@@ -1,6 +1,6 @@
 # DartLink WebSite
 
-Site vitrine pour présenter DartLink, le système intelligent de comptage de points pour les parties de fléchettes.
+Site vitrine pour présenter DartLink, le système intelligent de comptage de points pour les parties de fléchettes à partir des lancers saisis par les joueurs.
 
 ## Pages
 - `index.html` : présentation du produit, démonstration des fonctionnalités et témoignages.
