@@ -6,7 +6,6 @@ const navItems = [
   'Modes de jeu',
   'Matériel',
   'Captures d’écran',
-  'Installation',
   'Contact',
 ];
 
@@ -146,15 +145,10 @@ function App() {
           </div>
         </section>
 
-        <section id="installation" className="panel">
-          <h2>Installation</h2>
-          <pre>{`# Installer les dépendances\nnpm install\n\n# Lancer en local\nnpm run dev\n\n# Générer le build de production\nnpm run build`}</pre>
-        </section>
-
         <section id="contact" className="panel contact">
           <h2>Contact</h2>
           <p>Pour toute question ou partenariat, contactez l’équipe DartLink.</p>
-          <a href="mailto:contact@dartlink.app">contact@dartlink.app</a>
+          <a href="mailto:contact@dartlink.fr">contact@dartlink.fr</a>
         </section>
       </main>
       {activeShot && (
