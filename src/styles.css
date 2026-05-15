@@ -3,8 +3,8 @@
   --bg: #07090f;
   --bg-2: #0f1220;
   --panel: #11172a;
-  --accent: #ff4d8d;
-  --accent-2: #50e7ff;
+  --accent: #d7263d;
+  --accent-2: #6dff5a;
   --text: #f5f7ff;
   --muted: #9ca5bf;
   --border: #2a3353;
@@ -16,8 +16,8 @@ body {
   margin: 0;
   font-family: Inter, Segoe UI, Roboto, sans-serif;
   background:
-    radial-gradient(circle at 15% 0%, rgba(255, 77, 141, 0.18) 0%, transparent 35%),
-    radial-gradient(circle at 95% 5%, rgba(80, 231, 255, 0.2) 0%, transparent 30%),
+    radial-gradient(circle at 15% 0%, rgba(215, 38, 61, 0.22) 0%, transparent 35%),
+    radial-gradient(circle at 95% 5%, rgba(109, 255, 90, 0.2) 0%, transparent 30%),
     linear-gradient(180deg, var(--bg-2), var(--bg));
   color: var(--text);
 }
@@ -76,7 +76,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 1rem; }
 }
 .shot img {
   display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
-  background: linear-gradient(145deg, rgba(255,77,141,.18), rgba(80,231,255,.12));
+  background: linear-gradient(145deg, rgba(215,38,61,.2), rgba(109,255,90,.14));
 }
 .shot figcaption { padding: .7rem .8rem; color: var(--muted); font-size: .92rem; }
 
@@ -86,4 +86,62 @@ pre { overflow:auto; background:#090e1d; border:1px solid var(--border); border-
 @media (max-width: 720px) {
   .topbar { align-items: flex-start; flex-direction: column; }
   .hero { padding-top: 4rem; }
+}
+
+.shot-button {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: zoom-in;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+}
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(4, 7, 14, 0.86);
+}
+
+.lightbox-content {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  width: min(92vw, 1200px);
+}
+
+.lightbox-content img {
+  display: block;
+  width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border: 1px solid #3c4b7a;
+  border-radius: 12px;
+  background: #050811;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  border: 0;
+  border-radius: 999px;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.lightbox-content figcaption {
+  margin-top: .6rem;
+  text-align: center;
+  color: #d7def7;
 }

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const navItems = [
   'Accueil',
   'Fonctionnalités',
@@ -55,7 +57,11 @@ const screenshotSlots = [
   { title: 'Mode Tournoi', file: 'mode-tournoi.png' },
 ];
 
+const screenshotsBasePath = `${import.meta.env.BASE_URL}screenshots/`;
+
 function App() {
+  const [activeShot, setActiveShot] = useState(null);
+
   return (
     <>
       <header className="topbar">
@@ -126,7 +132,14 @@ function App() {
           <div className="shots">
             {screenshotSlots.map((shot) => (
               <figure key={shot.file} className="shot">
-                <img src={`/screenshots/${shot.file}`} alt={shot.title} loading="lazy" />
+                <button
+                  type="button"
+                  className="shot-button"
+                  onClick={() => setActiveShot(shot)}
+                  aria-label={`Agrandir la capture ${shot.title}`}
+                >
+                  <img src={`${screenshotsBasePath}${shot.file}`} alt={shot.title} loading="lazy" />
+                </button>
                 <figcaption>{shot.title}</figcaption>
               </figure>
             ))}
@@ -144,6 +157,28 @@ function App() {
           <a href="mailto:contact@dartlink.app">contact@dartlink.app</a>
         </section>
       </main>
+      {activeShot && (
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label={activeShot.title}>
+          <button
+            type="button"
+            className="lightbox-backdrop"
+            aria-label="Fermer l’aperçu"
+            onClick={() => setActiveShot(null)}
+          />
+          <figure className="lightbox-content">
+            <button
+              type="button"
+              className="lightbox-close"
+              aria-label="Fermer"
+              onClick={() => setActiveShot(null)}
+            >
+              ✕
+            </button>
+            <img src={`${screenshotsBasePath}${activeShot.file}`} alt={activeShot.title} />
+            <figcaption>{activeShot.title}</figcaption>
+          </figure>
+        </div>
+      )}
     </>
   );
 }
