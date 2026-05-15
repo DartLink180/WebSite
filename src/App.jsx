@@ -46,9 +46,12 @@ const hardware = [
 ];
 
 const screenshotSlots = [
-  { title: 'Menu principal', file: 'screenshots/menu-principal.png' },
-  { title: 'Mode 301 / 501', file: 'screenshots/mode-301-501.png' },
-  { title: 'Mode Cricket', file: 'screenshots/mode-cricket.png' },
+  { title: 'Menu principal', file: 'screenshots/menu.png' },
+  { title: 'Mode 301 / 501 — écran 1', file: 'screenshots/mode-301-1.png' },
+  { title: 'Mode 301 / 501 — écran 2', file: 'screenshots/mode-301-2.png' },
+  { title: 'Mode Cricket — écran 1', file: 'screenshots/mode-cricket-1.png' },
+  { title: 'Mode Cricket — écran 2', file: 'screenshots/mode-cricket-2.png' },
+  { title: 'Mode Course', file: 'screenshots/mode-course.png' },
   { title: 'Mode Tournoi', file: 'screenshots/mode-tournoi.png' },
 ];
 
