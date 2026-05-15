@@ -1,0 +1,64 @@
+:root {
+  color-scheme: dark;
+  --bg: #090b12;
+  --panel: #101528;
+  --accent: #95ff00;
+  --text: #f5f7ff;
+  --muted: #97a0b8;
+  --border: #26314f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Segoe UI, Roboto, sans-serif;
+  background: radial-gradient(circle at top, #151e38 0%, var(--bg) 35%);
+  color: var(--text);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  background: rgba(9, 11, 18, 0.8);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.topbar nav { display: flex; flex-wrap: wrap; gap: .8rem; }
+.topbar a { color: var(--muted); text-decoration: none; font-size: .9rem; }
+.topbar a:hover { color: var(--accent); }
+.brand { font-weight: 800; letter-spacing: .02em; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 1rem; }
+.hero { padding: 6rem 0 4rem; }
+.hero h1 { font-size: clamp(2rem, 6vw, 3.8rem); margin: 0 0 1rem; }
+.hero p { max-width: 760px; color: var(--muted); line-height: 1.6; }
+.kicker { color: var(--accent); text-transform: uppercase; letter-spacing: .1em; font-size: .78rem; }
+.cta { display:inline-block; margin-top:1.4rem; background: var(--accent); color:#111; padding:.8rem 1.2rem; border-radius:.6rem; font-weight:700; text-decoration:none; }
+
+.panel { margin: 1.2rem 0; padding: 1.5rem; background: linear-gradient(160deg, rgba(18,26,48,.95), rgba(11,15,27,.95)); border:1px solid var(--border); border-radius: 14px; }
+.panel h2 { margin-top: 0; }
+
+.cards { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; }
+.card { border:1px solid var(--border); border-radius: 10px; padding:1rem; background: rgba(7,10,19,.6); }
+.card h3 { margin-top:0; color: var(--accent); }
+.list-grid { margin:0; padding-left:1.1rem; display:grid; gap:.7rem; color: var(--muted); }
+
+.shots { display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.shot { border: 1px dashed #3b4d78; border-radius: 10px; min-height: 140px; display:flex; align-items:center; justify-content:center; text-align:center; color: var(--muted); padding: 1rem; }
+pre { overflow:auto; background:#0b1020; border:1px solid var(--border); border-radius: 8px; padding:1rem; }
+.contact a { color: var(--accent); }
+
+@media (max-width: 720px) {
+  .topbar { align-items: flex-start; flex-direction: column; }
+  .hero { padding-top: 4rem; }
+}
