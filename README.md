@@ -1,4 +1,12 @@
-# DartLink — Site vitrine
+# DartLink V2 — prototype validé
+
+La version publiée utilise désormais `index.html`, `app.js` et `style.css` à la racine. Ouvrir `index.html` sans installation pour la consulter. Générer la sortie GitHub Pages avec `node build.cjs` : les fichiers sont copiés dans `dist/`.
+
+Le Manager est une démonstration avec connexion simulée, données fictives et modes clair/sombre. Aucun accès PiServeur ou GitHub réel. Voir `PROTOTYPE.md` pour les parcours et `RESTAURATION.md` pour revenir à la version précédente.
+
+L’ancien code React ci-dessous reste conservé dans le dépôt mais n’est plus utilisé pour la publication.
+
+## Documentation historique V1
 
 Site vitrine statique, responsive et moderne pour l’application **DartLink** (jeu de fléchettes sur Raspberry Pi).
 

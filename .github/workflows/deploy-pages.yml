@@ -28,11 +28,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Installer les dépendances
-        run: npm install
-
       - name: Générer le site
-        run: npm run build
+        run: node build.cjs
 
       - name: Envoyer le dossier dist à GitHub Pages
         uses: actions/upload-pages-artifact@v3
