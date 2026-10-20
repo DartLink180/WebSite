@@ -2,7 +2,7 @@
 
 La version publiée utilise désormais `index.html`, `app.js` et `style.css` à la racine. Ouvrir `index.html` sans installation pour la consulter. Générer la sortie GitHub Pages avec `node build.cjs` : les fichiers sont copiés dans `dist/`.
 
-Le Manager est une démonstration avec connexion simulée, données fictives et modes clair/sombre. Aucun accès PiServeur ou GitHub réel. Voir `PROTOTYPE.md` pour les parcours et `RESTAURATION.md` pour revenir à la version précédente.
+Les boutons « Manager » et « Explorer le Manager » ouvrent le Manager réel sur `https://dartlink.fr/manager/`. Les anciennes routes `#/login` et `#/manager` y redirigent également. Le code historique de démonstration est conservé dans le dépôt ; ses écrans ne sont plus accessibles par ces routes. Voir `PROTOTYPE.md` pour le prototype historique et `RESTAURATION.md` pour revenir à la version précédente.
 
 L’ancien code React ci-dessous reste conservé dans le dépôt mais n’est plus utilisé pour la publication.
 
