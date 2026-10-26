@@ -1,8 +1,24 @@
 > Mémoire de développement : [point d’entrée](docs/memoire/README.md).
 
-# DartLink V2 — prototype validé
+# DartLink — vitrine
 
-La version publiée utilise désormais `index.html`, `app.js` et `style.css` à la racine. Ouvrir `index.html` sans installation pour la consulter. Générer la sortie GitHub Pages avec `node build.cjs` : les fichiers sont copiés dans `dist/`.
+Nouvelle vitrine : thème sombre inspiré du Manager, accents verts, navigation mobile et captures du jeu. Voir [la refonte et sa validation](docs/REFONTE-VITRINE.md).
+
+Les trois logos originaux fournis dans `screenshots/` sont intégrés sans retouche : logo horizontal, signature complète et symbole. Le symbole sert également de favicon.
+
+```bash
+npm install --package-lock=false
+npm run dev
+npm test
+npm run build
+npm run preview
+```
+
+Le build utilise uniquement Node.js. Il copie les pages et les ressources explicitement autorisées dans `dist/`. Les tests de navigateur optionnels sont décrits dans le document de refonte.
+
+## Historique : DartLink V2 — prototype validé
+
+La version V2 utilisait `index.html`, `app.js` et `style.css` à la racine. Ouvrir `index.html` sans installation pour la consulter. Générer la sortie GitHub Pages avec `node build.cjs` : les fichiers sont copiés dans `dist/`.
 
 Les boutons « Manager » et « Explorer le Manager » ouvrent le Manager réel sur `https://dartlink.fr/manager/`. Les anciennes routes `#/login` et `#/manager` y redirigent également. Le code historique de démonstration est conservé dans le dépôt ; ses écrans ne sont plus accessibles par ces routes. Voir `PROTOTYPE.md` pour le prototype historique et `RESTAURATION.md` pour revenir à la version précédente.
 

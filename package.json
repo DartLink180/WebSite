@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "node build.cjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test tests/build.test.cjs",
+    "test:browser": "node tests/browser.cjs"
   },
   "dependencies": {
     "react": "^18.3.1",
