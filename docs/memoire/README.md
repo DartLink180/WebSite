@@ -87,3 +87,7 @@ pas redémarré. Le constat d'ancien contenu ci-dessus est historique. Voir
 ## Lien DartLink Remote — préparation du 26 octobre 2026
 
 Depuis `main` à `8b511698a0aa9dbcaa4f51905bc8cc5e295c874f`, la branche `feat/remote-link` prépare deux liens explicites vers `https://dartlink.fr/remote/` : menu global et bouton d’accueil. La PWA est développée dans `DartLink180/MobileApp` et sa PR est encore en recette. L’hôte `remote.dartlink.fr` ne résout pas dans la vérification DNS publique du 26 octobre 2026 ; la cible provisoire est donc `https://dartlink.fr/remote/`. Garder la PR WebSite en brouillon jusqu’à la vérification de cette URL HTTPS. La recette terrain reste à réaliser ; aucune publication de la vitrine n’est autorisée par la seule préparation de ce code. Voir [la décision et ses limites](../REFONTE-VITRINE.md#lien-vers-dartlink-remote--préparation-du-26-octobre-2026).
+
+### Publication vérifiée le 26 octobre 2026
+
+Le statut « préparation » ci-dessus est historique. Le commit WebSite `0fba9f5d0cbf4328e1a03de45072554b5959e5be` est servi sur `dartlink.fr` et le commit MobileApp `07a6fbb70c838676628282bbf2ff42c878f80c45` sous `/remote/`. L'URL HTTPS de la PWA, son manifeste, la vitrine et `/manager/` répondent 200 sur le Nginx local ; le `app.js` servi correspond au build. Le navigateur a suivi le lien mobile vers la PWA. La découverte et la télécommande sur vrais téléphones restent non vérifiées. Voir [la publication et ses limites](../REFONTE-VITRINE.md#publication-du-lien--26-octobre-2026).
