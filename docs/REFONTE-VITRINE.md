@@ -106,3 +106,27 @@ L’hébergement effectif doit être identifié et mis à jour avec un accès au
 aucun accès SSH de déploiement n’est configuré dans cet environnement cloud.
 Ne pas changer le DNS à l’aveugle : le domaine héberge aussi le Manager réel.
 La mise en ligne visible reste donc en attente de cet accès.
+
+## Déploiement sur le serveur du domaine — 26 octobre 2026
+
+Le constat précédent est historique. Le serveur qui répond pour `dartlink.fr`
+servait la vitrine depuis une release statique locale, distincte du proxy
+`/manager/`. Après sauvegarde privée de la vitrine et de la configuration
+Nginx, les deux directives `root` de la vitrine (HTTPS et redirection HTTP)
+ont été orientées vers une release construite depuis
+`d328ea379f2dac3600aaa172f6ceea9d343c3fd5`. Le bloc de proxy Manager
+n'a pas été modifié. La configuration Nginx a passé `nginx -t`, puis a été
+rechargée.
+
+Contrôle réel après bascule : `https://dartlink.fr/` répond 200 avec le nouvel
+HTML de 843 octets. Les empreintes SHA-256 des dix fichiers publiés (HTML,
+JavaScript, CSS, trois logos et quatre captures) correspondent octet pour
+octet au build du commit. `/manager/` répond 200 ; le PID et l'heure de
+démarrage du service Manager sont identiques avant et après. Les redirections
+HTTP et `www` vers l'URL HTTPS principale répondent 301. Les trois tests Node
+du build ont été exécutés à nouveau et réussissent.
+
+Cette vérification confirme les ressources servies et la disponibilité HTTP
+du Manager ; elle ne constitue pas un nouveau test interactif en navigateur
+ni une recette du Manager. La sauvegarde et les détails d'exploitation restent
+sur le serveur, hors de ce dépôt public.
