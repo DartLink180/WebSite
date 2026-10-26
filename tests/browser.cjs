@@ -61,11 +61,11 @@ const baseUrl =
     await page.getByRole("button", { name: "Menu" }).click();
     assert.equal(
       await page.getByRole("navigation").getByRole("link", { name: "Télécommande" }).getAttribute("href"),
-      "https://remote.dartlink.fr/",
+      "https://dartlink.fr/remote/",
     );
     assert.equal(
       await page.getByRole("link", { name: "Ouvrir DartLink Remote" }).getAttribute("href"),
-      "https://remote.dartlink.fr/",
+      "https://dartlink.fr/remote/",
     );
     assert.equal(
       await page

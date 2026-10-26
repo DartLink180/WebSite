@@ -109,4 +109,4 @@ npx gh-pages -d dist
 
 ## Lien DartLink Remote (préparation)
 
-Une branche de préparation ajoute « Télécommande » au menu et « Ouvrir DartLink Remote » sur l’accueil, tous deux dirigés vers `https://remote.dartlink.fr/`. Cette URL ne doit être activée sur la vitrine qu’après hébergement HTTPS de la PWA et recette réelle : le sous-domaine ne résout pas encore publiquement au 26 octobre 2026. La Pull Request reste en brouillon jusque-là.
+Une branche de préparation ajoute « Télécommande » au menu et « Ouvrir DartLink Remote » sur l’accueil, tous deux dirigés vers `https://dartlink.fr/remote/`. Cette URL doit être activée sur la vitrine après vérification du déploiement HTTPS de la PWA sous `/remote/`. Le sous-domaine `remote.dartlink.fr` pourra être utilisé plus tard lorsque son DNS et son certificat seront prêts. La Pull Request reste en brouillon jusque-là.

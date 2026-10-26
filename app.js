@@ -1,6 +1,6 @@
 const app = document.querySelector("#app");
 const managerUrl = "https://dartlink.fr/manager/";
-const remoteUrl = "https://remote.dartlink.fr/";
+const remoteUrl = "https://dartlink.fr/remote/";
 // Original logos supplied in screenshots/; published unchanged from public/brand/.
 const arrowIcon = `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>`;
 const menuIcon = `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`;
