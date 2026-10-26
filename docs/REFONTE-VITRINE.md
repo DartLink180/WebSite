@@ -130,3 +130,11 @@ Cette vérification confirme les ressources servies et la disponibilité HTTP
 du Manager ; elle ne constitue pas un nouveau test interactif en navigateur
 ni une recette du Manager. La sauvegarde et les détails d'exploitation restent
 sur le serveur, hors de ce dépôt public.
+
+## Lien vers DartLink Remote — préparation du 26 octobre 2026
+
+La branche `feat/remote-link`, issue de `main` à `8b511698a0aa9dbcaa4f51905bc8cc5e295c874f`, ajoute un lien de menu « Télécommande » sur toutes les pages et un bouton « Ouvrir DartLink Remote » sur l’accueil. Les deux ciblent `https://remote.dartlink.fr/`. La destination est constante et n’ajoute ni intégration réseau locale ni code Manager à la vitrine.
+
+Ce changement est préparé en Pull Request brouillon, sans fusion ni déploiement. Le code de la PWA est dans `DartLink180/MobileApp` sur `develop/pwa-v1` ; la PWA n’est pas encore hébergée. La résolution DNS publique interrogée le 26 octobre 2026 renvoie NXDOMAIN pour `remote.dartlink.fr`. Fusionner cette branche avant que le sous-domaine HTTPS fonctionne créerait un lien cassé. Valider d’abord le déploiement, la recette sur smartphones et Raspberry Pi, puis la disponibilité de l’URL cible.
+
+Vérifications locales effectuées : `node --check app.js`, `npm test` (3 tests), `npm run build` et recette Chromium (24 combinaisons de routes/largeurs, navigation mobile et présence des deux liens vers le sous-domaine). Les destinations externes ne sont pas ouvertes pendant la recette. Le comportement de la PWA et l’accès réel à la télécommande ne sont pas certifiés par ces tests de vitrine.

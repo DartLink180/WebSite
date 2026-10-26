@@ -60,6 +60,14 @@ const baseUrl =
     await page.goto(baseUrl, { waitUntil: "networkidle" });
     await page.getByRole("button", { name: "Menu" }).click();
     assert.equal(
+      await page.getByRole("navigation").getByRole("link", { name: "Télécommande" }).getAttribute("href"),
+      "https://remote.dartlink.fr/",
+    );
+    assert.equal(
+      await page.getByRole("link", { name: "Ouvrir DartLink Remote" }).getAttribute("href"),
+      "https://remote.dartlink.fr/",
+    );
+    assert.equal(
       await page
         .getByRole("button", { name: "Menu" })
         .getAttribute("aria-expanded"),
@@ -154,7 +162,7 @@ const baseUrl =
     assert.deepEqual(errors, [], "JavaScript errors");
     assert.deepEqual(responses, [], "HTTP failures");
     console.log(
-      `PASS: ${checked} route/viewport checks; mobile navigation, Escape, FAQ, form validation/no transmission, skip link, three Manager redirects, no JS errors or missing assets.`,
+      `PASS: ${checked} route/viewport checks; Remote links, mobile navigation, Escape, FAQ, form validation/no transmission, skip link, three Manager redirects, no JS errors or missing assets.`,
     );
   } finally {
     await browser.close();

@@ -83,3 +83,7 @@ sert désormais le build de `d328ea3`. Les dix ressources publiques comparées
 en HTTPS sont identiques au build ; `/manager/` répond 200 et son service n'a
 pas redémarré. Le constat d'ancien contenu ci-dessus est historique. Voir
 [le déploiement et ses limites](../REFONTE-VITRINE.md).
+
+## Lien DartLink Remote — préparation du 26 octobre 2026
+
+Depuis `main` à `8b511698a0aa9dbcaa4f51905bc8cc5e295c874f`, la branche `feat/remote-link` prépare deux liens explicites vers `https://remote.dartlink.fr/` : menu global et bouton d’accueil. La PWA est développée dans `DartLink180/MobileApp` et sa PR est encore en recette. L’hôte `remote.dartlink.fr` ne résout pas dans la vérification DNS publique du 26 octobre 2026. Garder la PR WebSite en brouillon jusqu’à l’hébergement HTTPS et la recette terrain ; aucune publication de la vitrine n’est autorisée par la seule préparation de ce code. Voir [la décision et ses limites](../REFONTE-VITRINE.md#lien-vers-dartlink-remote--préparation-du-26-octobre-2026).
