@@ -77,3 +77,9 @@ Publication GitHub : `d328ea3`, workflow Pages `40336781126` réussi.
 Le contrôle HTTPS constate cependant l’ancien site sur dartlink.fr et une 404
 pour le logo publié. La mise à jour de l’hébergement réel reste à faire ;
 voir la section publication de [la refonte](../REFONTE-VITRINE.md).
+
+Mise à jour vérifiée le 26 octobre 2026 : le serveur effectif de `dartlink.fr`
+sert désormais le build de `d328ea3`. Les dix ressources publiques comparées
+en HTTPS sont identiques au build ; `/manager/` répond 200 et son service n'a
+pas redémarré. Le constat d'ancien contenu ci-dessus est historique. Voir
+[le déploiement et ses limites](../REFONTE-VITRINE.md).
