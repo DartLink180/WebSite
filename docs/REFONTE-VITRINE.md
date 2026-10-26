@@ -87,3 +87,22 @@ publier le changement autorisé, puis suivre le workflow GitHub Pages existant.
 Confirmer l’URL réellement configurée dans Pages et comparer les fichiers
 servis au build avant d’annoncer la mise en ligne. Ne pas assimiler la
 publication Pages à une mise à jour de PiServeur ou du Manager.
+
+
+## Publication et contrôle du domaine — 26 octobre 2026
+
+Refonte publiée sur `main` au commit `d328ea379f2dac3600aaa172f6ceea9d343c3fd5`.
+Le workflow [40336781126](https://github.com/DartLink180/WebSite/actions/runs/40336781126)
+a terminé avec succès (build et déploiement GitHub Pages). Les trois tests Node
+et les 24 combinaisons de routes et tailles dans Chromium ont réussi avec les
+logos originaux. Le build conserve leurs octets et la recette charge les images.
+
+Attention : cette réussite ne correspond pas encore au site visible sur le domaine.
+Après le workflow, `https://dartlink.fr/` sert toujours l’ancien HTML de 420 octets,
+avec Last-Modified au 20 octobre ; `/brand/wordmark.png` répond 404. Une requête
+avec paramètre de version confirme l’ancien contenu. L’URL GitHub Pages redirige
+vers ce domaine, mais les réponses du domaine ne correspondent pas au build.
+L’hébergement effectif doit être identifié et mis à jour avec un accès autorisé ;
+aucun accès SSH de déploiement n’est configuré dans cet environnement cloud.
+Ne pas changer le DNS à l’aveugle : le domaine héberge aussi le Manager réel.
+La mise en ligne visible reste donc en attente de cet accès.

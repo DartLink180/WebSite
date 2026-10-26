@@ -72,3 +72,8 @@ sur `main` au commit `e2afde1`, depuis `screenshots/`. Le site utilise leurs
 copies identiques dans `public/brand/` pour l’en-tête, l’accueil, la présentation
 du Manager et le favicon. Les remplacements textuels ne sont plus utilisés.
 Le déploiement demandé utilise le workflow GitHub Pages vers `https://dartlink.fr/`.
+
+Publication GitHub : `d328ea3`, workflow Pages `40336781126` réussi.
+Le contrôle HTTPS constate cependant l’ancien site sur dartlink.fr et une 404
+pour le logo publié. La mise à jour de l’hébergement réel reste à faire ;
+voir la section publication de [la refonte](../REFONTE-VITRINE.md).
