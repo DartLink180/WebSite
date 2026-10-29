@@ -152,3 +152,13 @@ emplacements réservés aux installations physiques restent textuels jusqu’à 
 réception de photos. La solution utilise l’élément HTML `dialog`, sans nouvel
 asset ni dépendance ; les routes, le build et les services liés sont inchangés.
 Validation et publication sont consignées dans le document de refonte.
+
+### Publication vérifiée le 29 octobre 2026
+
+La galerie est publiée dans WebSite `main` au commit applicatif
+`287434640ebfaad9964040da179b3e7af33190c4` ; le workflow Pages
+[40884449263](https://github.com/DartLink180/WebSite/actions/runs/40884449263)
+a réussi. Le Nginx qui sert `dartlink.fr` utilise une release statique
+construite depuis ce commit. Les 13 ressources web du domaine correspondent
+au build et la galerie a été parcourue sur l’URL HTTPS à 1280 et 390 px.
+Voir [les contrôles et limites](../REFONTE-VITRINE.md#publication-de-la-galerie--29-octobre-2026).

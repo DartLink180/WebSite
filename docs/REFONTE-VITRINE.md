@@ -236,3 +236,19 @@ retour du focus. Inspection visuelle de la galerie ouverte à 1280, 390 et
 320 px : image et commandes visibles dans les fenêtres contrôlées. Les
 interactions utilisent les captures logicielles existantes ; aucune photo ni
 recette matérielle n’en découle.
+
+### Publication de la galerie — 29 octobre 2026
+
+Le commit applicatif `287434640ebfaad9964040da179b3e7af33190c4` est sur
+`main` et son workflow GitHub Pages
+[40884449263](https://github.com/DartLink180/WebSite/actions/runs/40884449263)
+a réussi. Une release statique construite depuis ce commit a été copiée sur
+le serveur ; ses 14 fichiers sont identiques au build. La configuration
+Nginx a été sauvegardée en privé, ses racines de vitrine ont été orientées
+vers cette release, puis `nginx -t` et le rechargement ont réussi. Sur le
+domaine public, les 13 ressources web servies correspondent octet pour octet
+à la release. `/manager/`, `/remote/`, `/mobile/` et les deux manifestes PWA
+répondent 200. Chromium a vérifié en HTTPS l’ouverture de la galerie, le
+passage à l’image suivante, Échap, le retour du focus et l’absence d’erreur
+JavaScript à 1280 et 390 px. Cette recette vérifie la vitrine, pas les
+services liés ni une installation matérielle.
