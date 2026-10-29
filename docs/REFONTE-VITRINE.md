@@ -191,3 +191,24 @@ Son code correspond à `feature/mobile-app-link` `cebb256`, et l’URL HTTPS
 navigateur afin que la nouvelle vitrine le conserve. Le code de la PWA mobile,
 les routes `/mobile/`, `/remote/` et le proxy Manager ne sont pas modifiés par
 ce changement.
+
+### Publication de la page L’expérience — 29 octobre 2026
+
+Le commit applicatif `e6fc8f81d22dd779325fb2fff2fd45363f28af06` a été
+poussé sur `main`. Le workflow GitHub Pages
+[40882794683](https://github.com/DartLink180/WebSite/actions/runs/40882794683)
+a terminé avec succès. Une release statique issue de ce commit a été copiée
+sur le serveur ; ses 14 fichiers sont identiques au build propre. Après
+sauvegarde privée de la configuration Nginx, les racines HTTP et HTTPS de la
+vitrine ont été orientées vers cette release. `nginx -t` et le rechargement
+ont réussi. Les blocs `/manager/`, `/remote/` et `/mobile/` n’ont pas changé.
+
+Sur `https://dartlink.fr/`, les 13 fichiers servis (HTML, JavaScript, CSS,
+trois logos et sept captures) correspondent octet pour octet à la release.
+`/manager/`, `/remote/`, `/remote/manifest.webmanifest`, `/mobile/` et
+`/mobile/manifest.webmanifest` répondent 200. Chromium sur l’URL publique a
+vérifié la page L’expérience à 1280 et 390 px : six modes, captures chargées,
+trois espaces photo, lien mobile, absence d’erreur JavaScript et de débordement
+horizontal. La recette ne couvre pas le fonctionnement interne de ces trois
+services, une installation de la version 2.9.6 sur carte, ni les périphériques
+physiques. Aucune photo d’installation n’est encore publiée.

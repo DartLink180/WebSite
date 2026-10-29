@@ -122,3 +122,16 @@ répondait 200. Ils ont été intégrés au code de travail pour préserver ce l
 lors du changement de release. La base GitHub `main` était toujours
 `92ed58d9` ; la présence du lien sur le domaine n’attestait pas sa fusion.
 La publication et ses contrôles sont consignés dans le document de refonte.
+
+### Publication vérifiée le 29 octobre 2026
+
+Le statut « travail local » ci-dessus est historique. Le commit applicatif
+WebSite `e6fc8f81d22dd779325fb2fff2fd45363f28af06` a été poussé sur
+`main` ; le workflow GitHub Pages
+[40882794683](https://github.com/DartLink180/WebSite/actions/runs/40882794683)
+a réussi. Le Nginx qui sert effectivement `dartlink.fr` utilise maintenant
+une release statique construite depuis ce commit. Sur le domaine public,
+les 13 ressources web comparées correspondent au build ; voir
+[les contrôles et limites](../REFONTE-VITRINE.md#publication-de-la-page-lexpérience--29-octobre-2026).
+Aucune mise à jour de carte ni modification du Manager, de Remote ou de la
+PWA mobile n’a été réalisée.
