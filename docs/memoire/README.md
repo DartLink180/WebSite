@@ -20,6 +20,8 @@ Le build copie une liste explicite de ressources, pas tout le dossier public : n
 
 Le workflow [.github/workflows/deploy-pages.yml](../../.github/workflows/deploy-pages.yml) déclenche GitHub Pages sur push vers main ou lancement manuel. Une fusion peut donc déployer même sans commande locale. Pour une publication de code ou de documentation explicitement sans déploiement, utiliser un message de commit final contenant `[skip ci]`, sans lancer workflow_dispatch ; vérifier ensuite l’absence de run Pages associé.
 
+Tout changement terminé, documentation comprise, doit être commité et poussé sur sa branche GitHub. Après le push, récupérer la référence distante et vérifier que le commit y figure ; documenter ou signaler clairement un échec de push ou un travail encore local. Cette exigence de synchronisation ne vaut pas autorisation de déployer : si le changement applicatif n’est pas autorisé en production, le pousser sur une branche dédiée sans fusion vers `main`. Pour une mise à jour documentaire sur `main`, appliquer la procédure `[skip ci]` ci-dessus.
+
 Consulter [RESTAURATION](../../RESTAURATION.md) avant tout retour : restaurer par revert ou par nouveaux commits depuis une sauvegarde. Fusionner simplement une ancienne branche ne restaure pas ses fichiers déjà présents dans l’historique. La sauvegarde avant V2 est identifiée dans ce document.
 
 Vérifications isolées : `node --check app.js`, génération dans un répertoire temporaire avec les entrées, les ressources et le script (`npm test`), contrôle de la sortie ; vérifier en navigateur les routes publiques, le lien Manager, le mobile et le comportement du formulaire après un changement fonctionnel. Aucun backend ni accès PiServeur n’est nécessaire pour la simple génération.
@@ -39,6 +41,8 @@ Aucun autre incident de production n’est établi par cette analyse. Une propos
 [README](../../README.md), [PROTOTYPE](../../PROTOTYPE.md), [RESTAURATION](../../RESTAURATION.md), les deux README de captures et le workflow sont conservés ; aucun AGENTS de projet n’existait dans l’arbre GitHub analysé. PROTOTYPE décrit le parcours historique simulé, tandis que le README courant et cette mémoire décrivent l’accès Manager réel.
 
 À chaque évolution, actualiser cette page et le document spécialisé concerné. Ajouter date, SHA, résultat, raison, contrôles et limites sans recopier les conversations ou des journaux sensibles.
+
+Le 29 octobre 2026, avant l’ajout de cette règle, `main` et `origin/main` ont été vérifiés au même SHA `ddce9e00c2ed13e38c648210d77393bb992fbab5`. Le lien « Jouer sur mobile » vers `https://dartlink.fr/mobile/` est présent dans le menu et l’accueil de `app.js` à ce SHA distant. La divergence observée avant la publication de la page L’expérience, quand le lien n’était que dans une release locale et une branche GitHub distincte, est historique ; son intégration dans `main` est consignée plus bas. Ce contrôle Git ne vérifie pas à lui seul le contenu actuellement servi par le domaine.
 
 
 ## Refonte de la vitrine — 23 octobre 2026, travail local
