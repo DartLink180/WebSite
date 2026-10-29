@@ -2,7 +2,7 @@
 
 # DartLink — vitrine
 
-Nouvelle vitrine : thème sombre inspiré du Manager, accents verts, navigation mobile et captures du jeu. Voir [la refonte et sa validation](docs/REFONTE-VITRINE.md).
+Nouvelle vitrine : thème sombre inspiré du Manager, accents verts, navigation mobile et captures du jeu. La page L’expérience présente les six modes de DartLink v2.9.6 et réserve trois emplacements pour de futures photos des installations. Voir [la refonte et sa validation](docs/REFONTE-VITRINE.md).
 
 Les trois logos originaux fournis dans `screenshots/` sont intégrés sans retouche : logo horizontal, signature complète et symbole. Le symbole sert également de favicon.
 
@@ -110,3 +110,7 @@ npx gh-pages -d dist
 ## DartLink Remote
 
 Le menu « Télécommande » et le bouton « Ouvrir DartLink Remote » de l’accueil ouvrent [DartLink Remote](https://dartlink.fr/remote/). L’application est servie en HTTPS sous `/remote/` ; son interface peut se charger hors ligne après installation, mais la découverte et la télécommande exigent le Wi-Fi local. La recette sur vrais smartphones et Raspberry Pi reste à effectuer. Le sous-domaine `remote.dartlink.fr` pourra être utilisé plus tard lorsque DNS et certificat seront prêts.
+
+Le menu et l’accueil conservent aussi le lien « Jouer sur mobile » vers
+[la PWA mobile](https://dartlink.fr/mobile/), présent sur le domaine avant cette
+mise à jour de la vitrine.

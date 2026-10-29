@@ -144,3 +144,50 @@ Vérifications locales effectuées : `node --check app.js`, `npm test` (3 tests)
 Le paragraphe de préparation précédent est historique. La vitrine issue du commit `0fba9f5d0cbf4328e1a03de45072554b5959e5be` de `main` est maintenant servie par le Nginx de `dartlink.fr`. Le lien du menu et le bouton d’accueil ouvrent `https://dartlink.fr/remote/`, où la PWA issue du commit MobileApp `07a6fbb70c838676628282bbf2ff42c878f80c45` est servie sous un chemin distinct. Les ressources de la vitrine restent issues d'une release statique immuable ; le proxy `/manager/` n'a pas été changé.
 
 Après `nginx -t` et rechargement, la vitrine, son `app.js`, `/remote/`, son manifeste et `/manager/` ont répondu 200 en HTTPS avec certificat valide lors de requêtes dirigées vers le Nginx local. L'empreinte SHA-256 du `app.js` servi correspond au build du commit. Un parcours Chromium à largeur mobile a suivi le bouton d'accueil jusqu'à la PWA. La suite de la vitrine a aussi réussi : trois tests Node et 24 combinaisons de routes et largeurs. Ces résultats ne valident ni la découverte DNS `.lan` ni l'ouverture de la télécommande sur de vrais téléphones. Le sous-domaine `remote.dartlink.fr` reste sans DNS public vérifié.
+
+## Page L’expérience — 29 octobre 2026
+
+Sur WebSite `main` `92ed58d9abaf8f653bf5e396d5434e80ee087b2f`, la page
+L’expérience a été mise à jour pour suivre les six modes du menu de DartLink
+`main` `9210ae4ed4ed2b25bf91a816906ba03672e1df44` (version 2.9.6) :
+X01, Cricket, Course 300, Around the World, Killer et Tournoi. La FAQ et
+l’aperçu d’accueil ont été actualisés. Les options affichées dans les textes
+proviennent du menu et des moteurs du jeu à ce SHA. Les versions installées
+sur des cartes précises peuvent différer.
+
+Les captures `v296-*.png` proviennent d’un serveur du jeu lancé en simulation
+locale avec données temporaires. Chromium a capturé le menu et une partie ou
+préparation pour chaque mode à 1280 × 720 ; voir
+[le détail des fichiers](../public/screenshots/README.md). Le build utilise
+désormais ces sept images via sa liste explicite. Les anciennes captures
+restent dans le dépôt comme historique et ne sont plus publiées par le build.
+Cette décision remplace celle de la refonte initiale qui affichait les
+captures antérieures pour trois modes.
+
+Trois espaces textuels réservent la place de photos des installations : vue
+d’ensemble, cible et équipement, espace de jeu. Aucune photographie physique
+n’a été fournie dans ce changement. Leur ajout exigera des fichiers source,
+un texte alternatif fidèle et leur inclusion explicite dans `build.cjs`.
+Cette section ne constitue ni une recette matérielle, ni une preuve de
+déploiement de la vitrine ou de v2.9.6 sur une carte.
+
+Validation locale : `node --check app.js`, trois tests Node du build et
+`git diff --check` réussis. Un build propre dans un dossier temporaire a
+été servi seulement sur `127.0.0.1`. La recette Chromium a réussi pour six
+routes à quatre largeurs (1440, 768, 390 et 320 px), dont le chargement de
+toutes les captures, les six modes et les trois emplacements photo ; aucune
+erreur JavaScript, ressource manquante ni débordement horizontal relevé.
+Les parcours habituels de menu mobile, FAQ, formulaire et redirection Manager
+ont également réussi. Inspection visuelle supplémentaire de la page à
+1280 et 390 px. Aucun changement n’a été publié ou déployé par cette recette.
+
+### Préparation de publication — 29 octobre 2026
+
+Le contrôle préalable a trouvé une divergence entre `main` `92ed58d9` et la
+release effectivement servie par Nginx `mobile-20261027-175824` : cette
+release ajoutait le lien « Jouer sur mobile » dans le menu et l’accueil.
+Son code correspond à `feature/mobile-app-link` `cebb256`, et l’URL HTTPS
+`/mobile/` répond 200. Le lien a été reporté dans `app.js` et la recette
+navigateur afin que la nouvelle vitrine le conserve. Le code de la PWA mobile,
+les routes `/mobile/`, `/remote/` et le proxy Manager ne sont pas modifiés par
+ce changement.

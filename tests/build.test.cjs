@@ -6,10 +6,13 @@ const path = require("node:path");
 const { spawnSync } = require("node:child_process");
 const root = path.resolve(__dirname, "..");
 const screenshots = [
-  "menu.png",
-  "mode-301-1.png",
-  "mode-cricket-1.png",
-  "mode-course.png",
+  "v296-menu.png",
+  "v296-x01.png",
+  "v296-cricket.png",
+  "v296-course.png",
+  "v296-around-world.png",
+  "v296-killer.png",
+  "v296-tournoi.png",
 ];
 
 function fixture() {
@@ -108,10 +111,10 @@ test("provided brand files are copied byte-for-byte, unrelated files stay privat
 test("missing required screenshot fails the build instead of publishing broken images", () => {
   const dir = fixture();
   try {
-    fs.unlinkSync(path.join(dir, "public", "screenshots", "menu.png"));
+    fs.unlinkSync(path.join(dir, "public", "screenshots", "v296-menu.png"));
     const result = build(dir);
     assert.notEqual(result.status, 0);
-    assert.match(result.stderr, /menu\.png/);
+    assert.match(result.stderr, /v296-menu\.png/);
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

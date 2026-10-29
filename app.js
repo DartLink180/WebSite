@@ -1,6 +1,7 @@
 const app = document.querySelector("#app");
 const managerUrl = "https://dartlink.fr/manager/";
 const remoteUrl = "https://dartlink.fr/remote/";
+const mobileUrl = "https://dartlink.fr/mobile/";
 // Original logos supplied in screenshots/; published unchanged from public/brand/.
 const arrowIcon = `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>`;
 const menuIcon = `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`;
@@ -29,7 +30,7 @@ function shell(content, current = "") {
     <header class="site-header"><div class="container header-inner">
       <a class="brand" href="#/" aria-label="DartLink — accueil">${logo()}</a>
       <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">${menuIcon}</span></button>
-      <nav id="main-nav" aria-label="Navigation principale">${navItems.map(([path, label]) => `<a href="#/${path}" ${path === current ? 'aria-current="page"' : ""}>${label}</a>`).join("")}<a href="${remoteUrl}">Télécommande</a>${button("Ouvrir le Manager", managerUrl)}</nav>
+      <nav id="main-nav" aria-label="Navigation principale">${navItems.map(([path, label]) => `<a href="#/${path}" ${path === current ? 'aria-current="page"' : ""}>${label}</a>`).join("")}<a href="${remoteUrl}">Télécommande</a><a href="${mobileUrl}">Jouer sur mobile</a>${button("Ouvrir le Manager", managerUrl)}</nav>
     </div></header>
     <main id="main" tabindex="-1">${content}</main>
     <footer class="site-footer container"><div class="footer-main"><a class="brand" href="#/" aria-label="DartLink — accueil">${logo()}</a><p>La passion du jeu.<br>L’esprit connecté.</p><a class="text-link" href="${managerUrl}">Accès au Manager <span aria-hidden="true">${arrowIcon}</span></a></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} DartLink</span><span>Imaginé pour les passionnés de fléchettes.</span><a href="#/mentions">Informations & confidentialité</a></div></footer>`;
@@ -58,35 +59,23 @@ function managerSection() {
   return `<section class="manager-section container"><div class="manager-identity"><span class="eyebrow">L’écosystème DartLink</span><div class="brand-seal">${logo("mark")}</div><span class="identity-caption">UNE PASSION. UN POINT DE CONNEXION.</span></div><div class="manager-copy"><span class="eyebrow">En coulisses / Le Manager</span><h2>Gardez le jeu en vue.<br>Et vos installations aussi.</h2><p>Un espace dédié pour retrouver vos appareils, consulter leur état et gérer vos installations. La même identité, du terrain à l’administration.</p><ul class="check-list"><li>Une vue d’ensemble du parc</li><li>Le détail de chaque installation</li><li>Des outils réservés aux administrateurs</li></ul>${button("Accéder au Manager", managerUrl)}<p class="fine-print">Un compte administrateur est nécessaire.</p></div></section>`;
 }
 function home() {
-  return shell(`<section class="hero container"><div class="hero-copy"><span class="eyebrow"><span class="status-dot"></span> FLÉCHETTES · PASSION · CONNEXION</span><h1>Le jeu nous<br><em>connecte.</em></h1><p>Le plaisir d’un beau lancer. L’envie de rejouer ensemble. Découvrez DartLink, l’écosystème qui accompagne votre passion des fléchettes.</p><div class="actions">${button("Découvrir l’expérience", "#/experience")}${button("Explorer le Manager", managerUrl, true)}${button("Ouvrir DartLink Remote", remoteUrl, true)}</div><div class="hero-note"><span class="note-line"></span>Du premier lancer à la prochaine partie.</div></div><div class="hero-visual"><span class="visual-label">DARTLINK / L’ESPRIT DU JEU</span><div class="signature">${logo("signature")}</div><div class="visual-caption"><span class="status-dot"></span> La précision rassemble.<span aria-hidden="true">${arrowIcon}</span></div></div></section>
+  return shell(`<section class="hero container"><div class="hero-copy"><span class="eyebrow"><span class="status-dot"></span> FLÉCHETTES · PASSION · CONNEXION</span><h1>Le jeu nous<br><em>connecte.</em></h1><p>Le plaisir d’un beau lancer. L’envie de rejouer ensemble. Découvrez DartLink, l’écosystème qui accompagne votre passion des fléchettes.</p><div class="actions">${button("Découvrir l’expérience", "#/experience")}${button("Explorer le Manager", managerUrl, true)}${button("Ouvrir DartLink Remote", remoteUrl, true)}${button("Jouer sur mobile", mobileUrl, true)}</div><div class="hero-note"><span class="note-line"></span>Du premier lancer à la prochaine partie.</div></div><div class="hero-visual"><span class="visual-label">DARTLINK / L’ESPRIT DU JEU</span><div class="signature">${logo("signature")}</div><div class="visual-caption"><span class="status-dot"></span> La précision rassemble.<span aria-hidden="true">${arrowIcon}</span></div></div></section>
     <section class="principles container" aria-label="L’esprit DartLink"><span>01 <strong>Jouer.</strong></span><span>02 <strong>Connecter.</strong></span><span>03 <strong>Partager.</strong></span><p>Votre cible.<br>Tout un univers autour.</p></section>
     <section class="section container"><div class="section-heading"><div><span class="eyebrow">Pensé autour de votre passion</span><h2>Plus qu’une cible.<br>Une expérience commune.</h2></div><p>Sur le terrain comme en coulisses,<br>chaque chose trouve sa place.</p></div>${featureCards()}</section>
-    <section class="game-section container"><div class="game-copy"><span class="eyebrow">À vous de jouer</span><h2>Choisissez votre jeu.<br>Trouvez votre rythme.</h2><p>X01, Cricket, Course… Explorez les écrans de DartLink et imaginez votre prochaine partie.</p><a class="text-link" href="#/experience">Voir les modes de jeu <span aria-hidden="true">${arrowIcon}</span></a></div><figure class="game-preview"><div class="window-bar"><span><i></i><i></i><i></i></span><span>DARTLINK / LE JEU</span><span aria-hidden="true">${arrowIcon}</span></div><img src="screenshots/menu.png" alt="Menu de DartLink : choix du nombre de joueurs et du mode X01" width="1919" height="918" loading="lazy"><figcaption>Un aperçu de l’interface de jeu.</figcaption></figure></section>
+    <section class="game-section container"><div class="game-copy"><span class="eyebrow">À vous de jouer</span><h2>Choisissez votre jeu.<br>Trouvez votre rythme.</h2><p>Six modes, de X01 au Tournoi : explorez les écrans de DartLink et imaginez votre prochaine partie.</p><a class="text-link" href="#/experience">Voir les modes de jeu <span aria-hidden="true">${arrowIcon}</span></a></div><figure class="game-preview"><div class="window-bar"><span><i></i><i></i><i></i></span><span>DARTLINK / LE JEU</span><span aria-hidden="true">${arrowIcon}</span></div><img src="screenshots/v296-menu.png" alt="Menu de DartLink avec choix des joueurs, du mode et des options" width="1280" height="720" loading="lazy"><figcaption>Un aperçu de l’interface de jeu.</figcaption></figure></section>
     ${managerSection()}<section class="closing container"><div><span class="eyebrow">La prochaine partie commence ici</span><h2>On se retrouve<br>autour de la cible ?</h2></div>${button("En savoir plus", "#/faq")}</section>`);
 }
 const games = [
-  [
-    "mode-301-1.png",
-    "X01",
-    "Gardez le score en ligne de mire.",
-    "Écran de jeu X01 de DartLink",
-  ],
-  [
-    "mode-cricket-1.png",
-    "Cricket",
-    "Précision et stratégie.",
-    "Écran de Cricket de DartLink",
-  ],
-  [
-    "mode-course.png",
-    "Course",
-    "Un autre rythme de jeu.",
-    "Écran du mode Course de DartLink",
-  ],
+  ["v296-x01.png", "X01", "101, 301 ou 501, avec variantes contre l’IA.", "Partie X01 à deux joueurs avec scores et lancers"],
+  ["v296-cricket.png", "Cricket", "Standard ou Cut-Throat, avec ou sans bull.", "Tableau Cricket avec marques et points de deux joueurs"],
+  ["v296-course.png", "Course 300", "Faites avancer votre joueur jusqu’à 300 points.", "Course 300 avec pistes et progression de deux joueurs"],
+  ["v296-around-world.png", "Around the World", "Parcourez les cibles de 1 à 20, puis la bull en option.", "Tour du monde avec cibles à atteindre pour deux joueurs"],
+  ["v296-killer.png", "Killer", "Trouvez votre numéro, puis éliminez vos adversaires.", "Attribution des numéros en mode Killer pour trois joueurs"],
+  ["v296-tournoi.png", "Tournoi", "Enchaînez les matchs X01 jusqu’à la finale.", "Tableau de tournoi à quatre joueurs avec matchs à jouer"],
 ];
 function experience() {
   return shell(
-    `<section class="page-intro container"><span class="eyebrow">L’expérience DartLink</span><h1>Chaque lancer.<br><em>Une nouvelle partie.</em></h1><p>Une cible, des joueurs et l’envie de partager un bon moment. DartLink réunit une interface de jeu et des outils de gestion dans un même écosystème.</p></section><section class="container section compact"><div class="section-heading"><div><span class="eyebrow">Le jeu en images</span><h2>À chacun son mode.</h2></div><p>Captures de l’application DartLink.</p></div><div class="games-grid">${games.map(([file, title, text, alt]) => `<figure class="game-card"><img src="screenshots/${file}" alt="${alt}" width="1920" height="1080" loading="lazy"><figcaption><span class="eyebrow">${title}</span><h3>${text}</h3></figcaption></figure>`).join("")}</div></section><section class="section container"><div class="section-heading"><div><span class="eyebrow">Du terrain aux coulisses</span><h2>Un ensemble cohérent.</h2></div></div>${featureCards()}</section>${managerSection()}`,
+    `<section class="page-intro container"><span class="eyebrow">L’expérience DartLink</span><h1>Chaque lancer.<br><em>Une nouvelle partie.</em></h1><p>Une cible, des joueurs et l’envie de partager un bon moment. Découvrez les six modes du jeu, puis l’écosystème qui accompagne les installations.</p></section><section class="container section compact"><div class="section-heading"><div><span class="eyebrow">Le jeu en images</span><h2>À chacun son mode.</h2></div><p>Captures de DartLink v2.9.6 en simulation locale.</p></div><div class="games-grid">${games.map(([file, title, text, alt]) => `<figure class="game-card"><img src="screenshots/${file}" alt="${alt}" width="1280" height="720" loading="lazy"><figcaption><span class="eyebrow">${title}</span><h3>${text}</h3></figcaption></figure>`).join("")}</div></section><section class="section container installations-section"><div class="section-heading"><div><span class="eyebrow">Le jeu dans votre espace</span><h2>Les installations en images.</h2></div><p>Des photos des installations physiques seront ajoutées ici.</p></div><div class="installations-grid"><div class="installation-slot"><span class="installation-slot-number">01</span><span>Vue d’ensemble</span><strong>Photo à venir</strong></div><div class="installation-slot"><span class="installation-slot-number">02</span><span>La cible et son équipement</span><strong>Photo à venir</strong></div><div class="installation-slot"><span class="installation-slot-number">03</span><span>L’espace de jeu</span><strong>Photo à venir</strong></div></div></section><section class="section container"><div class="section-heading"><div><span class="eyebrow">Du terrain aux coulisses</span><h2>Un ensemble cohérent.</h2></div></div>${featureCards()}</section>${managerSection()}`,
     "experience",
   );
 }
@@ -105,7 +94,7 @@ const questions = [
   ],
   [
     "Quels modes de jeu peut-on découvrir ?",
-    "La page L’expérience présente des captures des modes X01, Cricket et Course. Les options disponibles sur votre installation dépendent de la version de l’application de jeu.",
+    "La page L’expérience présente X01, Cricket, Course 300, Around the World, Killer et Tournoi. Les options disponibles sur votre installation dépendent de la version de l’application de jeu.",
   ],
   [
     "Le site permet-il de jouer à distance ?",

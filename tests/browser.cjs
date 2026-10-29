@@ -53,6 +53,14 @@ const baseUrl =
               .map((img) => img.src),
           );
         assert.deepEqual(broken, []);
+        if (route === "experience") {
+          assert.deepEqual(
+            await page.locator(".game-card .eyebrow").allTextContents(),
+            ["X01", "Cricket", "Course 300", "Around the World", "Killer", "Tournoi"],
+          );
+          assert.equal(await page.locator(".installation-slot").count(), 3);
+          assert.equal(await page.locator(".installation-slot strong").filter({ hasText: "Photo à venir" }).count(), 3);
+        }
         checked++;
       }
     }
@@ -66,6 +74,14 @@ const baseUrl =
     assert.equal(
       await page.getByRole("link", { name: "Ouvrir DartLink Remote" }).getAttribute("href"),
       "https://dartlink.fr/remote/",
+    );
+    assert.equal(
+      await page.getByRole("navigation").getByRole("link", { name: "Jouer sur mobile" }).getAttribute("href"),
+      "https://dartlink.fr/mobile/",
+    );
+    assert.equal(
+      await page.getByRole("main").getByRole("link", { name: "Jouer sur mobile" }).getAttribute("href"),
+      "https://dartlink.fr/mobile/",
     );
     assert.equal(
       await page

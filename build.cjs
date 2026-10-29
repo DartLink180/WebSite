@@ -7,10 +7,13 @@ for (const file of ["index.html", "app.js", "style.css"]) {
 }
 // Publish only the assets used by the site, never local configuration files.
 const screenshots = [
-  "menu.png",
-  "mode-301-1.png",
-  "mode-cricket-1.png",
-  "mode-course.png",
+  "v296-menu.png",
+  "v296-x01.png",
+  "v296-cricket.png",
+  "v296-course.png",
+  "v296-around-world.png",
+  "v296-killer.png",
+  "v296-tournoi.png",
 ];
 fs.mkdirSync(path.join(output, "screenshots"), { recursive: true });
 for (const file of screenshots) {

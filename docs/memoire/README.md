@@ -91,3 +91,34 @@ Depuis `main` à `8b511698a0aa9dbcaa4f51905bc8cc5e295c874f`, la branche `feat/re
 ### Publication vérifiée le 26 octobre 2026
 
 Le statut « préparation » ci-dessus est historique. Le commit WebSite `0fba9f5d0cbf4328e1a03de45072554b5959e5be` est servi sur `dartlink.fr` et le commit MobileApp `07a6fbb70c838676628282bbf2ff42c878f80c45` sous `/remote/`. L'URL HTTPS de la PWA, son manifeste, la vitrine et `/manager/` répondent 200 sur le Nginx local ; le `app.js` servi correspond au build. Le navigateur a suivi le lien mobile vers la PWA. La découverte et la télécommande sur vrais téléphones restent non vérifiées. Voir [la publication et ses limites](../REFONTE-VITRINE.md#publication-du-lien--26-octobre-2026).
+
+## Page L’expérience — 29 octobre 2026, travail local
+
+Base WebSite `main` `92ed58d9abaf8f653bf5e396d5434e80ee087b2f`, arbre propre
+avant changement. Le menu du jeu vérifié dans `DartLink` `main`
+`9210ae4ed4ed2b25bf91a816906ba03672e1df44` (version déclarée 2.9.6)
+contient six modes : X01, Cricket, Course 300, Around the World, Killer et
+Tournoi. La page L’expérience et la FAQ les présentent tous. La décision
+historique de montrer seulement X01, Cricket et Course est remplacée.
+
+Sept captures du jeu ont été réalisées en simulation locale avec Chromium,
+à 1280 × 720, depuis ce SHA : menu et un écran par mode. La vitrine affiche
+ces nouvelles captures et son build les copie explicitement. Les anciennes
+images restent dans le dépôt mais sont exclues du build. La section des
+installations réserve trois espaces pour des photos futures : vue d’ensemble,
+cible et équipement, espace de jeu. Aucun visuel matériel n’est inventé.
+La provenance détaillée est dans [le README des captures](../../public/screenshots/README.md).
+
+Le fonctionnement reste statique, sans nouvelle dépendance. Validation et
+limites de cette évolution : voir [le document de refonte](../REFONTE-VITRINE.md#page-lexpérience--29-octobre-2026).
+
+### Préparation de la publication — 29 octobre 2026
+
+Avant la publication, le domaine servait une release locale
+`mobile-20261027-175824` dont `app.js` différait de `main` par trois ajouts
+liés à « Jouer sur mobile ». Ces ajouts correspondent au commit `cebb256` de
+la branche GitHub `feature/mobile-app-link` ; `https://dartlink.fr/mobile/`
+répondait 200. Ils ont été intégrés au code de travail pour préserver ce lien
+lors du changement de release. La base GitHub `main` était toujours
+`92ed58d9` ; la présence du lien sur le domaine n’attestait pas sa fusion.
+La publication et ses contrôles sont consignés dans le document de refonte.
