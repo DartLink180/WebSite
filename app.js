@@ -22,6 +22,7 @@ function button(label, href, secondary = false) {
 }
 const navItems = [
   ["experience", "L’expérience"],
+  ["competitions", "Compétitions"],
   ["faq", "Questions fréquentes"],
   ["contact", "Contact"],
 ];
@@ -77,6 +78,19 @@ function experience() {
   return shell(
     `<section class="page-intro container"><span class="eyebrow">L’expérience DartLink</span><h1>Chaque lancer.<br><em>Une nouvelle partie.</em></h1><p>Une cible, des joueurs et l’envie de partager un bon moment. Découvrez les six modes du jeu, puis l’écosystème qui accompagne les installations.</p></section><section class="container section compact"><div class="section-heading"><div><span class="eyebrow">Le jeu en images</span><h2>À chacun son mode.</h2></div><p>Captures de DartLink v2.9.6 en simulation locale.</p></div><div class="games-grid">${games.map(([file, title, text, alt], index) => `<figure class="game-card"><button class="game-card-open" type="button" data-gallery-index="${index}" aria-label="Agrandir la capture ${title}"><img src="screenshots/${file}" alt="${alt}" width="1280" height="720" loading="lazy"><span aria-hidden="true">Agrandir ↗</span></button><figcaption><span class="eyebrow">${title}</span><h3>${text}</h3></figcaption></figure>`).join("")}</div></section><dialog id="game-gallery" class="game-gallery" aria-labelledby="gallery-title"><div class="game-gallery-panel"><div class="game-gallery-top"><span class="eyebrow">Le jeu en images</span><button class="game-gallery-close" type="button" aria-label="Fermer la galerie">Fermer <span aria-hidden="true">×</span></button></div><figure><img id="gallery-image" alt="" width="1280" height="720"><figcaption><strong id="gallery-title"></strong><span id="gallery-count" aria-live="polite"></span></figcaption></figure><div class="game-gallery-controls"><button class="game-gallery-prev" type="button">← Image précédente</button><button class="game-gallery-next" type="button">Image suivante →</button></div></div></dialog><section class="section container installations-section"><div class="section-heading"><div><span class="eyebrow">Le jeu dans votre espace</span><h2>Les installations en images.</h2></div><p>Des photos des installations physiques seront ajoutées ici.</p></div><div class="installations-grid"><div class="installation-slot"><span class="installation-slot-number">01</span><span>Vue d’ensemble</span><strong>Photo à venir</strong></div><div class="installation-slot"><span class="installation-slot-number">02</span><span>La cible et son équipement</span><strong>Photo à venir</strong></div><div class="installation-slot"><span class="installation-slot-number">03</span><span>L’espace de jeu</span><strong>Photo à venir</strong></div></div></section><section class="section container"><div class="section-heading"><div><span class="eyebrow">Du terrain aux coulisses</span><h2>Un ensemble cohérent.</h2></div></div>${featureCards()}</section>${managerSection()}`,
     "experience",
+  );
+}
+const competitionSources = [
+  ["01", "Scores en direct", "PDC", "Matchs en cours, à venir et terminés sur le centre officiel des matchs.", "https://www.pdc.tv/games"],
+  ["02", "Actualités", "PDC", "Articles, annonces et comptes rendus des compétitions professionnelles.", "https://www.pdc.tv/news/"],
+  ["03", "Calendrier", "PDC", "Dates et tournois du circuit professionnel international.", "https://www.pdc.tv/calendar/"],
+  ["04", "Actualités", "WDF", "Nouvelles des compétitions de la World Darts Federation.", "https://dartswdf.com/news/"],
+  ["05", "Calendrier", "WDF", "Événements fédéraux et compétitions internationales à venir.", "https://dartswdf.com/calendar/"],
+];
+function competitions() {
+  return shell(
+    `<section class="page-intro container"><span class="eyebrow">Le monde des fléchettes</span><h1>Suivez les<br><em>compétitions.</em></h1><p>Retrouvez les scores, les actualités et les prochaines dates auprès des organisateurs internationaux. Les liens ouvrent leurs pages mises à jour directement.</p></section><section class="section container compact"><div class="section-heading"><div><span class="eyebrow">Sources officielles</span><h2>Au plus près des tournois.</h2></div><p>Les résultats et les horaires sont publiés par chaque organisateur.</p></div><div class="competition-grid">${competitionSources.map(([number, category, source, description, url]) => `<article class="competition-card"><span class="eyebrow">${number} / ${category}</span><h3>${source}</h3><p>${description}</p><a class="text-link" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="Voir ${category.toLowerCase()} ${source} (nouvel onglet)">Voir sur ${source} <span aria-hidden="true">${arrowIcon}</span></a></article>`).join("")}</div><p class="competition-note">Les scores en direct sont disponibles selon les événements. Cette page ne diffuse pas elle-même les matchs ni les résultats.</p></section>`,
+    "competitions",
   );
 }
 function setupGameGallery() {
@@ -173,6 +187,7 @@ function notFound() {
 const routes = {
   "": [home, "Le jeu nous connecte"],
   experience: [experience, "L’expérience"],
+  competitions: [competitions, "Compétitions"],
   faq: [faq, "Questions fréquentes"],
   contact: [contact, "Contact"],
   mentions: [mentions, "Informations & confidentialité"],

@@ -409,6 +409,33 @@ nav > a[aria-current] {
   font-size: 13px;
   margin-bottom: 0;
 }
+.competition-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.competition-card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.competition-card h3 {
+  margin: 16px 0 8px;
+}
+.competition-card p {
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+.competition-card .text-link {
+  margin-top: auto;
+}
+.competition-note {
+  font-size: 12px;
+  margin: 22px 0 0;
+}
 .game-section {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
@@ -909,6 +936,17 @@ details > p {
     gap: 40px;
   }
 }
+@media (max-width: 1200px) and (min-width: 761px) {
+  .header-inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding-block: 18px;
+  }
+  .header-inner nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
 @media (max-width: 760px) {
   .container {
     width: calc(100% - 40px);
@@ -1018,6 +1056,7 @@ details > p {
     margin-top: 20px;
   }
   .feature-grid,
+  .competition-grid,
   .games-grid,
   .installations-grid {
     grid-template-columns: 1fr;

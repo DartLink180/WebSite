@@ -252,3 +252,11 @@ répondent 200. Chromium a vérifié en HTTPS l’ouverture de la galerie, le
 passage à l’image suivante, Échap, le retour du focus et l’absence d’erreur
 JavaScript à 1280 et 390 px. Cette recette vérifie la vitrine, pas les
 services liés ni une installation matérielle.
+
+## Onglet Compétitions — 29 octobre 2026
+
+Depuis `main` `f08b085245e89eb792d24cf5febb95d51a802473`, la branche `feat/competitions-live` ajoute au menu une page `#/competitions` consacrée aux compétitions internationales. Elle oriente vers le [centre de matchs PDC](https://www.pdc.tv/games), les [actualités PDC](https://www.pdc.tv/news/), le [calendrier PDC](https://www.pdc.tv/calendar/), les [actualités WDF](https://dartswdf.com/news/) et le [calendrier WDF](https://dartswdf.com/calendar/). Ces cinq destinations ont répondu HTTP 200 le 29 octobre 2026. Les liens externes ouvrent un nouvel onglet et sont identifiés comme tels pour l’accessibilité.
+
+La vitrine reste statique : aucun résultat ni article n’est copié ou affiché dans DartLink, et aucun score n’est présenté comme courant sans source de données. Le « direct » se consulte sur le centre de matchs PDC, lorsqu’un événement y est couvert. Les autres organisateurs pourront être ajoutés quand leurs sources et conditions d’usage seront vérifiées. Cette décision préserve le fonctionnement sans clé d’API, dépendance ou tâche planifiée ; elle ne prouve pas que tous les tournois mondiaux soient couverts.
+
+Validation locale : `node --check app.js`, les trois tests Node existants et `git diff --check` réussis avec Node 24 fourni localement par le runtime du Manager. Le shell ne dispose pas de `node` dans son `PATH` standard ni de Chromium ; aucune recette navigateur ou vérification de la production n’est revendiquée pour cette branche. Le build statique ne requiert aucun nouvel asset. Publication GitHub et SHA vérifié seront ajoutés à la documentation après push, sans fusion ni déploiement sur `main`.

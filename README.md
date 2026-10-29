@@ -114,3 +114,11 @@ Le menu « Télécommande » et le bouton « Ouvrir DartLink Remote » de l’ac
 Le menu et l’accueil conservent aussi le lien « Jouer sur mobile » vers
 [la PWA mobile](https://dartlink.fr/mobile/), présent sur le domaine avant cette
 mise à jour de la vitrine.
+
+## Compétitions internationales
+
+L’onglet `#/competitions` regroupe les accès directs aux scores et aux
+actualités PDC, ainsi qu’aux actualités et calendriers PDC et WDF. Ces pages
+sont mises à jour par les organisateurs ; la vitrine ne récupère ni ne republie
+de scores ou d’articles. Les liens ouvrent les sites sources dans un nouvel
+onglet. Voir [la décision et les limites](docs/REFONTE-VITRINE.md#onglet-compétitions--29-octobre-2026).

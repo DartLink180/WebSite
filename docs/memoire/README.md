@@ -166,3 +166,9 @@ a réussi. Le Nginx qui sert `dartlink.fr` utilise une release statique
 construite depuis ce commit. Les 13 ressources web du domaine correspondent
 au build et la galerie a été parcourue sur l’URL HTTPS à 1280 et 390 px.
 Voir [les contrôles et limites](../REFONTE-VITRINE.md#publication-de-la-galerie--29-octobre-2026).
+
+## Onglet Compétitions — 29 octobre 2026, préparation
+
+Base `main` et `origin/main` : `f08b085245e89eb792d24cf5febb95d51a802473`, arbre propre avant changement. La branche `feat/competitions-live` ajoute la route `#/competitions` au menu. La page donne accès aux scores, actualités et calendrier de la PDC et aux actualités et calendrier de la WDF. Les liens directs vers les sources remplacent toute idée implicite d’un flux de résultats intégré : aucun flux public stable ni droit de republication des scores n’a été établi pour ce site statique. Les horaires et résultats restent donc ceux des organisateurs, selon les événements couverts.
+
+La route utilise le routage existant dans `app.js` et des cartes responsive dans `style.css`, sans dépendance ni ressource de build supplémentaire. Aucun changement du Manager, des PWA ou de la production n’est prévu par cette préparation. Validation, sources et limites : [document de refonte](../REFONTE-VITRINE.md#onglet-compétitions--29-octobre-2026). La référence Git de la branche et son état distant seront consignés après publication de ce changement.
