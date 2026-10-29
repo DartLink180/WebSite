@@ -31,7 +31,7 @@ jobs:
           node-version: 20
 
       - name: Actualiser les titres PDC
-        run: python3 scripts/update-pdc-news.py public/news/pdc.json || echo "Flux indisponible : copie de secours conservée"
+        run: python3 scripts/update-pdc-news.py public/news/pdc.json || echo "Flux indisponible, copie de secours conservée"
 
       - name: Générer le site
         run: node build.cjs
