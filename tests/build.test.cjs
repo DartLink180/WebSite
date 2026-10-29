@@ -28,6 +28,8 @@ function fixture() {
     );
   }
   fs.mkdirSync(path.join(dir, "public", "brand"), { recursive: true });
+  fs.mkdirSync(path.join(dir, "public", "news"), { recursive: true });
+  fs.copyFileSync(path.join(root, "public", "news", "pdc.json"), path.join(dir, "public", "news", "pdc.json"));
   for (const name of ["wordmark.png", "signature.png", "mark.png"]) {
     fs.copyFileSync(
       path.join(root, "public", "brand", name),
@@ -64,11 +66,16 @@ test("fresh build includes the complete site and only intended public resources"
         fs.readFileSync(path.join(dir, "public", "screenshots", name)),
       );
     }
+    assert.deepEqual(
+      fs.readFileSync(path.join(dir, "dist", "news", "pdc.json")),
+      fs.readFileSync(path.join(dir, "public", "news", "pdc.json")),
+    );
     assert.deepEqual(fs.readdirSync(path.join(dir, "dist")).sort(), [
       ".nojekyll",
       "app.js",
       "brand",
       "index.html",
+      "news",
       "screenshots",
       "style.css",
     ]);

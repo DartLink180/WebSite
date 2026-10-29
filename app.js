@@ -89,9 +89,48 @@ const competitionSources = [
 ];
 function competitions() {
   return shell(
-    `<section class="page-intro container"><span class="eyebrow">Le monde des fléchettes</span><h1>Suivez les<br><em>compétitions.</em></h1><p>Retrouvez les scores, les actualités et les prochaines dates auprès des organisateurs internationaux. Les liens ouvrent leurs pages mises à jour directement.</p></section><section class="section container compact"><div class="section-heading"><div><span class="eyebrow">Sources officielles</span><h2>Au plus près des tournois.</h2></div><p>Les résultats et les horaires sont publiés par chaque organisateur.</p></div><div class="competition-grid">${competitionSources.map(([number, category, source, description, url]) => `<article class="competition-card"><span class="eyebrow">${number} / ${category}</span><h3>${source}</h3><p>${description}</p><a class="text-link" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="Voir ${category.toLowerCase()} ${source} (nouvel onglet)">Voir sur ${source} <span aria-hidden="true">${arrowIcon}</span></a></article>`).join("")}</div><p class="competition-note">Les scores en direct sont disponibles selon les événements. Cette page ne diffuse pas elle-même les matchs ni les résultats.</p></section>`,
+    `<section class="page-intro container"><span class="eyebrow">Le monde des fléchettes</span><h1>Suivez les<br><em>compétitions.</em></h1><p>Les derniers titres de la PDC sont affichés ici. Retrouvez aussi les scores, les actualités et les prochaines dates auprès des organisateurs internationaux.</p></section><section class="section container compact"><div class="section-heading"><div><span class="eyebrow">Actualités PDC</span><h2>Les derniers titres.</h2></div><p>Ouvrez un titre pour lire l’article sur le site de la PDC.</p></div><p id="competition-news-status" class="competition-note" role="status">Chargement des titres…</p><div id="competition-news" class="competition-news" aria-label="Derniers titres de la PDC"></div></section><section class="section container compact"><div class="section-heading"><div><span class="eyebrow">Sources officielles</span><h2>Au plus près des tournois.</h2></div><p>Les résultats et les horaires sont publiés par chaque organisateur.</p></div><div class="competition-grid">${competitionSources.map(([number, category, source, description, url]) => `<article class="competition-card"><span class="eyebrow">${number} / ${category}</span><h3>${source}</h3><p>${description}</p><a class="text-link" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="Voir ${category.toLowerCase()} ${source} (nouvel onglet)">Voir sur ${source} <span aria-hidden="true">${arrowIcon}</span></a></article>`).join("")}</div><p class="competition-note">Les scores en direct sont disponibles selon les événements. Cette page ne diffuse pas elle-même les matchs ni les résultats.</p></section>`,
     "competitions",
   );
+}
+async function setupCompetitionNews() {
+  const list = document.querySelector("#competition-news");
+  const status = document.querySelector("#competition-news-status");
+  if (!list || !status) return;
+  try {
+    const response = await fetch("news/pdc.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("News unavailable");
+    const data = await response.json();
+    if (!Array.isArray(data.items) || !data.items.length) throw new Error("Empty news");
+    if (!list.isConnected) return;
+    const dateFormat = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Paris" });
+    for (const item of data.items.slice(0, 6)) {
+      let url;
+      try { url = new URL(item.url); } catch { continue; }
+      const published = new Date(item.publishedAt);
+      if (url.protocol !== "https:" || url.hostname !== "www.pdc.tv" || !url.pathname.startsWith("/news/") || typeof item.title !== "string" || !item.title.trim() || Number.isNaN(published.getTime())) continue;
+      const article = document.createElement("article");
+      article.className = "competition-news-item";
+      const date = document.createElement("time");
+      date.dateTime = published.toISOString();
+      date.textContent = dateFormat.format(published);
+      const link = document.createElement("a");
+      link.href = url.href;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = item.title;
+      link.setAttribute("aria-label", `${item.title} (PDC, nouvel onglet)`);
+      article.append(date, link);
+      list.append(article);
+    }
+    if (!list.children.length) throw new Error("No valid news");
+    const updated = new Date(data.updatedAt);
+    status.textContent = Number.isNaN(updated.getTime())
+      ? "Titres fournis par la PDC."
+      : `Titres PDC récupérés le ${dateFormat.format(updated)} à ${new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Paris" }).format(updated)} (heure de Paris).`;
+  } catch {
+    if (list.isConnected) status.textContent = "Les titres sont momentanément indisponibles. Consultez les actualités sur le site de la PDC ci-dessous.";
+  }
 }
 function setupGameGallery() {
   const dialog = document.querySelector("#game-gallery");
@@ -220,6 +259,7 @@ function render() {
     }
   });
   setupGameGallery();
+  setupCompetitionNews();
   document.querySelector("#contact")?.addEventListener("submit", (event) => {
     event.preventDefault();
     event.target.reset();

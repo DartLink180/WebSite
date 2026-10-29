@@ -119,6 +119,10 @@ mise à jour de la vitrine.
 
 L’onglet `#/competitions` regroupe les accès directs aux scores et aux
 actualités PDC, ainsi qu’aux actualités et calendriers PDC et WDF. Ces pages
-sont mises à jour par les organisateurs ; la vitrine ne récupère ni ne republie
-de scores ou d’articles. Les liens ouvrent les sites sources dans un nouvel
-onglet. Voir [la décision et les limites](docs/REFONTE-VITRINE.md#onglet-compétitions--29-octobre-2026).
+sont mises à jour par les organisateurs. La page affiche maintenant les six
+derniers titres du [flux RSS officiel PDC](https://www.pdc.tv/rss.xml), avec
+leur date et un lien vers chaque article. Elle ne republie ni les articles ni
+les scores. Les titres sont actualisés toutes les 15 minutes sur le serveur et
+environ deux fois par heure sur GitHub Pages ; la date de récupération est
+visible dans la page. Si le flux échoue, les derniers titres connus restent
+affichés. Voir [la décision et les limites](docs/REFONTE-VITRINE.md#titres-pdc-sur-la-page-compétitions--29-octobre-2026).

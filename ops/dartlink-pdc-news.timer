@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh DartLink PDC news every 15 minutes
+
+[Timer]
+OnCalendar=*:0/15
+Persistent=true
+Unit=dartlink-pdc-news.service
+
+[Install]
+WantedBy=timers.target

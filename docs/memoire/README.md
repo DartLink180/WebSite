@@ -176,3 +176,9 @@ La route utilise le routage existant dans `app.js` et des cartes responsive dans
 ### Publication vérifiée le 29 octobre 2026
 
 La préparation ci-dessus est historique. `main` a été avancée au commit `4954bf08c81802b73cec52b97df78b4af325fca6`, poussé sur GitHub. Le workflow Pages [40911388618](https://github.com/DartLink180/WebSite/actions/runs/40911388618) a réussi. Le Nginx de `dartlink.fr` sert une release statique construite depuis ce SHA ; ses 13 ressources publiques correspondent au build en HTTPS. `/manager/`, `/remote/` et `/mobile/` répondent 200. Voir [les contrôles et limites](../REFONTE-VITRINE.md#publication-de-longlet-compétitions--29-octobre-2026).
+
+### Titres PDC sur la page — 29 octobre 2026
+
+Le retour utilisateur établit que les seuls liens de la page publiée ne suffisent pas. Cette évolution remplace la décision de ne présenter aucun titre sur la vitrine : le flux officiel `https://www.pdc.tv/rss.xml` a été vérifié et permet d’afficher six titres, leurs dates et des liens directs vers les articles. Aucun article complet ni score n’est repris ; la WDF conserve son lien, faute de flux équivalent vérifié. La date de récupération est affichée, y compris si une mise à jour échoue.
+
+Le générateur Python standard `scripts/update-pdc-news.py` valide les liens et produit un JSON borné. `build.cjs` publie une copie de secours versionnée ; le workflow Pages actualise ce fichier au build et toutes les 30 minutes. Sur le serveur du domaine, une tâche systemd toutes les 15 minutes écrit un JSON hors des releases, servi par Nginx au même chemin. Voir [architecture, exploitation, validation et limites](../REFONTE-VITRINE.md#titres-pdc-sur-la-page-compétitions--29-octobre-2026). La publication et sa référence Git seront consignées après déploiement.

@@ -1,0 +1,12 @@
+[Unit]
+Description=Refresh DartLink PDC news headlines
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=www-data
+ExecStart=/usr/bin/python3 /srv/dartlink-v2/bin/update-pdc-news.py /srv/dartlink-v2/data/pdc.json
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/srv/dartlink-v2/data

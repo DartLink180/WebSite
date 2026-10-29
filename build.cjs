@@ -5,6 +5,8 @@ fs.mkdirSync(output, { recursive: true });
 for (const file of ["index.html", "app.js", "style.css"]) {
   fs.copyFileSync(path.join(__dirname, file), path.join(output, file));
 }
+fs.mkdirSync(path.join(output, "news"), { recursive: true });
+fs.copyFileSync(path.join(__dirname, "public", "news", "pdc.json"), path.join(output, "news", "pdc.json"));
 // Publish only the assets used by the site, never local configuration files.
 const screenshots = [
   "v296-menu.png",

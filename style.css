@@ -414,6 +414,33 @@ nav > a[aria-current] {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
+.competition-news {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+.competition-news-item {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding: 20px 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+.competition-news-item time {
+  color: var(--accent);
+  font-size: 11px;
+  white-space: nowrap;
+}
+.competition-news-item a {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.competition-news-item a:hover {
+  color: var(--accent);
+}
 .competition-card {
   display: flex;
   flex-direction: column;
@@ -1173,6 +1200,12 @@ details > p {
   }
   .prose h2 {
     font-size: 23px;
+  }
+}
+@media (max-width: 480px) {
+  .competition-news-item {
+    display: grid;
+    gap: 8px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
