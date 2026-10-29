@@ -75,9 +75,52 @@ const games = [
 ];
 function experience() {
   return shell(
-    `<section class="page-intro container"><span class="eyebrow">L’expérience DartLink</span><h1>Chaque lancer.<br><em>Une nouvelle partie.</em></h1><p>Une cible, des joueurs et l’envie de partager un bon moment. Découvrez les six modes du jeu, puis l’écosystème qui accompagne les installations.</p></section><section class="container section compact"><div class="section-heading"><div><span class="eyebrow">Le jeu en images</span><h2>À chacun son mode.</h2></div><p>Captures de DartLink v2.9.6 en simulation locale.</p></div><div class="games-grid">${games.map(([file, title, text, alt]) => `<figure class="game-card"><img src="screenshots/${file}" alt="${alt}" width="1280" height="720" loading="lazy"><figcaption><span class="eyebrow">${title}</span><h3>${text}</h3></figcaption></figure>`).join("")}</div></section><section class="section container installations-section"><div class="section-heading"><div><span class="eyebrow">Le jeu dans votre espace</span><h2>Les installations en images.</h2></div><p>Des photos des installations physiques seront ajoutées ici.</p></div><div class="installations-grid"><div class="installation-slot"><span class="installation-slot-number">01</span><span>Vue d’ensemble</span><strong>Photo à venir</strong></div><div class="installation-slot"><span class="installation-slot-number">02</span><span>La cible et son équipement</span><strong>Photo à venir</strong></div><div class="installation-slot"><span class="installation-slot-number">03</span><span>L’espace de jeu</span><strong>Photo à venir</strong></div></div></section><section class="section container"><div class="section-heading"><div><span class="eyebrow">Du terrain aux coulisses</span><h2>Un ensemble cohérent.</h2></div></div>${featureCards()}</section>${managerSection()}`,
+    `<section class="page-intro container"><span class="eyebrow">L’expérience DartLink</span><h1>Chaque lancer.<br><em>Une nouvelle partie.</em></h1><p>Une cible, des joueurs et l’envie de partager un bon moment. Découvrez les six modes du jeu, puis l’écosystème qui accompagne les installations.</p></section><section class="container section compact"><div class="section-heading"><div><span class="eyebrow">Le jeu en images</span><h2>À chacun son mode.</h2></div><p>Captures de DartLink v2.9.6 en simulation locale.</p></div><div class="games-grid">${games.map(([file, title, text, alt], index) => `<figure class="game-card"><button class="game-card-open" type="button" data-gallery-index="${index}" aria-label="Agrandir la capture ${title}"><img src="screenshots/${file}" alt="${alt}" width="1280" height="720" loading="lazy"><span aria-hidden="true">Agrandir ↗</span></button><figcaption><span class="eyebrow">${title}</span><h3>${text}</h3></figcaption></figure>`).join("")}</div></section><dialog id="game-gallery" class="game-gallery" aria-labelledby="gallery-title"><div class="game-gallery-panel"><div class="game-gallery-top"><span class="eyebrow">Le jeu en images</span><button class="game-gallery-close" type="button" aria-label="Fermer la galerie">Fermer <span aria-hidden="true">×</span></button></div><figure><img id="gallery-image" alt="" width="1280" height="720"><figcaption><strong id="gallery-title"></strong><span id="gallery-count" aria-live="polite"></span></figcaption></figure><div class="game-gallery-controls"><button class="game-gallery-prev" type="button">← Image précédente</button><button class="game-gallery-next" type="button">Image suivante →</button></div></div></dialog><section class="section container installations-section"><div class="section-heading"><div><span class="eyebrow">Le jeu dans votre espace</span><h2>Les installations en images.</h2></div><p>Des photos des installations physiques seront ajoutées ici.</p></div><div class="installations-grid"><div class="installation-slot"><span class="installation-slot-number">01</span><span>Vue d’ensemble</span><strong>Photo à venir</strong></div><div class="installation-slot"><span class="installation-slot-number">02</span><span>La cible et son équipement</span><strong>Photo à venir</strong></div><div class="installation-slot"><span class="installation-slot-number">03</span><span>L’espace de jeu</span><strong>Photo à venir</strong></div></div></section><section class="section container"><div class="section-heading"><div><span class="eyebrow">Du terrain aux coulisses</span><h2>Un ensemble cohérent.</h2></div></div>${featureCards()}</section>${managerSection()}`,
     "experience",
   );
+}
+function setupGameGallery() {
+  const dialog = document.querySelector("#game-gallery");
+  if (!dialog) return;
+  const triggers = [...document.querySelectorAll(".game-card-open")];
+  const image = dialog.querySelector("#gallery-image");
+  const title = dialog.querySelector("#gallery-title");
+  const count = dialog.querySelector("#gallery-count");
+  let current = 0;
+  let opener;
+  const show = (index) => {
+    current = (index + triggers.length) % triggers.length;
+    const source = triggers[current].querySelector("img");
+    image.src = source.src;
+    image.alt = source.alt;
+    title.textContent = triggers[current].closest("figure").querySelector(".eyebrow").textContent;
+    count.textContent = `${current + 1} / ${triggers.length}`;
+  };
+  triggers.forEach((trigger, index) => trigger.addEventListener("click", () => {
+    opener = trigger;
+    show(index);
+    dialog.showModal();
+    dialog.querySelector(".game-gallery-close").focus();
+  }));
+  dialog.querySelector(".game-gallery-close").addEventListener("click", () => dialog.close());
+  dialog.querySelector(".game-gallery-prev").addEventListener("click", () => show(current - 1));
+  dialog.querySelector(".game-gallery-next").addEventListener("click", () => show(current + 1));
+  dialog.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") { event.preventDefault(); show(current - 1); }
+    if (event.key === "ArrowRight") { event.preventDefault(); show(current + 1); }
+  });
+  dialog.addEventListener("close", () => opener?.focus());
+  let touchStart;
+  image.addEventListener("touchstart", (event) => {
+    touchStart = { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
+  }, { passive: true });
+  image.addEventListener("touchend", (event) => {
+    if (!touchStart) return;
+    const dx = event.changedTouches[0].clientX - touchStart.x;
+    const dy = event.changedTouches[0].clientY - touchStart.y;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
+    touchStart = undefined;
+  }, { passive: true });
 }
 const questions = [
   [
@@ -161,6 +204,7 @@ function render() {
       toggle.focus();
     }
   });
+  setupGameGallery();
   document.querySelector("#contact")?.addEventListener("submit", (event) => {
     event.preventDefault();
     event.target.reset();

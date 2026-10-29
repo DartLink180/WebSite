@@ -49,7 +49,7 @@ const baseUrl =
           .locator("img")
           .evaluateAll((imgs) =>
             imgs
-              .filter((img) => img.complete && !img.naturalWidth)
+              .filter((img) => img.hasAttribute("src") && img.complete && !img.naturalWidth)
               .map((img) => img.src),
           );
         assert.deepEqual(broken, []);
@@ -65,6 +65,33 @@ const baseUrl =
       }
     }
     await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(baseUrl + "#/experience", { waitUntil: "networkidle" });
+    const firstCapture = page.getByRole("button", { name: "Agrandir la capture X01" });
+    await firstCapture.click();
+    const gallery = page.locator("#game-gallery");
+    assert.equal(await page.getByRole("dialog", { name: "X01" }).isVisible(), true);
+    assert.match(await gallery.locator("#gallery-image").getAttribute("src"), /v296-x01\.png$/);
+    assert.equal(await gallery.locator("#gallery-count").textContent(), "1 / 6");
+    await gallery.getByRole("button", { name: "Image suivante" }).click();
+    assert.equal(await gallery.locator("#gallery-title").textContent(), "Cricket");
+    await page.keyboard.press("ArrowLeft");
+    assert.equal(await gallery.locator("#gallery-title").textContent(), "X01");
+    await gallery.getByRole("button", { name: "Image précédente" }).click();
+    assert.equal(await gallery.locator("#gallery-title").textContent(), "Tournoi");
+    assert.equal(await gallery.locator("#gallery-count").textContent(), "6 / 6");
+    await page.keyboard.press("Escape");
+    assert.equal(await page.locator("#game-gallery").isVisible(), false);
+    assert.equal(await firstCapture.evaluate((button) => document.activeElement === button), true);
+    await page.getByRole("button", { name: "Agrandir la capture Killer" }).click();
+    assert.equal(await page.locator("#gallery-title").textContent(), "Killer");
+    await gallery.locator("#gallery-image").evaluate((image) => {
+      const start = new Touch({ identifier: 1, target: image, clientX: 300, clientY: 300 });
+      const end = new Touch({ identifier: 1, target: image, clientX: 100, clientY: 310 });
+      image.dispatchEvent(new TouchEvent("touchstart", { changedTouches: [start] }));
+      image.dispatchEvent(new TouchEvent("touchend", { changedTouches: [end] }));
+    });
+    assert.equal(await page.locator("#gallery-title").textContent(), "Tournoi");
+    await page.getByRole("button", { name: "Fermer la galerie" }).click();
     await page.goto(baseUrl, { waitUntil: "networkidle" });
     await page.getByRole("button", { name: "Menu" }).click();
     assert.equal(

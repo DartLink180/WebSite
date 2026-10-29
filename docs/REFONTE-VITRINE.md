@@ -212,3 +212,27 @@ trois espaces photo, lien mobile, absence d’erreur JavaScript et de débordeme
 horizontal. La recette ne couvre pas le fonctionnement interne de ces trois
 services, une installation de la version 2.9.6 sur carte, ni les périphériques
 physiques. Aucune photo d’installation n’est encore publiée.
+
+## Galerie des captures — 29 octobre 2026
+
+Depuis WebSite `main` `34d46a12d37bbec33b3cb49417ba50e499021413`,
+les six captures de L’expérience peuvent être ouvertes en grand. Un élément
+`dialog` natif assure la modalité ; les commandes précédent/suivant, les
+flèches du clavier et le balayage horizontal de l’image parcourent les six
+captures avec retour de la dernière à la première. Échap et le bouton de
+fermeture quittent la galerie ; le focus revient à la vignette activée.
+Titre, texte alternatif et compteur décrivent l’image courante. Les photos
+d’installations restent absentes et leurs trois emplacements ne sont pas
+interactifs. Aucune dépendance, ressource ou route supplémentaire n’est ajoutée.
+Cette décision complète la grille de captures fixes livrée dans `e6fc8f8`.
+
+Validation locale : `node --check app.js`, trois tests Node du build et
+`git diff --check` réussis. La recette Chromium sur un build temporaire a
+réussi pour six routes à quatre largeurs (1440, 768, 390 et 320 px), sans
+image manquante ni débordement horizontal. Elle vérifie l’ouverture de la
+première et d’une autre capture, les boutons précédent/suivant, le retour en
+boucle, les flèches, le geste tactile, Échap, la fermeture explicite et le
+retour du focus. Inspection visuelle de la galerie ouverte à 1280, 390 et
+320 px : image et commandes visibles dans les fenêtres contrôlées. Les
+interactions utilisent les captures logicielles existantes ; aucune photo ni
+recette matérielle n’en découle.

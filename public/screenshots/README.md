@@ -29,3 +29,7 @@ Lorsqu’elles seront fournies et autorisées à la publication, ajouter des
 fichiers optimisés dans `public/installations/`, les copier explicitement dans
 `build.cjs`, puis remplacer chaque emplacement textuel de `app.js` par une
 image avec un texte alternatif précis.
+
+Depuis la galerie de L’expérience, un clic sur l’une des six captures ouvre
+l’image en grand. La navigation utilise les boutons, les flèches du clavier ou
+un balayage horizontal sur l’image. Le menu d’accueil reste un simple aperçu.

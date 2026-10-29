@@ -135,3 +135,20 @@ les 13 ressources web comparées correspondent au build ; voir
 [les contrôles et limites](../REFONTE-VITRINE.md#publication-de-la-page-lexpérience--29-octobre-2026).
 Aucune mise à jour de carte ni modification du Manager, de Remote ou de la
 PWA mobile n’a été réalisée.
+
+## Galerie de captures — 29 octobre 2026
+
+Base WebSite `main` `34d46a12d37bbec33b3cb49417ba50e499021413`, arbre propre
+avant changement. La page L’expérience rend ses six captures cliquables et
+ouvre une galerie modale native. Les boutons précédent/suivant parcourent les
+images en boucle ; les flèches gauche/droite et le balayage horizontal sur
+l’image font de même. Échap ou « Fermer » ferme la galerie et rend le focus à
+la capture ouverte. Le titre, le texte alternatif et le compteur suivent
+l’image affichée. Cette interaction complète la grille publiée au commit
+`e6fc8f8`, qui n’offrait alors que des images fixes.
+
+Seules les captures du jeu existantes participent à la galerie. Les trois
+emplacements réservés aux installations physiques restent textuels jusqu’à la
+réception de photos. La solution utilise l’élément HTML `dialog`, sans nouvel
+asset ni dépendance ; les routes, le build et les services liés sont inchangés.
+Validation et publication sont consignées dans le document de refonte.

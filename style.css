@@ -603,12 +603,37 @@ nav > a[aria-current] {
   overflow: hidden;
   background: var(--panel);
 }
-.game-card > img {
+.game-card-open {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: #050606;
+  text-align: left;
+}
+.game-card-open img {
   width: 100%;
   aspect-ratio: 16/9;
   object-fit: contain;
   background: #050606;
   height: auto;
+}
+.game-card-open > span {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  background: #101417e8;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+.game-card-open:hover > span,
+.game-card-open:focus-visible > span {
+  background: var(--accent);
+  color: var(--dark-green);
 }
 .game-card figcaption {
   padding: 24px;
@@ -616,6 +641,81 @@ nav > a[aria-current] {
 .game-card h3 {
   font-size: 18px;
   margin: 12px 0 0;
+}
+.game-gallery {
+  width: min(1100px, calc(100% - 24px));
+  max-width: none;
+  max-height: calc(100dvh - 24px);
+  padding: 0;
+  border: 1px solid #41564b;
+  border-radius: 12px;
+  background: var(--panel);
+  color: #e9edee;
+  box-shadow: 0 24px 90px #0009;
+}
+.game-gallery::backdrop {
+  background: #050b0bd9;
+}
+.game-gallery-panel {
+  padding: clamp(14px, 2vw, 24px);
+}
+.game-gallery-top,
+.game-gallery-controls,
+.game-gallery figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.game-gallery-top {
+  margin-bottom: 12px;
+}
+.game-gallery button {
+  border: 1px solid #40584b;
+  border-radius: 6px;
+  background: #203028;
+  color: #e9edee;
+  padding: 10px 14px;
+  min-height: 44px;
+}
+.game-gallery button:hover {
+  background: #2c4938;
+}
+.game-gallery-close span {
+  margin-left: 8px;
+  font-size: 18px;
+}
+.game-gallery figure {
+  margin: 0;
+}
+.game-gallery figure img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 225px);
+  margin-inline: auto;
+  object-fit: contain;
+  background: #050606;
+}
+.game-gallery figcaption {
+  padding-block: 12px 16px;
+  font-size: 14px;
+}
+.game-gallery figcaption span {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.game-gallery-controls button {
+  flex: 1;
+}
+@media (max-width: 480px) {
+  .game-gallery-controls {
+    gap: 8px;
+  }
+  .game-gallery-controls button {
+    padding-inline: 8px;
+    font-size: 11px;
+  }
 }
 .installations-section {
   padding-top: 10px;
