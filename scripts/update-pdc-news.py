@@ -4,15 +4,37 @@
 import argparse
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+from html.parser import HTMLParser
 import json
 import os
 from pathlib import Path
+import re
 import tempfile
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 import xml.etree.ElementTree as ET
 
 FEED_URL = "https://www.pdc.tv/rss.xml"
+
+
+class FirstImage(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.source = None
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "img" and self.source is None:
+            self.source = dict(attrs).get("src")
+
+
+def thumbnail_from_description(description):
+    parser = FirstImage()
+    parser.feed(description or "")
+    url = urlparse(parser.source or "")
+    match = re.fullmatch(r"/fit-in/\d+x\d+/([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|webp))", url.path, re.IGNORECASE)
+    if url.scheme != "https" or url.hostname != "images.gc.pdcservices.co.uk" or not match:
+        return None
+    return f"https://images.gc.pdcservices.co.uk/fit-in/320x180/{match.group(1)}"
 
 
 def fetch_items():
@@ -39,7 +61,11 @@ def fetch_items():
             date = parsedate_to_datetime(published).astimezone(timezone.utc)
         except (TypeError, ValueError):
             continue
-        items.append({"title": title, "url": link, "publishedAt": date.isoformat()})
+        item = {"title": title, "url": link, "publishedAt": date.isoformat()}
+        thumbnail = thumbnail_from_description(entry.findtext("description"))
+        if thumbnail:
+            item["thumbnail"] = thumbnail
+        items.append(item)
         seen.add(link)
         if len(items) == 6:
             break

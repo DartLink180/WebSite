@@ -118,9 +118,34 @@ async function setupCompetitionNews() {
       link.href = url.href;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
-      link.textContent = item.title;
       link.setAttribute("aria-label", `${item.title} (PDC, nouvel onglet)`);
-      article.append(date, link);
+      if (typeof item.thumbnail === "string") {
+        let thumbnail;
+        try { thumbnail = new URL(item.thumbnail); } catch { /* Keep the text-only article. */ }
+        if (thumbnail?.protocol === "https:" && thumbnail.hostname === "images.gc.pdcservices.co.uk" && /^\/fit-in\/320x180\/[a-z0-9_-]+\.(jpg|jpeg|png|webp)$/i.test(thumbnail.pathname)) {
+          const image = document.createElement("img");
+          image.src = thumbnail.href;
+          image.alt = "";
+          image.width = 120;
+          image.height = 76;
+          image.loading = "lazy";
+          image.decoding = "async";
+          image.referrerPolicy = "no-referrer";
+          image.addEventListener("error", () => {
+            image.remove();
+            link.classList.remove("has-image");
+          });
+          link.classList.add("has-image");
+          link.append(image);
+        }
+      }
+      const copy = document.createElement("span");
+      copy.className = "competition-news-copy";
+      const title = document.createElement("span");
+      title.textContent = item.title;
+      copy.append(date, title);
+      link.append(copy);
+      article.append(link);
       list.append(article);
     }
     if (!list.children.length) throw new Error("No valid news");
@@ -215,7 +240,7 @@ function contact() {
 }
 function mentions() {
   return shell(
-    `<section class="page-intro container"><span class="eyebrow">Informations & confidentialité</span><h1>En toute<br><em>clarté.</em></h1></section><section class="prose container"><h2>Le site DartLink</h2><p>Cette vitrine présente l’écosystème DartLink et les captures de son interface de jeu. Elle ne permet pas de piloter une installation.</p><h2>Accès au Manager</h2><p>Les liens Manager ouvrent le service externe à l’adresse dartlink.fr/manager/. Ce service possède sa propre authentification et ses propres traitements, distincts de cette vitrine.</p><h2>Vos données sur cette vitrine</h2><p>Le formulaire de contact est une démonstration. Les données saisies ne sont ni transmises par l’application, ni conservées après le rechargement de la page. Ce site n’ajoute aucun outil de mesure d’audience ni cookie applicatif. L’hébergeur peut traiter les données techniques nécessaires à la fourniture du site.</p><h2>Informations éditoriales</h2><p>Les informations légales complètes de l’éditeur et les coordonnées de contact restent à renseigner à partir d’informations vérifiées.</p></section>`,
+    `<section class="page-intro container"><span class="eyebrow">Informations & confidentialité</span><h1>En toute<br><em>clarté.</em></h1></section><section class="prose container"><h2>Le site DartLink</h2><p>Cette vitrine présente l’écosystème DartLink et les captures de son interface de jeu. Elle ne permet pas de piloter une installation.</p><h2>Accès au Manager</h2><p>Les liens Manager ouvrent le service externe à l’adresse dartlink.fr/manager/. Ce service possède sa propre authentification et ses propres traitements, distincts de cette vitrine.</p><h2>Vos données sur cette vitrine</h2><p>Le formulaire de contact est une démonstration. Les données saisies ne sont ni transmises par l’application, ni conservées après le rechargement de la page. Ce site n’ajoute aucun outil de mesure d’audience ni cookie applicatif. Les vignettes des actualités sont chargées directement depuis le serveur d’images de la PDC : votre navigateur contacte ce service lorsque vous consultez la page Compétitions. L’hébergeur peut traiter les données techniques nécessaires à la fourniture du site.</p><h2>Informations éditoriales</h2><p>Les informations légales complètes de l’éditeur et les coordonnées de contact restent à renseigner à partir d’informations vérifiées.</p></section>`,
   );
 }
 function notFound() {
