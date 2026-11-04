@@ -1,35 +1,17 @@
-# Captures de la vitrine
+# Captures historiques de la vitrine
 
-Les sept fichiers `v296-*.png` sont les captures publiées par `build.cjs` :
+Les sept fichiers `v296-*.png` sont conservés pour provenance historique. Ils
+ont été publiés lors de la page L'expérience du 29 octobre 2026, puis
+remplacés dans la vitrine par les 19 captures fournies le 4 novembre 2026.
+Le build courant ne les copie plus.
 
-| Fichier | Écran |
-|---|---|
-| `v296-menu.png` | Menu de préparation, accueil de la vitrine |
-| `v296-x01.png` | X01, partie 101 à deux joueurs |
-| `v296-cricket.png` | Cricket Cut-Throat à deux joueurs |
-| `v296-course.png` | Course 300 à deux joueurs |
-| `v296-around-world.png` | Around the World, arrivée au 20, à deux joueurs |
-| `v296-killer.png` | Killer, attribution des numéros à trois joueurs |
-| `v296-tournoi.png` | Tournoi, tableau de quatre joueurs |
-
-Provenance : dépôt `DartLink` local, branche `main`, SHA
+Provenance historique : dépôt `DartLink` local, branche `main`, SHA
 `9210ae4ed4ed2b25bf91a816906ba03672e1df44`, version déclarée `2.9.6`.
 Captures Chromium à 1280 × 720, serveur lancé avec `DARTLINK_SIMULATION=1`
 et données temporaires dans `/tmp`, le 29 octobre 2026. Les joueurs et les
-états de partie sont fictifs. Ces captures montrent le rendu logiciel et ne
-prouvent ni l’installation de v2.9.6 sur une carte, ni le fonctionnement du
-matériel ou d’une partie complète.
+états de partie étaient fictifs. Ces images ne prouvent ni l'installation
+sur une carte, ni le fonctionnement du matériel.
 
-Les anciens `menu.png` et `mode-*.png` restent dans ce dossier pour provenance
-historique, mais ne sont plus copiés dans le build. La décision de les utiliser
-sur la vitrine est remplacée par les captures `v296-*.png`.
-
-La section « installations en images » ne contient encore aucune photographie.
-Lorsqu’elles seront fournies et autorisées à la publication, ajouter des
-fichiers optimisés dans `public/installations/`, les copier explicitement dans
-`build.cjs`, puis remplacer chaque emplacement textuel de `app.js` par une
-image avec un texte alternatif précis.
-
-Depuis la galerie de L’expérience, un clic sur l’une des six captures ouvre
-l’image en grand. La navigation utilise les boutons, les flèches du clavier ou
-un balayage horizontal sur l’image. Le menu d’accueil reste un simple aperçu.
+Les anciens `menu.png` et `mode-*.png` restent également dans ce dossier pour
+provenance, sans être copiés dans le build. La liste et les limites des visuels
+courants sont dans [screenshots/README](../../screenshots/README.md).

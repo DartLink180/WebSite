@@ -1,11 +1,35 @@
-# Sources historiques des visuels
+# Visuels fournis pour la vitrine
 
-Ce dossier contient les trois logos originaux fournis pour la vitrine. Ils ont
-été copiés sans retouche dans `public/brand/` sous les noms `wordmark.png`,
-`signature.png` et `mark.png` ; seul ce dernier dossier entre dans le build.
+Les trois logos originaux restent copiés sans retouche dans `public/brand/`.
+Leur usage et leur provenance historique sont inchangés.
 
-L’ancienne consigne qui demandait de déposer ici les captures `menu.png` et
-`mode-*.png` pour alimenter automatiquement le site est remplacée. Les captures
-du jeu utilisées actuellement se trouvent dans `public/screenshots/`, avec leur
-provenance et la liste de publication dans son [README](../public/screenshots/README.md).
-Le build copie uniquement les noms inscrits explicitement dans `build.cjs`.
+Le 4 novembre 2026, l'utilisateur a fourni 19 captures d'application et trois
+photographies d'une installation dans ce dossier. Les noms et les octets
+originaux sont conservés. `build.cjs` copie explicitement les 19 PNG dans
+`dist/screenshots/` et les trois JPEG dans `dist/installations/` ; aucun autre
+fichier du dossier n'est publié.
+
+| Famille | Fichiers source | Présentation |
+|---|---|---|
+| X01 et X01 IA | `X01.PNG`, `X012.PNG`, `X01IA.PNG` | Début, partie en cours, jeu contre l'ordinateur |
+| Cricket | `cricket.PNG`, `cricket2.PNG` | Début et partie en cours |
+| Course | `course300.PNG`, `course3002.PNG`, `course10.PNG` | Course 300 et variante à dix tours |
+| Around the World | `arroundtheworld.PNG` | Numéros dans l'ordre |
+| Cible aléatoire | `ciblesaleatoire.PNG` | Numéro à toucher |
+| Killer | `killer.PNG`, `killer2.PNG` | Début et partie en cours |
+| Tournoi | `tournoi.PNG`, `tournoi2.PNG`, `tourjoi3.PNG` | Tableau, finale et classement |
+| Menu | `menu.PNG` | Choix des joueurs, du mode et des options |
+| DartLink Remote | `remote1.PNG`, `remote2.PNG`, `remote3.PNG` | Accueil, commandes et noms des joueurs |
+| Installation physique | `dartlink1.jpeg`, `dartlink2.jpeg`, `dartlink3.jpeg` | Vue complète, cible et panneau de commandes |
+
+Ces images sont des documents fournis par l'utilisateur. Leur version exacte,
+leur méthode de capture et l'état de la carte photographiée ne sont pas
+établis par le dépôt. Les captures représentent des écrans et ne constituent
+pas une recette fonctionnelle ou matérielle. Le menu fourni montre l'adresse
+locale et le QR code de la télécommande ; aucune clé ni mot de passe n'a été
+repéré dans les visuels examinés.
+
+Les anciennes captures `public/screenshots/v296-*.png` restent conservées pour
+provenance historique. Elles ne sont plus copiées dans le build à compter de
+cette évolution. La consigne historique de dépôt automatique est remplacée :
+seuls les noms autorisés dans `build.cjs` entrent dans la publication.

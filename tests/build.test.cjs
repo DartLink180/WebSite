@@ -6,25 +6,26 @@ const path = require("node:path");
 const { spawnSync } = require("node:child_process");
 const root = path.resolve(__dirname, "..");
 const screenshots = [
-  "v296-menu.png",
-  "v296-x01.png",
-  "v296-cricket.png",
-  "v296-course.png",
-  "v296-around-world.png",
-  "v296-killer.png",
-  "v296-tournoi.png",
+  "X01.PNG", "X012.PNG", "X01IA.PNG",
+  "cricket.PNG", "cricket2.PNG",
+  "course300.PNG", "course3002.PNG", "course10.PNG",
+  "arroundtheworld.PNG", "ciblesaleatoire.PNG",
+  "killer.PNG", "killer2.PNG",
+  "tournoi.PNG", "tournoi2.PNG", "tourjoi3.PNG",
+  "menu.PNG", "remote1.PNG", "remote2.PNG", "remote3.PNG",
 ];
+const installations = ["dartlink1.jpeg", "dartlink2.jpeg", "dartlink3.jpeg"];
 
 function fixture() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "dartlink-build-"));
   for (const name of ["build.cjs", "index.html", "app.js", "style.css"]) {
     fs.copyFileSync(path.join(root, name), path.join(dir, name));
   }
-  fs.mkdirSync(path.join(dir, "public", "screenshots"), { recursive: true });
-  for (const name of screenshots) {
+  fs.mkdirSync(path.join(dir, "screenshots"), { recursive: true });
+  for (const name of [...screenshots, ...installations]) {
     fs.copyFileSync(
-      path.join(root, "public", "screenshots", name),
-      path.join(dir, "public", "screenshots", name),
+      path.join(root, "screenshots", name),
+      path.join(dir, "screenshots", name),
     );
   }
   fs.mkdirSync(path.join(dir, "public", "brand"), { recursive: true });
@@ -63,7 +64,13 @@ test("fresh build includes the complete site and only intended public resources"
     for (const name of screenshots) {
       assert.deepEqual(
         fs.readFileSync(path.join(dir, "dist", "screenshots", name)),
-        fs.readFileSync(path.join(dir, "public", "screenshots", name)),
+        fs.readFileSync(path.join(dir, "screenshots", name)),
+      );
+    }
+    for (const name of installations) {
+      assert.deepEqual(
+        fs.readFileSync(path.join(dir, "dist", "installations", name)),
+        fs.readFileSync(path.join(dir, "screenshots", name)),
       );
     }
     assert.deepEqual(
@@ -75,6 +82,7 @@ test("fresh build includes the complete site and only intended public resources"
       "app.js",
       "brand",
       "index.html",
+      "installations",
       "news",
       "screenshots",
       "style.css",
@@ -118,10 +126,10 @@ test("provided brand files are copied byte-for-byte, unrelated files stay privat
 test("missing required screenshot fails the build instead of publishing broken images", () => {
   const dir = fixture();
   try {
-    fs.unlinkSync(path.join(dir, "public", "screenshots", "v296-menu.png"));
+    fs.unlinkSync(path.join(dir, "screenshots", "menu.PNG"));
     const result = build(dir);
     assert.notEqual(result.status, 0);
-    assert.match(result.stderr, /v296-menu\.png/);
+    assert.match(result.stderr, /menu\.PNG/);
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

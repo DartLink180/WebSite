@@ -54,46 +54,43 @@ const baseUrl =
           );
         assert.deepEqual(broken, []);
         if (route === "experience") {
-          assert.deepEqual(
-            await page.locator(".game-card .eyebrow").allTextContents(),
-            ["X01", "Cricket", "Course 300", "Around the World", "Killer", "Tournoi"],
-          );
-          assert.equal(await page.locator(".installation-slot").count(), 3);
-          assert.equal(await page.locator(".installation-slot strong").filter({ hasText: "Photo à venir" }).count(), 3);
+          assert.equal(await page.locator(".game-card").count(), 19);
+          assert.equal(await page.locator(".remote-grid .game-card").count(), 3);
+          assert.equal(await page.locator(".installation-photo img").count(), 3);
         }
         checked++;
       }
     }
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(baseUrl + "#/experience", { waitUntil: "networkidle" });
-    const firstCapture = page.getByRole("button", { name: "Agrandir la capture X01" });
+    const firstCapture = page.getByRole("button", { name: "Agrandir la capture X01 · début" });
     await firstCapture.click();
     const gallery = page.locator("#game-gallery");
-    assert.equal(await page.getByRole("dialog", { name: "X01" }).isVisible(), true);
-    assert.match(await gallery.locator("#gallery-image").getAttribute("src"), /v296-x01\.png$/);
-    assert.equal(await gallery.locator("#gallery-count").textContent(), "1 / 6");
+    assert.equal(await page.getByRole("dialog", { name: "X01 · début" }).isVisible(), true);
+    assert.match(await gallery.locator("#gallery-image").getAttribute("src"), /X01\.PNG$/);
+    assert.equal(await gallery.locator("#gallery-count").textContent(), "1 / 19");
     await gallery.getByRole("button", { name: "Image suivante" }).click();
-    assert.equal(await gallery.locator("#gallery-title").textContent(), "Cricket");
+    assert.equal(await gallery.locator("#gallery-title").textContent(), "X01 · en cours");
     await page.keyboard.press("ArrowLeft");
-    assert.equal(await gallery.locator("#gallery-title").textContent(), "X01");
+    assert.equal(await gallery.locator("#gallery-title").textContent(), "X01 · début");
     await gallery.getByRole("button", { name: "Image précédente" }).click();
-    assert.equal(await gallery.locator("#gallery-title").textContent(), "Tournoi");
-    assert.equal(await gallery.locator("#gallery-count").textContent(), "6 / 6");
+    assert.equal(await gallery.locator("#gallery-title").textContent(), "Remote · joueurs");
+    assert.equal(await gallery.locator("#gallery-count").textContent(), "19 / 19");
     await page.keyboard.press("Escape");
     assert.equal(await page.locator("#game-gallery").isVisible(), false);
     assert.equal(await firstCapture.evaluate((button) => document.activeElement === button), true);
-    await page.getByRole("button", { name: "Agrandir la capture Killer" }).click();
-    assert.equal(await page.locator("#gallery-title").textContent(), "Killer");
+    await page.getByRole("button", { name: "Agrandir la capture Killer · début" }).click();
+    assert.equal(await page.locator("#gallery-title").textContent(), "Killer · début");
     await gallery.locator("#gallery-image").evaluate((image) => {
       const start = new Touch({ identifier: 1, target: image, clientX: 300, clientY: 300 });
       const end = new Touch({ identifier: 1, target: image, clientX: 100, clientY: 310 });
       image.dispatchEvent(new TouchEvent("touchstart", { changedTouches: [start] }));
       image.dispatchEvent(new TouchEvent("touchend", { changedTouches: [end] }));
     });
-    assert.equal(await page.locator("#gallery-title").textContent(), "Tournoi");
+    assert.equal(await page.locator("#gallery-title").textContent(), "Killer · en cours");
     await page.getByRole("button", { name: "Fermer la galerie" }).click();
     await page.goto(baseUrl, { waitUntil: "networkidle" });
-    await page.getByRole("button", { name: "Menu" }).click();
+    await page.getByRole("button", { name: "Menu", exact: true }).click();
     assert.equal(
       await page.getByRole("navigation").getByRole("link", { name: "Télécommande" }).getAttribute("href"),
       "https://dartlink.fr/remote/",
@@ -112,7 +109,7 @@ const baseUrl =
     );
     assert.equal(
       await page
-        .getByRole("button", { name: "Menu" })
+        .getByRole("button", { name: "Menu", exact: true })
         .getAttribute("aria-expanded"),
       "true",
     );
@@ -126,11 +123,11 @@ const baseUrl =
       .waitFor();
     assert.equal(
       await page
-        .getByRole("button", { name: "Menu" })
+        .getByRole("button", { name: "Menu", exact: true })
         .getAttribute("aria-expanded"),
       "false",
     );
-    await page.getByRole("button", { name: "Menu" }).click();
+    await page.getByRole("button", { name: "Menu", exact: true }).click();
     await page
       .getByRole("navigation")
       .getByRole("link", { name: "Questions fréquentes" })
@@ -138,7 +135,7 @@ const baseUrl =
     await page.keyboard.press("Escape");
     assert.equal(
       await page
-        .getByRole("button", { name: "Menu" })
+        .getByRole("button", { name: "Menu", exact: true })
         .getAttribute("aria-expanded"),
       "false",
     );

@@ -296,3 +296,40 @@ Les images sont chargées depuis le serveur PDC et ne sont ni téléchargées da
 Le commit applicatif `25020397b5b4112637ceb855366eae137ad56c32` a été intégré à `main` et poussé sur GitHub. Le workflow Pages [40917139573](https://github.com/DartLink180/WebSite/actions/runs/40917139573) a réussi. Une release construite depuis ce commit dans un répertoire propre a été installée ; ses 15 fichiers correspondent au build. Le script de rafraîchissement du serveur a été remplacé après sauvegarde, puis exécuté avec succès ; le minuteur reste actif. La configuration Nginx a été sauvegardée, les deux racines de vitrine ont été orientées vers la nouvelle release, puis `nginx -t` et le rechargement ont réussi.
 
 Les 13 ressources statiques servies sur le domaine correspondent octet pour octet à la release. Le JSON public est identique au fichier actualisé du serveur, contient six vignettes et leurs six URL d’images répondent HTTP 200. `/manager/`, `/remote/` et `/mobile/` répondent 200. La syntaxe JavaScript, les trois tests Node du build, l’extraction des images et le contrôle Git du diff ont réussi. Aucun navigateur Chromium n’était disponible pour vérifier visuellement la mise en page ; le repli sur les titres en cas d’échec d’image repose sur le code inspecté, pas sur une recette interactive.
+
+## Visuels fournis — 4 novembre 2026
+
+L'utilisateur demande le remplacement des visuels, la publication et la mise à
+jour GitHub. Base WebSite `79f174f`. Les 22 fichiers fournis sont conservés sans
+retouche dans `screenshots/` : 19 PNG et trois JPEG, environ 4 Mo au total.
+Le build copie seulement leurs noms autorisés vers `screenshots/` et
+`installations/`. Les anciens assets restent dans Git pour leur provenance.
+Cette évolution remplace la décision de conserver trois emplacements photo
+textuels et celle de présenter seulement les six modes de v2.9.6.
+
+La page présente 16 captures du jeu, trois captures Remote et trois photos du
+même système physique. La galerie conserve boutons, clavier, balayage, boucle
+et retour du focus pour ses 19 images. Les photos ouvrent leur fichier complet
+dans un nouvel onglet. La grille du jeu passe à deux colonnes sur grand écran,
+puis une sur mobile ; les images restent entières dans les vignettes. L'aperçu
+d'accueil utilise le nouveau menu, recadré uniquement par CSS.
+
+Accueil et FAQ annoncent huit familles de modes d'après le menu du code
+DartLink `b066776bd38761c3e7f42bcb6f30d32f1997cabc` : X01, X01 IA, Cricket,
+Course, Around the World, Cible aléatoire, Killer et Tournoi. La version exacte
+des images fournies n'est pas attribuée ; aucune recette matérielle ne découle
+de leur publication. Aucune dépendance applicative n'est ajoutée.
+
+Validation : syntaxe JavaScript, trois tests Node de build dans des sorties
+neuves et contrôle du diff réussis avec le runtime Node 24 local. Les tests
+contrôlent aussi la copie exacte des trois photos et l'échec si le nouveau
+menu manque. La recette navigateur et le contrôle du domaine sont consignés
+avec la publication ci-dessous.
+
+La recette Chromium a réussi pour six routes à quatre largeurs (1440, 768,
+390 et 320 px), avec 19 captures et trois photos chargées, sans débordement,
+image manquante ni erreur JavaScript. Ouverture et navigation de galerie,
+boucle, flèches, balayage, fermeture et retour du focus ont réussi. Les tests
+du menu utilisent un nom exact pour le distinguer de la capture « Menu du jeu ».
+L'accueil mobile a été inspecté visuellement. Ces contrôles portent sur la
+vitrine et ne vérifient pas le pilotage d'un appareil réel.

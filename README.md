@@ -2,7 +2,7 @@
 
 # DartLink — vitrine
 
-Nouvelle vitrine : thème sombre inspiré du Manager, accents verts, navigation mobile et captures du jeu. La page L’expérience présente les six modes de DartLink v2.9.6 et réserve trois emplacements pour de futures photos des installations. Voir [la refonte et sa validation](docs/REFONTE-VITRINE.md).
+Nouvelle vitrine : thème sombre inspiré du Manager, accents verts, navigation mobile et captures du jeu. La page L’expérience présente huit familles de modes, trois écrans de DartLink Remote et trois photos d’une installation physique. Voir [la refonte et sa validation](docs/REFONTE-VITRINE.md).
 
 Les trois logos originaux fournis dans `screenshots/` sont intégrés sans retouche : logo horizontal, signature complète et symbole. Le symbole sert également de favicon.
 

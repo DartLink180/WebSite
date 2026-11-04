@@ -12,7 +12,7 @@ Les captures et leur provenance sont documentées dans [public/screenshots/READM
 
 ## Dépendances et génération
 
-`package.json` conserve React/ReactDOM ^18.3.1, Vite ^5.4.10 et plugin-react ^4.3.2 pour l’historique et les outils de développement. Le build courant est `node build.cjs` (`npm run build`) : il utilise uniquement fs/path de Node, copie les trois fichiers racine, les quatre captures utilisées et les logos fournis explicitement autorisés dans dist, puis ajoute .nojekyll. Le workflow utilise Node 20.
+`package.json` conserve React/ReactDOM ^18.3.1, Vite ^5.4.10 et plugin-react ^4.3.2 pour l’historique et les outils de développement. Le build courant est `node build.cjs` (`npm run build`) : il utilise uniquement fs/path de Node, copie les trois fichiers racine, les captures et photos explicitement autorisées et les logos fournis dans dist, puis ajoute .nojekyll. Le workflow utilise Node 20.
 
 Le build copie une liste explicite de ressources, pas tout le dossier public : ne pas supposer qu’une image ajoutée au dépôt est publiée. Vérifier les chemins utilisés et la liste explicite de `build.cjs` avant de modifier les ressources. Le script ne nettoie pas dist ; utiliser une sortie neuve pour une vérification reproductible.
 
@@ -190,3 +190,19 @@ La version applicative `faed4d7f3386f1e50294de6fd17c9e219ce61a4f` est servie sur
 Depuis `main` `f32105e65d4263fdab056fc91b6762bccf519d29`, la page Compétitions associe aux titres les petites images trouvées dans le flux RSS PDC. Le générateur ne retient que les URL HTTPS du serveur d’images PDC et demande leur variante 320 × 180 ; le navigateur les charge directement depuis ce serveur. En l’absence d’image valide ou si le chargement échoue, l’article reste lisible en texte. La page Informations & confidentialité indique cette requête externe. Aucun fichier image n’est copié dans Git ou dans la release. Voir [le détail et les limites](../REFONTE-VITRINE.md#vignettes-des-actualités-pdc--29-octobre-2026).
 
 La version applicative `25020397b5b4112637ceb855366eae137ad56c32` est poussée sur `main` et servie sur le domaine. Le workflow Pages [40917139573](https://github.com/DartLink180/WebSite/actions/runs/40917139573) a réussi. Le JSON public contient six URL de vignettes accessibles ; les 13 autres ressources web correspondent au build. Voir [la validation et ses limites](../REFONTE-VITRINE.md#publication-des-vignettes--29-octobre-2026).
+
+## Visuels fournis — 4 novembre 2026
+
+Base `main` `79f174f`, après récupération des deux commits de dépôt d'images
+`e071a60` et `79f174f`. L'utilisateur a complété directement le clone PiServeur
+avec les fichiers restants et autorise la publication. Les 19 captures et trois
+photos sont conservées dans `screenshots/` et copiées explicitement au build.
+Les anciennes captures simulées et les emplacements « Photo à venir » sont
+remplacés ; les décisions historiques ci-dessus restent consultables.
+
+La page L'expérience présente 16 écrans du jeu, trois de Remote et trois photos.
+La galerie parcourt les 19 captures ; les photos s'ouvrent en grand dans un
+nouvel onglet. Accueil et FAQ présentent huit familles de modes, vérifiées dans
+`server/game/gameManager.js` de DartLink `b066776`. La version précise des
+captures fournies n'est pas attestée. Voir [provenance](../../screenshots/README.md)
+et [validation et publication](../REFONTE-VITRINE.md#visuels-fournis--4-novembre-2026).

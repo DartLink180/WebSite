@@ -9,19 +9,27 @@ fs.mkdirSync(path.join(output, "news"), { recursive: true });
 fs.copyFileSync(path.join(__dirname, "public", "news", "pdc.json"), path.join(output, "news", "pdc.json"));
 // Publish only the assets used by the site, never local configuration files.
 const screenshots = [
-  "v296-menu.png",
-  "v296-x01.png",
-  "v296-cricket.png",
-  "v296-course.png",
-  "v296-around-world.png",
-  "v296-killer.png",
-  "v296-tournoi.png",
+  "X01.PNG", "X012.PNG", "X01IA.PNG",
+  "cricket.PNG", "cricket2.PNG",
+  "course300.PNG", "course3002.PNG", "course10.PNG",
+  "arroundtheworld.PNG", "ciblesaleatoire.PNG",
+  "killer.PNG", "killer2.PNG",
+  "tournoi.PNG", "tournoi2.PNG", "tourjoi3.PNG",
+  "menu.PNG", "remote1.PNG", "remote2.PNG", "remote3.PNG",
 ];
 fs.mkdirSync(path.join(output, "screenshots"), { recursive: true });
 for (const file of screenshots) {
   fs.copyFileSync(
-    path.join(__dirname, "public", "screenshots", file),
+    path.join(__dirname, "screenshots", file),
     path.join(output, "screenshots", file),
+  );
+}
+const installations = ["dartlink1.jpeg", "dartlink2.jpeg", "dartlink3.jpeg"];
+fs.mkdirSync(path.join(output, "installations"), { recursive: true });
+for (const file of installations) {
+  fs.copyFileSync(
+    path.join(__dirname, "screenshots", file),
+    path.join(output, "installations", file),
   );
 }
 // Original brand assets are copied unchanged when supplied.
