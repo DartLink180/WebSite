@@ -127,8 +127,10 @@ environ deux fois par heure sur GitHub Pages ; la date de récupération est
 visible dans la page. Si le flux échoue, les derniers titres connus restent
 affichés. Voir [la décision et les limites](docs/REFONTE-VITRINE.md#titres-pdc-sur-la-page-compétitions--29-octobre-2026).
 
-## Préparation du formulaire de contact
+## Formulaire de contact
 
-La branche `feat/contact-mail` prépare un envoi réel via SMTP Gmail et un petit
-service Python sur PiServeur. Sa publication attend la configuration privée et
-la vérification de l’envoi ; voir [CONTACT](docs/CONTACT.md).
+Le formulaire envoie les messages à la messagerie DartLink via une API Python
+sur PiServeur et SMTP Gmail. L'envoi et la réception ont été vérifiés le
+4 novembre 2026. Le mot de passe d'application reste dans un fichier privé,
+hors Git. Le frontend Pages seul ne fournit pas l'API ; voir
+[architecture, exploitation et contrôles](docs/CONTACT.md).

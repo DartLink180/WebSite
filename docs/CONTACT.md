@@ -1,6 +1,14 @@
-# Formulaire de contact — préparation du 4 novembre 2026
+# Formulaire de contact
 
-## État et décision
+## État actuel vérifié — 4 novembre 2026
+
+Le formulaire et l'API sont publiés depuis le commit applicatif `96f454c6`.
+L'authentification Gmail et un envoi technique en HTTPS ont réussi ;
+l'utilisateur a confirmé la réception. Le service est actif et activé au
+redémarrage. Le statut « préparation » ci-dessous est historique et est
+remplacé par la publication consignée en fin de document.
+
+## Préparation et décision conservées
 
 Base WebSite `4a4d7df8642401b794d4b9fdf0858ade3063fac7`, production :
 formulaire simulé. La branche `feat/contact-mail` prépare un envoi réel vers
@@ -119,3 +127,35 @@ interceptées. Vérification de l'unité systemd et du snippet Nginx dans une
 configuration temporaire isolée réussie. Syntaxe JavaScript/Python et contrôle
 du diff réussis. La production n'a pas été modifiée ; le mot de passe SMTP
 privé n'est pas encore renseigné et aucun message réel n'a été confirmé.
+
+## Publication du formulaire réel — 4 novembre 2026
+
+La préparation est historique. Le mot de passe d'application a été placé par
+l'utilisateur dans le fichier privé de PiServeur ; ses permissions sont 0600.
+Aucune valeur de secret n'a été affichée, copiée dans le dépôt ou publiée.
+L'authentification SMTP TLS Gmail a répondu 235. Le service systemd dédié est
+installé, actif et activé au redémarrage. Le script, l'unité et le snippet
+Nginx installés correspondent aux fichiers versionnés.
+
+L'API `/api/contact` a été exposée après sauvegarde privée, `nginx -t` et
+rechargement. Un unique message technique avec des données fictives a été
+envoyé depuis Chromium sur le domaine ; l'API a répondu 200 après acceptation
+SMTP. L'utilisateur a confirmé la réception dans la conversation. Cela valide
+cet envoi, pas la livraison future de tous les messages ni leur classement.
+
+Le commit applicatif `96f454c6aad35510ee62d3752becad0382117a0d` a été intégré
+à `main` par avance rapide, puis retrouvé après fetch. Le workflow Pages
+[41834953675](https://github.com/DartLink180/WebSite/actions/runs/41834953675)
+a réussi. Une release neuve de ce SHA est servie par le Nginx du domaine après
+sauvegarde et validation de configuration. Les 28 ressources statiques HTTPS
+comparées sont identiques au build ; le JSON d'actualités garde sa source
+indépendante. Manager, Remote et mobile répondent 200.
+
+Les huit tests Python, trois tests Node et 24 parcours locaux Chromium avaient
+réussi avant publication. Le contrôle de production à 1280 et 390 px a
+revérifié la validation du formulaire, les champs conservés après erreur et
+leur effacement après succès, en interceptant les requêtes pour éviter tout
+nouvel e-mail de test. Deux requêtes réelles sans données personnelles ont
+confirmé les refus d'origine (403) et de contenu invalide (400). Le formulaire
+publié remplace les annonces de simulation dans la FAQ et les informations.
+La configuration privée n'est requise que sur le serveur, jamais dans le build.
