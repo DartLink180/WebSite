@@ -305,3 +305,20 @@ Aucune modification du service Manager, de ses droits ou de son hébergement.
 Aucune dépendance ni ressource supplémentaire. La recette navigateur vérifie
 sur chaque route un seul lien Manager, l'absence de mention dans le contenu
 principal et le pied de page, ainsi que les trois anciennes redirections.
+
+### Publication de la vitrine centrée sur le jeu — 4 novembre 2026
+
+Commit applicatif `238bfacc157cf32656d9ee21e488eea5c8623e24`, récupéré sur
+`origin/main`. Le workflow Pages
+[41821000541](https://github.com/DartLink180/WebSite/actions/runs/41821000541)
+a réussi. Nginx sert une release neuve de ce SHA après sauvegarde privée de
+configuration, validation et rechargement. Les 28 ressources statiques HTTPS
+correspondent au build ; Manager, Remote et mobile répondent 200.
+
+La syntaxe JavaScript, les trois tests Node et les 24 combinaisons de routes
+et largeurs de la recette locale ont réussi. Chromium sur le domaine à 1280
+et 390 px a vérifié l'accueil, L'expérience, la FAQ et les informations :
+un seul lien Manager, aucune mention promotionnelle dans le contenu principal,
+aucun débordement. Les redirections historiques sont testées localement avec
+interception, sans connexion au compte personnel. Le service Manager et ses
+autorisations ne sont pas modifiés par cette publication.
