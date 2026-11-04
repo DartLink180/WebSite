@@ -248,3 +248,19 @@ Validation : syntaxe JavaScript, trois tests Node du build et recette Chromium
 sur six routes à quatre largeurs ; vérification des quatre catégories, du
 clavier des onglets, de la navigation des photos et du retour du focus.
 La recette concerne la vitrine et ne constitue pas une recette matérielle.
+
+### Publication des onglets et de la galerie photo — 4 novembre 2026
+
+Le commit applicatif `94005ca10de7f23aa44ddf504a945c4b4dd08a92` a été poussé
+sur `main` puis retrouvé après fetch. Les jobs build et deploy du workflow
+Pages [41819549416](https://github.com/DartLink180/WebSite/actions/runs/41819549416)
+ont réussi. Le domaine sert une release construite depuis ce SHA, après
+sauvegarde privée de la configuration Nginx, validation et rechargement.
+Les 28 fichiers statiques comparés en HTTPS sont identiques au build ; les
+routes Manager, Remote, mobile et actualités répondent 200.
+
+Chromium en HTTPS à 1280 et 390 px vérifie chaque catégorie (3, 2, 3 et 8
+captures), l'ouverture d'une photo, le passage à la suivante, la fermeture et
+le retour du focus, sans erreur JavaScript ni débordement horizontal. Les
+trois tests Node et les 24 combinaisons de routes/largeurs de la recette
+locale ont réussi avant publication.
