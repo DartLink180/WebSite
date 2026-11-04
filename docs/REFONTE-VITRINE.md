@@ -465,3 +465,16 @@ réussis. Chromium à 1440 et 390 px a cliqué les cinq liens de service avec
 interception de leurs destinations : cinq nouveaux onglets, aucune référence
 à la fenêtre d'origine, URL source conservée. Un lien interne a ensuite été
 suivi dans la page courante. Aucun accès administrateur réel n'a été exécuté.
+
+### Publication des liens en nouvel onglet — 4 novembre 2026
+
+Commit applicatif `b9f499dc36942d427bcdd524e48ee9b72c50c2c2`, récupéré sur
+`origin/main`. Le workflow Pages
+[41821799707](https://github.com/DartLink180/WebSite/actions/runs/41821799707)
+a réussi. Nginx sert la release construite depuis ce SHA après sauvegarde,
+validation et rechargement. Les 28 ressources statiques HTTPS correspondent
+au build. La même recette Chromium à 1440 et 390 px a réussi sur le domaine :
+les cinq liens ouvrent chacun un onglet distinct, avec destinations interceptées,
+`window.opener` nul et page source conservée ; un lien interne ouvre ensuite
+L'expérience dans l'onglet courant. Les services de destination ne sont pas
+modifiés ni validés par ce test de navigation.
