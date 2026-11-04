@@ -63,30 +63,33 @@ const baseUrl =
     }
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(baseUrl + "#/experience", { waitUntil: "networkidle" });
+    assert.equal(await page.getByRole("tab").first().textContent(), "Menu");
+    assert.equal(await page.getByRole("tab", { name: "Menu", exact: true }).getAttribute("aria-selected"), "true");
+    await page.getByRole("tab", { name: "X01", exact: true }).click();
     const firstCapture = page.getByRole("button", { name: "Agrandir la capture X01 · début" });
     await firstCapture.click();
     const gallery = page.locator("#game-gallery");
     assert.equal(await page.getByRole("dialog", { name: "X01 · début" }).isVisible(), true);
     assert.match(await gallery.locator("#gallery-image").getAttribute("src"), /X01\.PNG$/);
-    assert.equal(await gallery.locator("#gallery-count").textContent(), "1 / 3");
+    assert.equal(await gallery.locator("#gallery-count").textContent(), "1 / 2");
     await gallery.getByRole("button", { name: "Image suivante" }).click();
     assert.equal(await gallery.locator("#gallery-title").textContent(), "X01 · en cours");
     await page.keyboard.press("ArrowLeft");
     assert.equal(await gallery.locator("#gallery-title").textContent(), "X01 · début");
     await gallery.getByRole("button", { name: "Image précédente" }).click();
-    assert.equal(await gallery.locator("#gallery-title").textContent(), "X01 IA");
-    assert.equal(await gallery.locator("#gallery-count").textContent(), "3 / 3");
+    assert.equal(await gallery.locator("#gallery-title").textContent(), "X01 · en cours");
+    assert.equal(await gallery.locator("#gallery-count").textContent(), "2 / 2");
     await page.keyboard.press("Escape");
     assert.equal(await page.locator("#game-gallery").isVisible(), false);
     assert.equal(await firstCapture.evaluate((button) => document.activeElement === button), true);
-    for (const [name, count] of [["X01", 3], ["Cricket", 2], ["Tournois", 3], ["Autres", 8]]) {
+    for (const [name, count] of [["Menu", 1], ["X01", 2], ["X01 IA", 1], ["Cricket", 2], ["Course", 3], ["Around the World", 1], ["Cible aléatoire", 1], ["Killer", 2], ["Tournoi", 3]]) {
       await page.getByRole("tab", { name, exact: true }).click();
       assert.equal(await page.locator('[role="tabpanel"]:visible .game-card').count(), count);
     }
     await page.getByRole("tab", { name: "X01", exact: true }).focus();
     await page.keyboard.press("ArrowRight");
-    assert.equal(await page.getByRole("tab", { name: "Cricket", exact: true }).getAttribute("aria-selected"), "true");
-    await page.getByRole("tab", { name: "Autres", exact: true }).click();
+    assert.equal(await page.getByRole("tab", { name: "X01 IA", exact: true }).getAttribute("aria-selected"), "true");
+    await page.getByRole("tab", { name: "Killer", exact: true }).click();
     await page.getByRole("button", { name: "Agrandir la capture Killer · début" }).click();
     assert.equal(await page.locator("#gallery-title").textContent(), "Killer · début");
     await gallery.locator("#gallery-image").evaluate((image) => {

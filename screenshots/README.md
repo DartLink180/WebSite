@@ -38,3 +38,14 @@ Depuis la correction des onglets du 4 novembre 2026, les captures du jeu sont
 regroupées sous X01, Cricket, Tournois et Autres. Les photos physiques utilisent
 la même fenêtre de galerie avec fermeture sur place ; chaque groupe se parcourt
 séparément. La décision précédente du nouvel onglet est remplacée.
+
+## Un onglet par mode — 4 novembre 2026
+
+Base `bed1e2c`. Le retour utilisateur remplace le regroupement en quatre
+catégories : Menu est désormais le premier onglet et celui sélectionné au
+chargement, suivi de X01, X01 IA, Cricket, Course, Around the World, Cible
+aléatoire, Killer et Tournoi. Course regroupe ses variantes 300 et dix tours.
+Chaque galerie conserve uniquement les captures de son onglet. Les captures,
+le build et les dépendances sont inchangés. La recette vérifie les neuf onglets,
+leurs effectifs (1, 2, 1, 2, 3, 1, 1, 2, 3), la sélection initiale du Menu et
+la navigation clavier. La galerie photo conserve sa fermeture sur place.

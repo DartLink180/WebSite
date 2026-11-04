@@ -90,10 +90,15 @@ const remoteScreens = [
   ["remote3.PNG", "Remote · joueurs", "Renseignez les noms des joueurs.", "Écran de saisie des noms des joueurs dans DartLink Remote"],
 ];
 const gameGroups = [
-  ["x01", "X01", gameScreens.slice(0, 3)],
+  ["menu", "Menu", [gameScreens[15]]],
+  ["x01", "X01", gameScreens.slice(0, 2)],
+  ["x01-ia", "X01 IA", [gameScreens[2]]],
   ["cricket", "Cricket", gameScreens.slice(3, 5)],
-  ["tournois", "Tournois", gameScreens.slice(12, 15)],
-  ["autres", "Autres", [...gameScreens.slice(5, 12), gameScreens[15]]],
+  ["course", "Course", gameScreens.slice(5, 8)],
+  ["around-world", "Around the World", [gameScreens[8]]],
+  ["cible-aleatoire", "Cible aléatoire", [gameScreens[9]]],
+  ["killer", "Killer", gameScreens.slice(10, 12)],
+  ["tournoi", "Tournoi", gameScreens.slice(12, 15)],
 ];
 function screenCards(screens, group) {
   return screens.map(([file, title, text, alt], index) => `<figure class="game-card"><button class="game-card-open" type="button" data-gallery-group="${group}" data-gallery-title="${title}" aria-label="Agrandir la capture ${title}"><img src="screenshots/${file}" alt="${alt}" loading="lazy"><span aria-hidden="true">Agrandir ↗</span></button><figcaption><span class="eyebrow">${title}</span><h3>${text}</h3></figcaption></figure>`).join("");

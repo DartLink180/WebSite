@@ -264,3 +264,14 @@ captures), l'ouverture d'une photo, le passage à la suivante, la fermeture et
 le retour du focus, sans erreur JavaScript ni débordement horizontal. Les
 trois tests Node et les 24 combinaisons de routes/largeurs de la recette
 locale ont réussi avant publication.
+
+## Un onglet par mode — 4 novembre 2026
+
+Base `bed1e2c`. Le retour utilisateur remplace le regroupement en quatre
+catégories : Menu est désormais le premier onglet et celui sélectionné au
+chargement, suivi de X01, X01 IA, Cricket, Course, Around the World, Cible
+aléatoire, Killer et Tournoi. Course regroupe ses variantes 300 et dix tours.
+Chaque galerie conserve uniquement les captures de son onglet. Les captures,
+le build et les dépendances sont inchangés. La recette vérifie les neuf onglets,
+leurs effectifs (1, 2, 1, 2, 3, 1, 1, 2, 3), la sélection initiale du Menu et
+la navigation clavier. La galerie photo conserve sa fermeture sur place.
