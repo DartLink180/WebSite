@@ -33,3 +33,8 @@ Les anciennes captures `public/screenshots/v296-*.png` restent conservées pour
 provenance historique. Elles ne sont plus copiées dans le build à compter de
 cette évolution. La consigne historique de dépôt automatique est remplacée :
 seuls les noms autorisés dans `build.cjs` entrent dans la publication.
+
+Depuis la correction des onglets du 4 novembre 2026, les captures du jeu sont
+regroupées sous X01, Cricket, Tournois et Autres. Les photos physiques utilisent
+la même fenêtre de galerie avec fermeture sur place ; chaque groupe se parcourt
+séparément. La décision précédente du nouvel onglet est remplacée.

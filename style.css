@@ -1253,3 +1253,27 @@ details > p {
   vertical-align: middle;
   flex-shrink: 0;
 }
+
+.game-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.game-tabs button {
+  min-height: 44px;
+  padding: 10px 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+.game-tabs button[aria-selected="true"] {
+  background: var(--accent);
+  color: var(--dark-green);
+  border-color: var(--accent);
+}
+[role="tabpanel"][hidden] { display: none; }
+.installation-photo .game-card-open img { aspect-ratio: auto; }

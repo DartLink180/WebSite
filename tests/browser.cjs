@@ -68,17 +68,25 @@ const baseUrl =
     const gallery = page.locator("#game-gallery");
     assert.equal(await page.getByRole("dialog", { name: "X01 · début" }).isVisible(), true);
     assert.match(await gallery.locator("#gallery-image").getAttribute("src"), /X01\.PNG$/);
-    assert.equal(await gallery.locator("#gallery-count").textContent(), "1 / 19");
+    assert.equal(await gallery.locator("#gallery-count").textContent(), "1 / 3");
     await gallery.getByRole("button", { name: "Image suivante" }).click();
     assert.equal(await gallery.locator("#gallery-title").textContent(), "X01 · en cours");
     await page.keyboard.press("ArrowLeft");
     assert.equal(await gallery.locator("#gallery-title").textContent(), "X01 · début");
     await gallery.getByRole("button", { name: "Image précédente" }).click();
-    assert.equal(await gallery.locator("#gallery-title").textContent(), "Remote · joueurs");
-    assert.equal(await gallery.locator("#gallery-count").textContent(), "19 / 19");
+    assert.equal(await gallery.locator("#gallery-title").textContent(), "X01 IA");
+    assert.equal(await gallery.locator("#gallery-count").textContent(), "3 / 3");
     await page.keyboard.press("Escape");
     assert.equal(await page.locator("#game-gallery").isVisible(), false);
     assert.equal(await firstCapture.evaluate((button) => document.activeElement === button), true);
+    for (const [name, count] of [["X01", 3], ["Cricket", 2], ["Tournois", 3], ["Autres", 8]]) {
+      await page.getByRole("tab", { name, exact: true }).click();
+      assert.equal(await page.locator('[role="tabpanel"]:visible .game-card').count(), count);
+    }
+    await page.getByRole("tab", { name: "X01", exact: true }).focus();
+    await page.keyboard.press("ArrowRight");
+    assert.equal(await page.getByRole("tab", { name: "Cricket", exact: true }).getAttribute("aria-selected"), "true");
+    await page.getByRole("tab", { name: "Autres", exact: true }).click();
     await page.getByRole("button", { name: "Agrandir la capture Killer · début" }).click();
     assert.equal(await page.locator("#gallery-title").textContent(), "Killer · début");
     await gallery.locator("#gallery-image").evaluate((image) => {
@@ -89,6 +97,14 @@ const baseUrl =
     });
     assert.equal(await page.locator("#gallery-title").textContent(), "Killer · en cours");
     await page.getByRole("button", { name: "Fermer la galerie" }).click();
+    const photo = page.getByRole("button", { name: "Agrandir la photo l’installation complète", exact: true });
+    await photo.click();
+    assert.equal(await gallery.locator("#gallery-count").textContent(), "1 / 3");
+    assert.match(await gallery.locator("#gallery-image").getAttribute("src"), /dartlink1\.jpeg$/);
+    await gallery.getByRole("button", { name: "Image suivante" }).click();
+    assert.match(await gallery.locator("#gallery-image").getAttribute("src"), /dartlink2\.jpeg$/);
+    await page.getByRole("button", { name: "Fermer la galerie" }).click();
+    assert.equal(await photo.evaluate(button => document.activeElement === button), true);
     await page.goto(baseUrl, { waitUntil: "networkidle" });
     await page.getByRole("button", { name: "Menu", exact: true }).click();
     assert.equal(

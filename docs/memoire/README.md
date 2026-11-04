@@ -227,3 +227,24 @@ ne sont pas validés par cette publication.
 Le premier push avec la clé SSH habituelle a été refusé. Le push a réussi avec
 la seconde identité GitHub déjà présente sur PiServeur ; aucun secret ni nouvelle
 configuration d'authentification n'a été ajouté au dépôt.
+
+## Onglets des modes et photos en galerie — 4 novembre 2026
+
+Base WebSite `e4d6517`. Le retour utilisateur remplace la décision d'afficher
+les 16 captures du jeu simultanément et d'ouvrir les photos dans un nouvel
+onglet. Les onglets X01 (3 images), Cricket (2), Tournois (3) et Autres (8)
+présentent une seule catégorie à la fois. X01 est sélectionné au chargement.
+Autres rassemble Course, Around the World, Cible aléatoire, Killer et le menu.
+Remote conserve sa section et ses trois captures.
+
+Les trois photos physiques ouvrent désormais la galerie modale de la page,
+avec fermeture, précédent/suivant, clavier, balayage et retour du focus.
+Chaque galerie parcourt uniquement le groupe ouvert : onglet courant, Remote
+ou installation. Les onglets utilisent tablist/tab/tabpanel, aria-selected,
+un seul arrêt de tabulation et les touches gauche/droite, Début et Fin.
+La solution réutilise le dialog existant, sans dépendance ni nouvel asset.
+
+Validation : syntaxe JavaScript, trois tests Node du build et recette Chromium
+sur six routes à quatre largeurs ; vérification des quatre catégories, du
+clavier des onglets, de la navigation des photos et du retour du focus.
+La recette concerne la vitrine et ne constitue pas une recette matérielle.

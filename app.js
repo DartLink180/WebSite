@@ -89,8 +89,14 @@ const remoteScreens = [
   ["remote2.PNG", "Remote · commandes", "Les actions de la partie depuis la télécommande.", "Commandes de menu dans DartLink Remote"],
   ["remote3.PNG", "Remote · joueurs", "Renseignez les noms des joueurs.", "Écran de saisie des noms des joueurs dans DartLink Remote"],
 ];
-function screenCards(screens, start) {
-  return screens.map(([file, title, text, alt], index) => `<figure class="game-card"><button class="game-card-open" type="button" data-gallery-index="${start + index}" aria-label="Agrandir la capture ${title}"><img src="screenshots/${file}" alt="${alt}" loading="lazy"><span aria-hidden="true">Agrandir ↗</span></button><figcaption><span class="eyebrow">${title}</span><h3>${text}</h3></figcaption></figure>`).join("");
+const gameGroups = [
+  ["x01", "X01", gameScreens.slice(0, 3)],
+  ["cricket", "Cricket", gameScreens.slice(3, 5)],
+  ["tournois", "Tournois", gameScreens.slice(12, 15)],
+  ["autres", "Autres", [...gameScreens.slice(5, 12), gameScreens[15]]],
+];
+function screenCards(screens, group) {
+  return screens.map(([file, title, text, alt], index) => `<figure class="game-card"><button class="game-card-open" type="button" data-gallery-group="${group}" data-gallery-title="${title}" aria-label="Agrandir la capture ${title}"><img src="screenshots/${file}" alt="${alt}" loading="lazy"><span aria-hidden="true">Agrandir ↗</span></button><figcaption><span class="eyebrow">${title}</span><h3>${text}</h3></figcaption></figure>`).join("");
 }
 const installationPhotos = [
   ["dartlink1.jpeg", "L’installation complète", "Vue d’ensemble du système DartLink avec cible, écran et commandes"],
@@ -100,10 +106,10 @@ const installationPhotos = [
 function experience() {
   return shell(
     `<section class="page-intro container"><span class="eyebrow">L’expérience DartLink</span><h1>Chaque lancer.<br><em>Une nouvelle partie.</em></h1><p>Une cible, des joueurs et l’envie de partager un bon moment. Découvrez huit familles de modes de jeu, la télécommande et une installation DartLink en images.</p></section>
-    <section class="container section compact"><div class="section-heading"><div><span class="eyebrow">Le jeu en images</span><h2>À chacun son mode.</h2></div><p>Captures de l’application fournies pour la vitrine. Les écrans présentés peuvent varier selon la version installée.</p></div><div class="games-grid">${screenCards(gameScreens, 0)}</div></section>
-    <section class="container section compact"><div class="section-heading"><div><span class="eyebrow">Piloter la partie</span><h2>DartLink Remote en images.</h2></div><p>Accueil, commandes et noms des joueurs sur la télécommande locale.</p></div><div class="games-grid remote-grid">${screenCards(remoteScreens, gameScreens.length)}</div></section>
+    <section class="container section compact"><div class="section-heading"><div><span class="eyebrow">Le jeu en images</span><h2>À chacun son mode.</h2></div><p>Captures de l’application fournies pour la vitrine. Les écrans présentés peuvent varier selon la version installée.</p></div><div class="game-tabs" role="tablist" aria-label="Modes de jeu">${gameGroups.map(([id, label], index) => `<button type="button" role="tab" id="tab-${id}" aria-controls="panel-${id}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">${label}</button>`).join("")}</div>${gameGroups.map(([id, label, screens], index) => `<div id="panel-${id}" role="tabpanel" aria-labelledby="tab-${id}" tabindex="0" ${index ? "hidden" : ""}><div class="games-grid">${screenCards(screens, id)}</div></div>`).join("")}</section>
+    <section class="container section compact"><div class="section-heading"><div><span class="eyebrow">Piloter la partie</span><h2>DartLink Remote en images.</h2></div><p>Accueil, commandes et noms des joueurs sur la télécommande locale.</p></div><div class="games-grid remote-grid">${screenCards(remoteScreens, "remote")}</div></section>
     <dialog id="game-gallery" class="game-gallery" aria-labelledby="gallery-title"><div class="game-gallery-panel"><div class="game-gallery-top"><span class="eyebrow">DartLink en images</span><button class="game-gallery-close" type="button" aria-label="Fermer la galerie">Fermer <span aria-hidden="true">×</span></button></div><figure><img id="gallery-image" alt=""><figcaption><strong id="gallery-title"></strong><span id="gallery-count" aria-live="polite"></span></figcaption></figure><div class="game-gallery-controls"><button class="game-gallery-prev" type="button">← Image précédente</button><button class="game-gallery-next" type="button">Image suivante →</button></div></div></dialog>
-    <section class="section container installations-section"><div class="section-heading"><div><span class="eyebrow">Le jeu dans votre espace</span><h2>Une installation en images.</h2></div><p>La cible, l’écran et les commandes physiques du système DartLink photographié.</p></div><div class="installations-grid">${installationPhotos.map(([file, title, alt], index) => `<figure class="installation-photo"><a href="installations/${file}" target="_blank" rel="noopener noreferrer" aria-label="Voir la photo ${title.toLowerCase()} en grand (nouvel onglet)"><img src="installations/${file}" alt="${alt}" loading="lazy"></a><figcaption><span class="eyebrow">0${index + 1} / Installation</span><h3>${title}</h3></figcaption></figure>`).join("")}</div></section>
+    <section class="section container installations-section"><div class="section-heading"><div><span class="eyebrow">Le jeu dans votre espace</span><h2>Une installation en images.</h2></div><p>La cible, l’écran et les commandes physiques du système DartLink photographié.</p></div><div class="installations-grid">${installationPhotos.map(([file, title, alt], index) => `<figure class="installation-photo"><button class="game-card-open" type="button" data-gallery-group="installation" data-gallery-title="${title}" aria-label="Agrandir la photo ${title.toLowerCase()}"><img src="installations/${file}" alt="${alt}" loading="lazy"><span aria-hidden="true">Agrandir ↗</span></button><figcaption><span class="eyebrow">0${index + 1} / Installation</span><h3>${title}</h3></figcaption></figure>`).join("")}</div></section>
     <section class="section container"><div class="section-heading"><div><span class="eyebrow">Du terrain aux coulisses</span><h2>Un ensemble cohérent.</h2></div></div>${featureCards()}</section>${managerSection()}`,
     "experience",
   );
@@ -188,7 +194,31 @@ async function setupCompetitionNews() {
 function setupGameGallery() {
   const dialog = document.querySelector("#game-gallery");
   if (!dialog) return;
-  const triggers = [...document.querySelectorAll(".game-card-open")];
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  const selectTab = (tab) => {
+    tabs.forEach((item) => {
+      const selected = item === tab;
+      item.setAttribute("aria-selected", String(selected));
+      item.tabIndex = selected ? 0 : -1;
+      document.getElementById(item.getAttribute("aria-controls")).hidden = !selected;
+    });
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => selectTab(tab));
+    tab.addEventListener("keydown", (event) => {
+      let next;
+      if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+      if (event.key === "ArrowLeft") next = (index + tabs.length - 1) % tabs.length;
+      if (event.key === "Home") next = 0;
+      if (event.key === "End") next = tabs.length - 1;
+      if (next === undefined) return;
+      event.preventDefault();
+      selectTab(tabs[next]);
+      tabs[next].focus();
+    });
+  });
+  const allTriggers = [...document.querySelectorAll("[data-gallery-group]")];
+  let triggers = [];
   const image = dialog.querySelector("#gallery-image");
   const title = dialog.querySelector("#gallery-title");
   const count = dialog.querySelector("#gallery-count");
@@ -199,12 +229,13 @@ function setupGameGallery() {
     const source = triggers[current].querySelector("img");
     image.src = source.src;
     image.alt = source.alt;
-    title.textContent = triggers[current].closest("figure").querySelector(".eyebrow").textContent;
+    title.textContent = triggers[current].dataset.galleryTitle;
     count.textContent = `${current + 1} / ${triggers.length}`;
   };
-  triggers.forEach((trigger, index) => trigger.addEventListener("click", () => {
+  allTriggers.forEach((trigger) => trigger.addEventListener("click", () => {
     opener = trigger;
-    show(index);
+    triggers = allTriggers.filter((item) => item.dataset.galleryGroup === trigger.dataset.galleryGroup);
+    show(triggers.indexOf(trigger));
     dialog.showModal();
     dialog.querySelector(".game-gallery-close").focus();
   }));
