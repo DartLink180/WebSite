@@ -275,3 +275,16 @@ Chaque galerie conserve uniquement les captures de son onglet. Les captures,
 le build et les dépendances sont inchangés. La recette vérifie les neuf onglets,
 leurs effectifs (1, 2, 1, 2, 3, 1, 1, 2, 3), la sélection initiale du Menu et
 la navigation clavier. La galerie photo conserve sa fermeture sur place.
+
+### Publication des neuf onglets — 4 novembre 2026
+
+Version applicative `024ac2a009588807976fe135a0177539fd9818ea`, présente sur
+`origin/main` après fetch. Les jobs build et deploy du workflow Pages
+[41820269108](https://github.com/DartLink180/WebSite/actions/runs/41820269108)
+ont réussi. Une release neuve de ce SHA est servie par le Nginx du domaine,
+après sauvegarde de configuration, validation et rechargement. Les 28 fichiers
+statiques comparés sont identiques au build ; Manager, Remote et mobile
+répondent 200. Chromium en HTTPS à 1280 et 390 px confirme Menu en première
+position et sélectionné au chargement, les neuf onglets, leurs effectifs et
+l'absence de débordement. La recette locale complète (24 combinaisons) et les
+trois tests Node ont réussi. Aucun changement de dépendance ou de matériel.
