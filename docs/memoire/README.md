@@ -206,3 +206,24 @@ nouvel onglet. Accueil et FAQ présentent huit familles de modes, vérifiées da
 `server/game/gameManager.js` de DartLink `b066776`. La version précise des
 captures fournies n'est pas attestée. Voir [provenance](../../screenshots/README.md)
 et [validation et publication](../REFONTE-VITRINE.md#visuels-fournis--4-novembre-2026).
+
+### Publication vérifiée — 4 novembre 2026
+
+Le commit applicatif `259cab64fa78cdc908f606885bd36fb03e46309d` est poussé
+sur `main`, puis retrouvé après récupération de `origin/main`. Le workflow
+Pages [41815629675](https://github.com/DartLink180/WebSite/actions/runs/41815629675)
+a réussi. Le Nginx du domaine sert une release neuve construite depuis ce SHA,
+après sauvegarde privée de sa configuration, `nginx -t` et rechargement.
+Les 28 ressources statiques comparées en HTTPS correspondent exactement au
+build ; le JSON d'actualités conserve son rafraîchissement indépendant.
+`/manager/`, `/remote/`, `/mobile/` et `/news/pdc.json` répondent 200.
+
+Chromium sur l'URL HTTPS a vérifié les 19 captures et trois photos, la navigation
+de galerie et l'absence de débordement à 1280 et 390 px. La recette complète
+locale avait réussi aux quatre largeurs prévues. Ces contrôles établissent
+l'affichage de la vitrine ; la version des cartes et les périphériques physiques
+ne sont pas validés par cette publication.
+
+Le premier push avec la clé SSH habituelle a été refusé. Le push a réussi avec
+la seconde identité GitHub déjà présente sur PiServeur ; aucun secret ni nouvelle
+configuration d'authentification n'a été ajouté au dépôt.
