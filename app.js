@@ -34,7 +34,7 @@ function shell(content, current = "") {
       <nav id="main-nav" aria-label="Navigation principale">${navItems.map(([path, label]) => `<a href="#/${path}" ${path === current ? 'aria-current="page"' : ""}>${label}</a>`).join("")}<a href="${remoteUrl}">Télécommande</a><a href="${mobileUrl}">Jouer sur mobile</a>${button("Ouvrir le Manager", managerUrl)}</nav>
     </div></header>
     <main id="main" tabindex="-1">${content}</main>
-    <footer class="site-footer container"><div class="footer-main"><a class="brand" href="#/" aria-label="DartLink — accueil">${logo()}</a><p>La passion du jeu.<br>L’esprit connecté.</p><a class="text-link" href="${managerUrl}">Accès au Manager <span aria-hidden="true">${arrowIcon}</span></a></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} DartLink</span><span>Imaginé pour les passionnés de fléchettes.</span><a href="#/mentions">Informations & confidentialité</a></div></footer>`;
+    <footer class="site-footer container"><div class="footer-main"><a class="brand" href="#/" aria-label="DartLink — accueil">${logo()}</a><p>La passion du jeu.<br>L’esprit connecté.</p></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} DartLink</span><span>Imaginé pour les passionnés de fléchettes.</span><a href="#/mentions">Informations & confidentialité</a></div></footer>`;
 }
 const features = [
   [
@@ -49,22 +49,19 @@ const features = [
   ],
   [
     "03",
-    "La gestion, au même endroit.",
-    "Un Manager réservé aux administrateurs pour retrouver les installations et suivre leurs états.",
+    "Votre partie, à portée de main.",
+    "DartLink Remote rassemble les commandes du jeu et les noms des joueurs dans une télécommande locale.",
   ],
 ];
 function featureCards() {
   return `<div class="feature-grid">${features.map(([number, title, text]) => `<article class="feature-card"><span class="card-number">${number} <span aria-hidden="true">${arrowIcon}</span></span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>`;
 }
-function managerSection() {
-  return `<section class="manager-section container"><div class="manager-identity"><span class="eyebrow">L’écosystème DartLink</span><div class="brand-seal">${logo("mark")}</div><span class="identity-caption">UNE PASSION. UN POINT DE CONNEXION.</span></div><div class="manager-copy"><span class="eyebrow">En coulisses / Le Manager</span><h2>Gardez le jeu en vue.<br>Et vos installations aussi.</h2><p>Un espace dédié pour retrouver vos appareils, consulter leur état et gérer vos installations. La même identité, du terrain à l’administration.</p><ul class="check-list"><li>Une vue d’ensemble du parc</li><li>Le détail de chaque installation</li><li>Des outils réservés aux administrateurs</li></ul>${button("Accéder au Manager", managerUrl)}<p class="fine-print">Un compte administrateur est nécessaire.</p></div></section>`;
-}
 function home() {
-  return shell(`<section class="hero container"><div class="hero-copy"><span class="eyebrow"><span class="status-dot"></span> FLÉCHETTES · PASSION · CONNEXION</span><h1>Le jeu nous<br><em>connecte.</em></h1><p>Le plaisir d’un beau lancer. L’envie de rejouer ensemble. Découvrez DartLink, l’écosystème qui accompagne votre passion des fléchettes.</p><div class="actions">${button("Découvrir l’expérience", "#/experience")}${button("Explorer le Manager", managerUrl, true)}${button("Ouvrir DartLink Remote", remoteUrl, true)}${button("Jouer sur mobile", mobileUrl, true)}</div><div class="hero-note"><span class="note-line"></span>Du premier lancer à la prochaine partie.</div></div><div class="hero-visual"><span class="visual-label">DARTLINK / L’ESPRIT DU JEU</span><div class="signature">${logo("signature")}</div><div class="visual-caption"><span class="status-dot"></span> La précision rassemble.<span aria-hidden="true">${arrowIcon}</span></div></div></section>
+  return shell(`<section class="hero container"><div class="hero-copy"><span class="eyebrow"><span class="status-dot"></span> FLÉCHETTES · PASSION · CONNEXION</span><h1>Le jeu nous<br><em>connecte.</em></h1><p>Le plaisir d’un beau lancer. L’envie de rejouer ensemble. Découvrez DartLink, l’écosystème qui accompagne votre passion des fléchettes.</p><div class="actions">${button("Découvrir l’expérience", "#/experience")}${button("Ouvrir DartLink Remote", remoteUrl, true)}${button("Jouer sur mobile", mobileUrl, true)}</div><div class="hero-note"><span class="note-line"></span>Du premier lancer à la prochaine partie.</div></div><div class="hero-visual"><span class="visual-label">DARTLINK / L’ESPRIT DU JEU</span><div class="signature">${logo("signature")}</div><div class="visual-caption"><span class="status-dot"></span> La précision rassemble.<span aria-hidden="true">${arrowIcon}</span></div></div></section>
     <section class="principles container" aria-label="L’esprit DartLink"><span>01 <strong>Jouer.</strong></span><span>02 <strong>Connecter.</strong></span><span>03 <strong>Partager.</strong></span><p>Votre cible.<br>Tout un univers autour.</p></section>
-    <section class="section container"><div class="section-heading"><div><span class="eyebrow">Pensé autour de votre passion</span><h2>Plus qu’une cible.<br>Une expérience commune.</h2></div><p>Sur le terrain comme en coulisses,<br>chaque chose trouve sa place.</p></div>${featureCards()}</section>
+    <section class="section container"><div class="section-heading"><div><span class="eyebrow">Pensé autour de votre passion</span><h2>Plus qu’une cible.<br>Une expérience commune.</h2></div><p>La cible, le jeu, la télécommande :<br>tout pour partager la partie.</p></div>${featureCards()}</section>
     <section class="game-section container"><div class="game-copy"><span class="eyebrow">À vous de jouer</span><h2>Choisissez votre jeu.<br>Trouvez votre rythme.</h2><p>Huit familles de modes, de X01 au Tournoi : explorez les écrans de DartLink et imaginez votre prochaine partie.</p><a class="text-link" href="#/experience">Voir les modes de jeu <span aria-hidden="true">${arrowIcon}</span></a></div><figure class="game-preview"><div class="window-bar"><span><i></i><i></i><i></i></span><span>DARTLINK / LE JEU</span><span aria-hidden="true">${arrowIcon}</span></div><img src="screenshots/menu.PNG" alt="Menu de DartLink avec choix des joueurs, du mode et des options" width="1292" height="1304" loading="lazy"><figcaption>Un aperçu de l’interface de jeu.</figcaption></figure></section>
-    ${managerSection()}<section class="closing container"><div><span class="eyebrow">La prochaine partie commence ici</span><h2>On se retrouve<br>autour de la cible ?</h2></div>${button("En savoir plus", "#/faq")}</section>`);
+    <section class="closing container"><div><span class="eyebrow">La prochaine partie commence ici</span><h2>On se retrouve<br>autour de la cible ?</h2></div>${button("En savoir plus", "#/faq")}</section>`);
 }
 const gameScreens = [
   ["X01.PNG", "X01 · début", "La partie à 301 points démarre à quatre joueurs.", "Écran de début de partie X01 301 à quatre joueurs"],
@@ -115,7 +112,7 @@ function experience() {
     <section class="container section compact"><div class="section-heading"><div><span class="eyebrow">Piloter la partie</span><h2>DartLink Remote en images.</h2></div><p>Accueil, commandes et noms des joueurs sur la télécommande locale.</p></div><div class="games-grid remote-grid">${screenCards(remoteScreens, "remote")}</div></section>
     <dialog id="game-gallery" class="game-gallery" aria-labelledby="gallery-title"><div class="game-gallery-panel"><div class="game-gallery-top"><span class="eyebrow">DartLink en images</span><button class="game-gallery-close" type="button" aria-label="Fermer la galerie">Fermer <span aria-hidden="true">×</span></button></div><figure><img id="gallery-image" alt=""><figcaption><strong id="gallery-title"></strong><span id="gallery-count" aria-live="polite"></span></figcaption></figure><div class="game-gallery-controls"><button class="game-gallery-prev" type="button">← Image précédente</button><button class="game-gallery-next" type="button">Image suivante →</button></div></div></dialog>
     <section class="section container installations-section"><div class="section-heading"><div><span class="eyebrow">Le jeu dans votre espace</span><h2>Une installation en images.</h2></div><p>La cible, l’écran et les commandes physiques du système DartLink photographié.</p></div><div class="installations-grid">${installationPhotos.map(([file, title, alt], index) => `<figure class="installation-photo"><button class="game-card-open" type="button" data-gallery-group="installation" data-gallery-title="${title}" aria-label="Agrandir la photo ${title.toLowerCase()}"><img src="installations/${file}" alt="${alt}" loading="lazy"><span aria-hidden="true">Agrandir ↗</span></button><figcaption><span class="eyebrow">0${index + 1} / Installation</span><h3>${title}</h3></figcaption></figure>`).join("")}</div></section>
-    <section class="section container"><div class="section-heading"><div><span class="eyebrow">Du terrain aux coulisses</span><h2>Un ensemble cohérent.</h2></div></div>${featureCards()}</section>${managerSection()}`,
+    <section class="section container"><div class="section-heading"><div><span class="eyebrow">Autour de la partie</span><h2>Un ensemble cohérent.</h2></div></div>${featureCards()}</section>`,
     "experience",
   );
 }
@@ -267,15 +264,7 @@ function setupGameGallery() {
 const questions = [
   [
     "Qu’est-ce que DartLink ?",
-    "DartLink est un écosystème dédié aux fléchettes : une application de jeu autour du Raspberry Pi et un Manager pour administrer les installations. Ce site vous présente ces deux univers.",
-  ],
-  [
-    "À qui s’adresse le Manager ?",
-    "Le Manager est réservé aux administrateurs disposant d’un compte. Le bouton « Ouvrir le Manager » vous dirige vers le service réel ; le site vitrine ne propose pas de connexion de démonstration.",
-  ],
-  [
-    "Que trouve-t-on dans le Manager ?",
-    "Le Manager permet de consulter le parc, l’état des appareils et le détail des installations. Les opérations disponibles dépendent des autorisations du compte et de la configuration de chaque installation.",
+    "DartLink est un système dédié aux fléchettes autour du Raspberry Pi, avec une application de jeu, des commandes physiques et une télécommande locale.",
   ],
   [
     "Quels modes de jeu peut-on découvrir ?",
@@ -292,7 +281,7 @@ const questions = [
 ];
 function faq() {
   return shell(
-    `<section class="page-intro container"><span class="eyebrow">Questions fréquentes</span><h1>Avant de<br><em>vous lancer.</em></h1><p>Quelques repères pour découvrir le jeu, les installations et le Manager.</p></section><section class="faq-layout container"><div><span class="eyebrow">Les réponses essentielles</span><h2>Faisons le tour<br>de la cible.</h2><a class="text-link" href="#/experience">Découvrir l’expérience ${arrowIcon}</a></div><div class="faq-list">${questions.map(([question, answer], i) => `<details><summary><span class="faq-number">0${i + 1}</span><span>${question}</span><span class="faq-plus" aria-hidden="true">+</span></summary><p>${answer}</p></details>`).join("")}</div></section>`,
+    `<section class="page-intro container"><span class="eyebrow">Questions fréquentes</span><h1>Avant de<br><em>vous lancer.</em></h1><p>Quelques repères pour découvrir le jeu, les installations et la télécommande.</p></section><section class="faq-layout container"><div><span class="eyebrow">Les réponses essentielles</span><h2>Faisons le tour<br>de la cible.</h2><a class="text-link" href="#/experience">Découvrir l’expérience ${arrowIcon}</a></div><div class="faq-list">${questions.map(([question, answer], i) => `<details><summary><span class="faq-number">0${i + 1}</span><span>${question}</span><span class="faq-plus" aria-hidden="true">+</span></summary><p>${answer}</p></details>`).join("")}</div></section>`,
     "faq",
   );
 }
@@ -304,7 +293,7 @@ function contact() {
 }
 function mentions() {
   return shell(
-    `<section class="page-intro container"><span class="eyebrow">Informations & confidentialité</span><h1>En toute<br><em>clarté.</em></h1></section><section class="prose container"><h2>Le site DartLink</h2><p>Cette vitrine présente l’écosystème DartLink et les captures de son interface de jeu. Elle ne permet pas de piloter une installation.</p><h2>Accès au Manager</h2><p>Les liens Manager ouvrent le service externe à l’adresse dartlink.fr/manager/. Ce service possède sa propre authentification et ses propres traitements, distincts de cette vitrine.</p><h2>Vos données sur cette vitrine</h2><p>Le formulaire de contact est une démonstration. Les données saisies ne sont ni transmises par l’application, ni conservées après le rechargement de la page. Ce site n’ajoute aucun outil de mesure d’audience ni cookie applicatif. Les vignettes des actualités sont chargées directement depuis le serveur d’images de la PDC : votre navigateur contacte ce service lorsque vous consultez la page Compétitions. L’hébergeur peut traiter les données techniques nécessaires à la fourniture du site.</p><h2>Informations éditoriales</h2><p>Les informations légales complètes de l’éditeur et les coordonnées de contact restent à renseigner à partir d’informations vérifiées.</p></section>`,
+    `<section class="page-intro container"><span class="eyebrow">Informations & confidentialité</span><h1>En toute<br><em>clarté.</em></h1></section><section class="prose container"><h2>Le site DartLink</h2><p>Cette vitrine présente l’écosystème DartLink et les captures de son interface de jeu. Elle ne permet pas de piloter une installation.</p><h2>Vos données sur cette vitrine</h2><p>Le formulaire de contact est une démonstration. Les données saisies ne sont ni transmises par l’application, ni conservées après le rechargement de la page. Ce site n’ajoute aucun outil de mesure d’audience ni cookie applicatif. Les vignettes des actualités sont chargées directement depuis le serveur d’images de la PDC : votre navigateur contacte ce service lorsque vous consultez la page Compétitions. L’hébergeur peut traiter les données techniques nécessaires à la fourniture du site.</p><h2>Informations éditoriales</h2><p>Les informations légales complètes de l’éditeur et les coordonnées de contact restent à renseigner à partir d’informations vérifiées.</p></section>`,
   );
 }
 function notFound() {

@@ -415,3 +415,20 @@ répondent 200. Chromium en HTTPS à 1280 et 390 px confirme Menu en première
 position et sélectionné au chargement, les neuf onglets, leurs effectifs et
 l'absence de débordement. La recette locale complète (24 combinaisons) et les
 trois tests Node ont réussi. Aucun changement de dépendance ou de matériel.
+
+## Vitrine centrée sur le jeu — 4 novembre 2026
+
+Base `263354c`. À la demande de l'utilisateur, le Manager n'est plus un sujet
+promotionnel de la vitrine, son accès étant personnel. Seul le bouton
+« Ouvrir le Manager » du menu global demeure. Les sections de présentation sur
+l'accueil et L'expérience, le bouton de l'accroche, le lien du pied de page,
+les deux questions de FAQ, le paragraphe des informations et les mentions dans
+la description HTML et le texte sans JavaScript sont retirés. La troisième
+carte de présentation décrit la télécommande locale. Cette décision remplace
+les présentations du Manager conservées dans l'historique documentaire.
+
+L'URL du bouton et les redirections historiques login/manager sont conservées.
+Aucune modification du service Manager, de ses droits ou de son hébergement.
+Aucune dépendance ni ressource supplémentaire. La recette navigateur vérifie
+sur chaque route un seul lien Manager, l'absence de mention dans le contenu
+principal et le pied de page, ainsi que les trois anciennes redirections.

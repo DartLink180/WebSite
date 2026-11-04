@@ -6,7 +6,7 @@
 
 Site vitrine statique DartLink. La version courante utilise `index.html`, `app.js` et `style.css` à la racine. `app.js` assure le routage par fragment, les pages publiques et les interactions dans le navigateur. Le code React sous `src/` est historique et n’est pas l’entrée du build courant.
 
-Les boutons Manager et Explorer le Manager ouvrent `https://dartlink.fr/manager/`. Les routes historiques `#/login` et `#/manager` redirigent vers ce Manager réel. La refonte locale retire les anciens écrans simulés du JavaScript livré ; ils restent consultables dans Git. Le Manager réel constitue un service distinct. Le formulaire public reste une simulation, sans envoi de message réel.
+Le bouton « Ouvrir le Manager » du menu est le seul accès visible à `https://dartlink.fr/manager/` ; les présentations du service ont été retirées à la demande de son administrateur. Les routes historiques `#/login` et `#/manager` redirigent vers ce Manager réel. La refonte locale retire les anciens écrans simulés du JavaScript livré ; ils restent consultables dans Git. Le Manager réel constitue un service distinct. Le formulaire public reste une simulation, sans envoi de message réel.
 
 Les captures et leur provenance sont documentées dans [public/screenshots/README](../../public/screenshots/README.md) et [screenshots/README](../../screenshots/README.md). Le code du jeu et le backend Manager appartiennent aux dépôts [DartLink](https://github.com/DartLink180/DartLink) et [DartLink-Manager](https://github.com/DartLink180/DartLink-Manager).
 
@@ -288,3 +288,20 @@ répondent 200. Chromium en HTTPS à 1280 et 390 px confirme Menu en première
 position et sélectionné au chargement, les neuf onglets, leurs effectifs et
 l'absence de débordement. La recette locale complète (24 combinaisons) et les
 trois tests Node ont réussi. Aucun changement de dépendance ou de matériel.
+
+## Vitrine centrée sur le jeu — 4 novembre 2026
+
+Base `263354c`. À la demande de l'utilisateur, le Manager n'est plus un sujet
+promotionnel de la vitrine, son accès étant personnel. Seul le bouton
+« Ouvrir le Manager » du menu global demeure. Les sections de présentation sur
+l'accueil et L'expérience, le bouton de l'accroche, le lien du pied de page,
+les deux questions de FAQ, le paragraphe des informations et les mentions dans
+la description HTML et le texte sans JavaScript sont retirés. La troisième
+carte de présentation décrit la télécommande locale. Cette décision remplace
+les présentations du Manager conservées dans l'historique documentaire.
+
+L'URL du bouton et les redirections historiques login/manager sont conservées.
+Aucune modification du service Manager, de ses droits ou de son hébergement.
+Aucune dépendance ni ressource supplémentaire. La recette navigateur vérifie
+sur chaque route un seul lien Manager, l'absence de mention dans le contenu
+principal et le pied de page, ainsi que les trois anciennes redirections.

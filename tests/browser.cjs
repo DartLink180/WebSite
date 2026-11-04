@@ -30,6 +30,10 @@ const baseUrl =
         await page.goto(`${baseUrl}#/${route}`, { waitUntil: "networkidle" });
         await page.locator("h1").waitFor();
         assert.equal(await page.locator("h1").count(), 1);
+        assert.equal(await page.locator('a[href="https://dartlink.fr/manager/"]').count(), 1);
+        assert.equal(await page.locator('a[href="https://dartlink.fr/manager/"]').textContent(), "Ouvrir le Manager");
+        assert.equal(await page.locator("main").innerText().then(text => /manager|administrateur/i.test(text)), false);
+        assert.equal(await page.locator("footer").innerText().then(text => /manager/i.test(text)), false);
         assert.equal(
           await page.evaluate(
             () => document.documentElement.scrollWidth <= innerWidth,
