@@ -1277,3 +1277,6 @@ details > p {
 }
 [role="tabpanel"][hidden] { display: none; }
 .installation-photo .game-card-open img { aspect-ratio: auto; }
+
+.contact-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.contact-form button:disabled { opacity: .65; cursor: wait; }

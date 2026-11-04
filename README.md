@@ -126,3 +126,9 @@ les scores. Les titres sont actualisés toutes les 15 minutes sur le serveur et
 environ deux fois par heure sur GitHub Pages ; la date de récupération est
 visible dans la page. Si le flux échoue, les derniers titres connus restent
 affichés. Voir [la décision et les limites](docs/REFONTE-VITRINE.md#titres-pdc-sur-la-page-compétitions--29-octobre-2026).
+
+## Préparation du formulaire de contact
+
+La branche `feat/contact-mail` prépare un envoi réel via SMTP Gmail et un petit
+service Python sur PiServeur. Sa publication attend la configuration privée et
+la vérification de l’envoi ; voir [CONTACT](docs/CONTACT.md).

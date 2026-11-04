@@ -12,9 +12,10 @@ const baseUrl =
     const page = await browser.newPage();
     const errors = [];
     const responses = [];
+    let expectedContactErrors = false;
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("response", (r) => {
-      if (r.status() >= 400) responses.push(`${r.status()} ${r.url()}`);
+      if (r.status() >= 400 && !(expectedContactErrors && r.url().endsWith("/api/contact") && [502, 429].includes(r.status()))) responses.push(`${r.status()} ${r.url()}`);
     });
     let checked = 0;
     for (const width of [1440, 768, 390, 320]) {
@@ -169,22 +170,35 @@ const baseUrl =
       "",
     );
     await page.goto(baseUrl + "#/contact");
-    await page.getByRole("button", { name: "Simuler l’envoi" }).click();
-    assert.equal(await page.locator("#contact-status").textContent(), "");
+    const submitted = [];
+    let contactCode = 502;
+    expectedContactErrors = true;
+    await page.route("**/api/contact", async (route) => {
+      submitted.push(route.request().postDataJSON());
+      await new Promise(resolve => setTimeout(resolve, 100));
+      await route.fulfill({ status: contactCode, contentType: "application/json", body: JSON.stringify({ ok: contactCode === 200 }) });
+    });
+    const send = page.getByRole("button", { name: "Envoyer le message" });
+    await send.click();
+    assert.equal(submitted.length, 0, "invalid form must not send");
     await page.locator("#contact-name").fill("Personne fictive");
     await page.locator("#contact-email").fill("demo@example.com");
     await page.locator("#contact-project").fill("Projet de test fictif");
-    const submitted = [];
-    const listener = (req) => submitted.push(req.url());
-    page.on("request", listener);
-    await page.getByRole("button", { name: "Simuler l’envoi" }).click();
-    assert.match(
-      await page.locator("#contact-status").textContent(),
-      /Aucun message envoyé/,
-    );
+    await send.click();
+    await page.waitForFunction(() => document.querySelector("#contact-status").textContent.includes("échoué"));
+    assert.equal(await page.locator("#contact-project").inputValue(), "Projet de test fictif");
+    contactCode = 429;
+    await send.click();
+    await page.waitForFunction(() => document.querySelector("#contact-status").textContent.includes("Trop de tentatives"));
+    assert.equal(await page.locator("#contact-name").inputValue(), "Personne fictive");
+    contactCode = 200;
+    await send.click();
+    await page.waitForFunction(() => document.querySelector("#contact-status").textContent.includes("a été envoyé"));
     assert.equal(await page.locator("#contact-name").inputValue(), "");
-    assert.deepEqual(submitted, []);
-    page.off("request", listener);
+    assert.equal(submitted.length, 3);
+    assert.deepEqual(submitted[0], { name: "Personne fictive", email: "demo@example.com", message: "Projet de test fictif", website: "" });
+    await page.unroute("**/api/contact");
+    expectedContactErrors = false;
     await page.goto(baseUrl);
     await page.keyboard.press("Tab");
     await page.getByRole("link", { name: "Aller au contenu" }).focus();
@@ -225,7 +239,7 @@ const baseUrl =
     assert.deepEqual(errors, [], "JavaScript errors");
     assert.deepEqual(responses, [], "HTTP failures");
     console.log(
-      `PASS: ${checked} route/viewport checks; Remote links, mobile navigation, Escape, FAQ, form validation/no transmission, skip link, three Manager redirects, no JS errors or missing assets.`,
+      `PASS: ${checked} route/viewport checks; Remote links, mobile navigation, Escape, FAQ, contact validation/error/retry/success with intercepted requests, skip link, three Manager redirects, no JS errors or missing assets.`,
     );
   } finally {
     await browser.close();

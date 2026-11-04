@@ -276,7 +276,7 @@ const questions = [
   ],
   [
     "Le formulaire de contact envoie-t-il un message ?",
-    "Pas encore. Le formulaire est une démonstration, signalée comme telle. Aucune donnée saisie n’est envoyée ou conservée par le site.",
+    "Oui. Le formulaire transmet votre nom, votre adresse e-mail et votre message à la messagerie de contact DartLink afin de vous répondre.",
   ],
 ];
 function faq() {
@@ -287,13 +287,13 @@ function faq() {
 }
 function contact() {
   return shell(
-    `<section class="page-intro container"><span class="eyebrow">Contact</span><h1>Le début d’une<br><em>belle partie.</em></h1><p>Une idée pour votre espace de jeu ? Découvrez le parcours de prise de contact.</p></section><section class="contact-layout container"><div><span class="eyebrow">Gardons le lien</span><h2>Votre projet.<br>Notre point de départ.</h2><p>Une installation à la maison, dans un club ou un espace partagé : chaque projet commence par une idée.</p><aside class="notice"><strong>Formulaire de démonstration</strong><p>L’envoi de messages n’est pas encore disponible. Utilisez uniquement des données fictives : rien ne sera envoyé ni enregistré.</p></aside></div><form id="contact" class="contact-form"><label for="contact-name">Votre nom</label><input id="contact-name" name="name" required maxlength="100" autocomplete="off" placeholder="Un nom fictif"><label for="contact-email">Votre adresse e-mail</label><input id="contact-email" name="email" type="email" required maxlength="254" autocomplete="off" placeholder="demo@example.com"><label for="contact-project">Votre projet</label><textarea id="contact-project" name="project" required maxlength="2000" rows="5" placeholder="Décrivez une installation fictive…"></textarea><button class="button" type="submit">Simuler l’envoi <span aria-hidden="true">${arrowIcon}</span></button><p id="contact-status" role="status" class="form-status"></p></form></section>`,
+    `<section class="page-intro container"><span class="eyebrow">Contact</span><h1>Le début d’une<br><em>belle partie.</em></h1><p>Une idée pour votre espace de jeu ? Écrivez-nous pour en discuter.</p></section><section class="contact-layout container"><div><span class="eyebrow">Gardons le lien</span><h2>Votre projet.<br>Notre point de départ.</h2><p>Une installation à la maison, dans un club ou un espace partagé : chaque projet commence par une idée.</p><aside class="notice"><strong>Parlons de votre projet</strong><p>Votre nom, votre adresse e-mail et votre message servent à traiter votre demande et à vous répondre.</p><p>Vous pouvez aussi écrire à <a href="mailto:dartlink180@gmail.com">dartlink180@gmail.com</a>.</p></aside></div><form id="contact" class="contact-form"><div class="contact-trap" aria-hidden="true"><label for="contact-website">Votre site web (laisser vide)</label><input id="contact-website" name="website" tabindex="-1" autocomplete="off"></div><label for="contact-name">Votre nom</label><input id="contact-name" name="name" required maxlength="100" autocomplete="name" placeholder="Votre nom"><label for="contact-email">Votre adresse e-mail</label><input id="contact-email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="vous@exemple.fr"><label for="contact-project">Votre projet</label><textarea id="contact-project" name="project" required maxlength="2000" rows="5" placeholder="Décrivez votre projet ou posez votre question…"></textarea><button class="button" type="submit">Envoyer le message <span aria-hidden="true">${arrowIcon}</span></button><p id="contact-status" role="status" class="form-status"></p></form></section>`,
     "contact",
   );
 }
 function mentions() {
   return shell(
-    `<section class="page-intro container"><span class="eyebrow">Informations & confidentialité</span><h1>En toute<br><em>clarté.</em></h1></section><section class="prose container"><h2>Le site DartLink</h2><p>Cette vitrine présente l’écosystème DartLink et les captures de son interface de jeu. Elle ne permet pas de piloter une installation.</p><h2>Vos données sur cette vitrine</h2><p>Le formulaire de contact est une démonstration. Les données saisies ne sont ni transmises par l’application, ni conservées après le rechargement de la page. Ce site n’ajoute aucun outil de mesure d’audience ni cookie applicatif. Les vignettes des actualités sont chargées directement depuis le serveur d’images de la PDC : votre navigateur contacte ce service lorsque vous consultez la page Compétitions. L’hébergeur peut traiter les données techniques nécessaires à la fourniture du site.</p><h2>Informations éditoriales</h2><p>Les informations légales complètes de l’éditeur et les coordonnées de contact restent à renseigner à partir d’informations vérifiées.</p></section>`,
+    `<section class="page-intro container"><span class="eyebrow">Informations & confidentialité</span><h1>En toute<br><em>clarté.</em></h1></section><section class="prose container"><h2>Le site DartLink</h2><p>Cette vitrine présente l’écosystème DartLink et les captures de son interface de jeu. Elle ne permet pas de piloter une installation.</p><h2>Vos données sur cette vitrine</h2><p>Le formulaire de contact transmet votre nom, votre adresse e-mail et votre message au serveur DartLink, puis à la messagerie Gmail de contact pour traiter votre demande et vous répondre. Le site ne conserve pas de copie des messages sur PiServeur. Une limitation temporaire des tentatives utilise votre adresse IP en mémoire pendant dix minutes. Les messages reçus sont traités dans la messagerie de contact. Ce site n’ajoute aucun outil de mesure d’audience ni cookie applicatif. Les vignettes des actualités sont chargées directement depuis le serveur d’images de la PDC : votre navigateur contacte ce service lorsque vous consultez la page Compétitions. L’hébergeur peut traiter les données techniques nécessaires à la fourniture du site.</p><h2>Informations éditoriales</h2><p>Les informations légales complètes de l’éditeur et les coordonnées de contact restent à renseigner à partir d’informations vérifiées.</p></section>`,
   );
 }
 function notFound() {
@@ -338,11 +338,53 @@ function render() {
   });
   setupGameGallery();
   setupCompetitionNews();
-  document.querySelector("#contact")?.addEventListener("submit", (event) => {
+  document.querySelector("#contact")?.addEventListener("submit", async (event) => {
     event.preventDefault();
-    event.target.reset();
-    document.querySelector("#contact-status").textContent =
-      "Simulation terminée. Aucun message envoyé, aucune donnée enregistrée.";
+    const form = event.currentTarget;
+    if (form.dataset.sending === "true") return;
+    const status = form.querySelector("#contact-status");
+    const submit = form.querySelector('[type="submit"]');
+    const values = new FormData(form);
+    const payload = {
+      name: values.get("name").trim(),
+      email: values.get("email").trim(),
+      message: values.get("project").trim(),
+      website: values.get("website"),
+    };
+    if (!payload.name || !payload.message) {
+      status.textContent = "Veuillez renseigner votre nom et votre message.";
+      return;
+    }
+    form.dataset.sending = "true";
+    form.setAttribute("aria-busy", "true");
+    submit.disabled = true;
+    status.textContent = "Envoi en cours…";
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 25000);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+      const result = await response.json();
+      if (!response.ok || result.ok !== true) {
+        status.textContent = response.status === 429
+          ? "Trop de tentatives. Réessayez dans dix minutes ou écrivez-nous directement."
+          : "L’envoi a échoué. Vos champs sont conservés ; réessayez ou écrivez-nous directement.";
+        return;
+      }
+      form.reset();
+      status.textContent = "Votre message a été envoyé. Merci !";
+    } catch {
+      status.textContent = "L’envoi n’a pas pu être confirmé. Vos champs sont conservés ; vérifiez votre connexion ou écrivez-nous directement.";
+    } finally {
+      clearTimeout(timeout);
+      form.dataset.sending = "false";
+      form.removeAttribute("aria-busy");
+      submit.disabled = false;
+    }
   });
   window.scrollTo(0, 0);
 }

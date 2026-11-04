@@ -478,3 +478,23 @@ les cinq liens ouvrent chacun un onglet distinct, avec destinations interceptée
 `window.opener` nul et page source conservée ; un lien interne ouvre ensuite
 L'expérience dans l'onglet courant. Les services de destination ne sont pas
 modifiés ni validés par ce test de navigation.
+
+## Formulaire de contact réel — préparation du 4 novembre 2026
+
+Base `main` `4a4d7df`. La branche `feat/contact-mail` prépare un formulaire
+avec envoi SMTP depuis un service Python local, vers l'adresse choisie par
+l'utilisateur. La production reste au formulaire simulé jusqu'à configuration
+privée et validation de l'envoi. La décision historique « aucun envoi » sera
+remplacée lors de la publication, pas par la seule présence du code.
+
+Architecture, données, antispam, configuration privée, déploiement, contrôles et
+limites : [CONTACT](CONTACT.md). FormSubmit a été envisagé puis abandonné
+après refus réseau. Une connexion TLS Gmail a réussi ; les identifiants et la
+livraison ne sont pas vérifiés. Aucun mot de passe réel n'est inscrit dans Git.
+
+Résultat de la préparation : huit tests Python réussis, trois tests Node du
+build réussis, 24 combinaisons Chromium réussies avec les requêtes de contact
+interceptées. Vérification de l'unité systemd et du snippet Nginx dans une
+configuration temporaire isolée réussie. Syntaxe JavaScript/Python et contrôle
+du diff réussis. La production n'a pas été modifiée ; le mot de passe SMTP
+privé n'est pas encore renseigné et aucun message réel n'a été confirmé.
