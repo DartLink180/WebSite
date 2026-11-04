@@ -449,3 +449,19 @@ un seul lien Manager, aucune mention promotionnelle dans le contenu principal,
 aucun débordement. Les redirections historiques sont testées localement avec
 interception, sans connexion au compte personnel. Le service Manager et ses
 autorisations ne sont pas modifiés par cette publication.
+
+## Liens des services dans un nouvel onglet — 4 novembre 2026
+
+Base `7998bf4`. À la demande de l'utilisateur, les liens Remote, jeu mobile
+et Manager du menu, ainsi que les deux boutons Remote/mobile de l'accueil,
+ouvrent un nouvel onglet (`target="_blank"`, `rel="noopener noreferrer"`).
+Le nom accessible annonce le nouvel onglet. Le helper des boutons reçoit une
+option explicite pour ce comportement ; les liens internes gardent leur
+navigation habituelle. Aucune dépendance, nouvelle ressource ou modification
+des services liés. Les anciennes routes redirigées conservent leur comportement.
+
+Validation locale : syntaxe JavaScript, trois tests Node et contrôle du diff
+réussis. Chromium à 1440 et 390 px a cliqué les cinq liens de service avec
+interception de leurs destinations : cinq nouveaux onglets, aucune référence
+à la fenêtre d'origine, URL source conservée. Un lien interne a ensuite été
+suivi dans la page courante. Aucun accès administrateur réel n'a été exécuté.
