@@ -1,8 +1,8 @@
 # Compte joueur DartLink — mission 11
 
 Candidat du 13 novembre 2026, branche `feat/mission11-player-account`.
-Publication en attente ; aucun push sans accord utilisateur, même si AGENTS
-prescrivait historiquement un push après chaque changement.
+Publication autorisée par l’utilisateur après la préparation ; l’interdiction
+initiale de push est levée pour la livraison des deux dépôts et leur intégration.
 
 Le bouton reprend la classe et la place du bouton Manager. Visiteur : Connexion
 vers Cloud ; joueur avec session OIDC vérifiée : Mon compte, pseudo, photo si
@@ -50,7 +50,7 @@ avec comptes temporaires, vraie API/PG, site candidat dans le seul navigateur.
 Recette réelle complète réussie sur le candidat puis contre la release Cloud
 déployée : SSO avec pseudo/avatar, aller-retour Cloud/site, logout partagé,
 connexion WebSite avec arrivée dans Cloud, upload/remplacement/suppression,
-confidentialité et erreurs. Le site public reste sur l'ancienne release.
+confidentialité et erreurs. Le site public utilise maintenant la release `mission11-player-v1`.
 Après cette recette, contrôle de géométrie avec une fixture connectée et un
 pseudo de 32 caractères à sept largeurs (1440, 1280, 1200, 1024, 768, 390, 320) :
 pas de débordement ni bouton coupé ; les retours à la ligne tablette et la taille
@@ -60,7 +60,7 @@ validées dans la mission 10, aucun nouveau mécanisme introduit ici.
 Trois tests build et les 24 parcours publics ont été rejoués après ajustement CSS.
 Aucun smartphone physique ni test de charge n'est revendiqué.
 
-Déploiement : accord utilisateur requis pour push/fusion et publication.
+Déploiement : accord utilisateur reçu pour push/fusion, publication et diff Nginx.
 Le client Keycloak, ses callbacks exacts racine/silent et l'API Cloud ont été
 activés après autorisation explicite. Aucun changement Nginx requis pour le
 parcours applicatif. Construire depuis le commit validé avec `npm test && npm run
@@ -72,21 +72,26 @@ en ligne. Revenir à la précédente release ou faire un revert après autorisat
 sans réécrire l'historique. Restaurer le client OIDC via l'outil Cloud uniquement
 si aucun autre déploiement n'en dépend ; aucun rollback des données joueurs.
 
-Le diff précis en attente d'accord est [ops/mission11-nginx.diff](../ops/mission11-nginx.diff) :
+Le diff précis approuvé et appliqué est [ops/mission11-nginx.diff](../ops/mission11-nginx.diff) :
 seules deux directives `root` de la vitrine sélectionnent `mission11-player-v1/dist`.
 Proxys Manager/Remote/mobile, TLS, contact et flux d'actualités restent inchangés.
 L'outil `sudo -n python3 ops/player-release.py prepare` prépare la release depuis
 un arbre commité propre et le build testé ; `source.json` reste hors racine
 publique et conserve SHA du commit, empreintes des assets et de la configuration
-initiale. **`apply` attend l'accord utilisateur** : sauvegarde privée root,
+initiale. **`apply` a été exécuté après l’accord utilisateur** : sauvegarde privée root,
 refus si la configuration partagée a changé, test de syntaxe et reload gracieux.
 `rollback` refuse d'écraser une modification ultérieure du fichier partagé.
 Les deux tests isolés `python3 tests/player_release_test.py -v` réussissent :
 restauration après échec de syntaxe et refus d’un changement partagé concurrent.
-Aucune commande apply/rollback de cet outil n’a été exécutée sur la production.
+La commande apply a réussi en production (test de syntaxe puis reload gracieux).
+Aucun rollback de production n’a été nécessaire.
 
 Release préparée réellement : `/srv/dartlink-v2/releases/mission11-player-v1`,
-source applicative locale `5a581b5`, manifeste des assets et empreinte Nginx
-initiale présents. La source Cloud qualifiée est `e56a0df`. Aucun push, aucune
-sélection de cette release par Nginx. Ce complément documentaire ne change pas
-les assets préparés.
+source applicative `5a581b5`, manifeste des assets et empreinte Nginx initiale
+présents. La source Cloud qualifiée est `e56a0df`. Release sélectionnée par Nginx,
+34 assets publics identiques au manifeste (hors `.nojekyll`, volontairement
+inaccessible, et JSON d'actualités indépendant). Manager/Remote/mobile HTTP 200,
+PID des services et maître Nginx conservés. La recette OIDC sur les deux sites
+publics a réussi sans substitution des pages ni callbacks : connexion, session,
+pseudo/photo, aller-retour Cloud, déconnexion globale, avatars et autorisations.
+Preuve privée Cloud : `mission11-live-status.json`. Fixtures supprimées.

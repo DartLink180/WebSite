@@ -415,3 +415,11 @@ Fichiers, sécurité, tests réels, limites et état de publication :
 [PLAYER-ACCOUNT](../PLAYER-ACCOUNT.md). Aucune publication Git n'est autorisée
 par la mission courante sans nouvel accord ; cette consigne utilisateur prime
 sur la règle historique de push automatique.
+
+### Publication mission 11 — 13 novembre 2026
+
+L’utilisateur a confirmé les autorisations de push/intégration et de publication.
+La release `mission11-player-v1` est sélectionnée par les deux directives root
+du diff approuvé, après sauvegarde, test Nginx et reload gracieux. Les 34 assets
+publics vérifiés correspondent au build ; Manager, Remote et mobile restent
+accessibles (HTTP 200). Le déroulement et les limites sont dans PLAYER-ACCOUNT.
