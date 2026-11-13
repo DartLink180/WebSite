@@ -18,9 +18,10 @@ const installations = ["dartlink1.jpeg", "dartlink2.jpeg", "dartlink3.jpeg"];
 
 function fixture() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "dartlink-build-"));
-  for (const name of ["build.cjs", "index.html", "app.js", "style.css"]) {
+  for (const name of ["build.cjs", "index.html", "app.js", "style.css", "account.js", "silent-check-sso.html", "silent-check-sso.js"]) {
     fs.copyFileSync(path.join(root, name), path.join(dir, name));
   }
+  fs.cpSync(path.join(root, "vendor"), path.join(dir, "vendor"), {recursive:true});
   fs.mkdirSync(path.join(dir, "screenshots"), { recursive: true });
   for (const name of [...screenshots, ...installations]) {
     fs.copyFileSync(
@@ -79,13 +80,17 @@ test("fresh build includes the complete site and only intended public resources"
     );
     assert.deepEqual(fs.readdirSync(path.join(dir, "dist")).sort(), [
       ".nojekyll",
+      "account.js",
       "app.js",
       "brand",
       "index.html",
       "installations",
       "news",
       "screenshots",
+      "silent-check-sso.html",
+      "silent-check-sso.js",
       "style.css",
+      "vendor",
     ]);
     assert.equal(build(dir).status, 0, "repeatable build");
   } finally {

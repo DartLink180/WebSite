@@ -1,0 +1,8 @@
+--- a/etc/nginx/sites-available/dartlink.conf
++++ b/etc/nginx/sites-available/dartlink.conf
+@@ -31 +31 @@
+-    root /srv/dartlink-v2/releases/96f454c6aad35510ee62d3752becad0382117a0d/dist;
++    root /srv/dartlink-v2/releases/mission11-player-v1/dist;
+@@ -140 +140 @@
+-    root /srv/dartlink-v2/releases/96f454c6aad35510ee62d3752becad0382117a0d/dist;
++    root /srv/dartlink-v2/releases/mission11-player-v1/dist;

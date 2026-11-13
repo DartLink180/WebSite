@@ -2,9 +2,11 @@ const fs = require("node:fs");
 const path = require("node:path");
 const output = path.join(__dirname, "dist");
 fs.mkdirSync(output, { recursive: true });
-for (const file of ["index.html", "app.js", "style.css"]) {
+for (const file of ["index.html", "app.js", "style.css", "account.js", "silent-check-sso.html", "silent-check-sso.js"]) {
   fs.copyFileSync(path.join(__dirname, file), path.join(output, file));
 }
+fs.mkdirSync(path.join(output, "vendor", "keycloak-js"), { recursive: true });
+for (const file of ["keycloak.js", "deprecations.js", "LICENSE"]) fs.copyFileSync(path.join(__dirname, "vendor", "keycloak-js", file), path.join(output, "vendor", "keycloak-js", file));
 fs.mkdirSync(path.join(output, "news"), { recursive: true });
 fs.copyFileSync(path.join(__dirname, "public", "news", "pdc.json"), path.join(output, "news", "pdc.json"));
 // Publish only the assets used by the site, never local configuration files.

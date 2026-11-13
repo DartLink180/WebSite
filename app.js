@@ -1,4 +1,5 @@
 const app = document.querySelector("#app");
+const accountUrl = "https://cloud.dartlink.fr/compte/";
 const managerUrl = "https://dartlink.fr/manager/";
 const remoteUrl = "https://dartlink.fr/remote/";
 const mobileUrl = "https://dartlink.fr/mobile/";
@@ -31,7 +32,7 @@ function shell(content, current = "") {
     <header class="site-header"><div class="container header-inner">
       <a class="brand" href="#/" aria-label="DartLink — accueil">${logo()}</a>
       <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">${menuIcon}</span></button>
-      <nav id="main-nav" aria-label="Navigation principale">${navItems.map(([path, label]) => `<a href="#/${path}" ${path === current ? 'aria-current="page"' : ""}>${label}</a>`).join("")}<a href="${remoteUrl}" target="_blank" rel="noopener noreferrer" aria-label="Télécommande (nouvel onglet)">Télécommande</a><a href="${mobileUrl}" target="_blank" rel="noopener noreferrer" aria-label="Jouer sur mobile (nouvel onglet)">Jouer sur mobile</a>${button("Ouvrir le Manager", managerUrl, false, true)}</nav>
+      <nav id="main-nav" aria-label="Navigation principale">${navItems.map(([path, label]) => `<a href="#/${path}" ${path === current ? 'aria-current="page"' : ""}>${label}</a>`).join("")}<a href="${remoteUrl}" target="_blank" rel="noopener noreferrer" aria-label="Télécommande (nouvel onglet)">Télécommande</a><a href="${mobileUrl}" target="_blank" rel="noopener noreferrer" aria-label="Jouer sur mobile (nouvel onglet)">Jouer sur mobile</a><span id="player-navigation" class="player-navigation">${button("Connexion", accountUrl)}</span></nav>
     </div></header>
     <main id="main" tabindex="-1">${content}</main>
     <footer class="site-footer container"><div class="footer-main"><a class="brand" href="#/" aria-label="DartLink — accueil">${logo()}</a><p>La passion du jeu.<br>L’esprit connecté.</p></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} DartLink</span><span>Imaginé pour les passionnés de fléchettes.</span><a href="#/mentions">Informations & confidentialité</a></div></footer>`;
@@ -293,7 +294,7 @@ function contact() {
 }
 function mentions() {
   return shell(
-    `<section class="page-intro container"><span class="eyebrow">Informations & confidentialité</span><h1>En toute<br><em>clarté.</em></h1></section><section class="prose container"><h2>Le site DartLink</h2><p>Cette vitrine présente l’écosystème DartLink et les captures de son interface de jeu. Elle ne permet pas de piloter une installation.</p><h2>Vos données sur cette vitrine</h2><p>Le formulaire de contact transmet votre nom, votre adresse e-mail et votre message au serveur DartLink, puis à la messagerie Gmail de contact pour traiter votre demande et vous répondre. Le site ne conserve pas de copie des messages sur PiServeur. Une limitation temporaire des tentatives utilise votre adresse IP en mémoire pendant dix minutes. Les messages reçus sont traités dans la messagerie de contact. Ce site n’ajoute aucun outil de mesure d’audience ni cookie applicatif. Les vignettes des actualités sont chargées directement depuis le serveur d’images de la PDC : votre navigateur contacte ce service lorsque vous consultez la page Compétitions. L’hébergeur peut traiter les données techniques nécessaires à la fourniture du site.</p><h2>Informations éditoriales</h2><p>Les informations légales complètes de l’éditeur et les coordonnées de contact restent à renseigner à partir d’informations vérifiées.</p></section>`,
+    `<section class="page-intro container"><span class="eyebrow">Informations & confidentialité</span><h1>En toute<br><em>clarté.</em></h1></section><section class="prose container"><h2>Le site DartLink</h2><p>Cette vitrine présente l’écosystème DartLink et les captures de son interface de jeu. Elle ne permet pas de piloter une installation.</p><h2>Vos données sur cette vitrine</h2><p>Le formulaire de contact transmet votre nom, votre adresse e-mail et votre message au serveur DartLink, puis à la messagerie Gmail de contact pour traiter votre demande et vous répondre. Le site ne conserve pas de copie des messages sur PiServeur. Une limitation temporaire des tentatives utilise votre adresse IP en mémoire pendant dix minutes. Les messages reçus sont traités dans la messagerie de contact. Ce site n’ajoute aucun outil de mesure d’audience. La connexion joueur utilise les cookies de session Keycloak sur auth.dartlink.fr ; les jetons d’accès restent en mémoire dans le navigateur. Les comptes et profils sont gérés exclusivement par DartLink-Cloud. Les vignettes des actualités sont chargées directement depuis le serveur d’images de la PDC : votre navigateur contacte ce service lorsque vous consultez la page Compétitions. L’hébergeur peut traiter les données techniques nécessaires à la fourniture du site.</p><h2>Informations éditoriales</h2><p>Les informations légales complètes de l’éditeur et les coordonnées de contact restent à renseigner à partir d’informations vérifiées.</p></section>`,
   );
 }
 function notFound() {
@@ -315,7 +316,11 @@ function render() {
     return;
   }
   const route = location.hash.replace(/^#\/?/, "").replace(/\/$/, "");
-  if (/^(login|manager)(\/|$)/.test(route)) {
+  if (/^login(\/|$)/.test(route)) {
+    location.replace(accountUrl);
+    return;
+  }
+  if (/^manager(\/|$)/.test(route)) {
     location.replace(managerUrl);
     return;
   }
@@ -336,6 +341,7 @@ function render() {
       toggle.focus();
     }
   });
+  window.dispatchEvent(new Event("dartlink:navigation"));
   setupGameGallery();
   setupCompetitionNews();
   document.querySelector("#contact")?.addEventListener("submit", async (event) => {

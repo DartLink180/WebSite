@@ -20,7 +20,7 @@ Le build utilise uniquement Node.js. Il copie les pages et les ressources explic
 
 La version V2 utilisait `index.html`, `app.js` et `style.css` à la racine. Ouvrir `index.html` sans installation pour la consulter. Générer la sortie GitHub Pages avec `node build.cjs` : les fichiers sont copiés dans `dist/`.
 
-Le seul accès au Manager sur la vitrine est le bouton « Ouvrir le Manager » du menu, vers `https://dartlink.fr/manager/`. Les présentations promotionnelles du Manager ont été retirées à la demande de son administrateur. Les anciennes routes `#/login` et `#/manager` y redirigent également. Le code historique de démonstration est conservé dans le dépôt ; ses écrans ne sont plus accessibles par ces routes. Voir `PROTOTYPE.md` pour le prototype historique et `RESTAURATION.md` pour revenir à la version précédente.
+La version publiée de mission 11 remplace le bouton Manager par « Connexion / Mon compte » vers l’espace joueur Cloud, avec session OIDC, pseudo, avatar et déconnexion. Les anciennes routes `#/manager` conservent l’accès administratif direct ; `#/login` mène désormais à Cloud. Voir [l’intégration joueur, les tests et le déploiement](docs/PLAYER-ACCOUNT.md). Le code historique de démonstration est conservé dans le dépôt ; ses écrans ne sont plus accessibles par ces routes. Voir `PROTOTYPE.md` pour le prototype historique et `RESTAURATION.md` pour revenir à la version précédente.
 
 L’ancien code React ci-dessous reste conservé dans le dépôt mais n’est plus utilisé pour la publication.
 
