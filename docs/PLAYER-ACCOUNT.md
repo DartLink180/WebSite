@@ -84,3 +84,9 @@ refus si la configuration partagée a changé, test de syntaxe et reload gracieu
 Les deux tests isolés `python3 tests/player_release_test.py -v` réussissent :
 restauration après échec de syntaxe et refus d’un changement partagé concurrent.
 Aucune commande apply/rollback de cet outil n’a été exécutée sur la production.
+
+Release préparée réellement : `/srv/dartlink-v2/releases/mission11-player-v1`,
+source applicative locale `5a581b5`, manifeste des assets et empreinte Nginx
+initiale présents. La source Cloud qualifiée est `e56a0df`. Aucun push, aucune
+sélection de cette release par Nginx. Ce complément documentaire ne change pas
+les assets préparés.
