@@ -1280,3 +1280,7 @@ details > p {
 
 .contact-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .contact-form button:disabled { opacity: .65; cursor: wait; }
+
+.player-navigation{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.player-navigation .player-avatar{width:24px;height:24px;object-fit:cover;object-position:center;border-radius:50%;flex-shrink:0}.player-navigation .player-name{max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.player-navigation .player-logout{background:transparent;color:var(--muted,#a4adb1);border:0;font:inherit;cursor:pointer;font-size:12px;padding:10px 0}.player-navigation .button{gap:9px;padding-block:8px}
+.player-navigation .button>span{font-size:12px;line-height:1.4}
+@media(min-width:761px) and (max-width:1200px){.header-inner nav{flex-wrap:wrap;row-gap:12px}.header-inner .player-navigation{margin-left:auto}}

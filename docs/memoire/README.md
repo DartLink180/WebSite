@@ -403,3 +403,15 @@ nouvel e-mail de test. Deux requêtes réelles sans données personnelles ont
 confirmé les refus d'origine (403) et de contenu invalide (400). Le formulaire
 publié remplace les annonces de simulation dans la FAQ et les informations.
 La configuration privée n'est requise que sur le serveur, jamais dans le build.
+
+## Mission 11 — comptes joueurs, 13 novembre 2026
+
+Le candidat `feat/mission11-player-account` remplace le bouton public Manager
+par Connexion/Mon compte et réutilise exclusivement les comptes/profils Cloud.
+Les anciennes décisions Manager/login de cette mémoire deviennent historiques
+pour ce candidat ; `#/manager` reste compatible, `#/login` mène à Cloud.
+Client OIDC existant activé après accord explicite, aucun Manager modifié.
+Fichiers, sécurité, tests réels, limites et état de publication :
+[PLAYER-ACCOUNT](../PLAYER-ACCOUNT.md). Aucune publication Git n'est autorisée
+par la mission courante sans nouvel accord ; cette consigne utilisateur prime
+sur la règle historique de push automatique.

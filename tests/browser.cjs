@@ -4,12 +4,15 @@ const baseUrl =
   (process.env.SITE_URL || "http://127.0.0.1:4173").replace(/\/$/, "") + "/";
 (async () => {
   const browser = await chromium.launch({
-    executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium",
+    ...(process.env.CHROMIUM_PATH ? {executablePath:process.env.CHROMIUM_PATH} : {}),
+    chromiumSandbox: true,
     headless: true,
-    args: ["--no-sandbox", "--disable-dev-shm-usage", "--no-proxy-server"],
+    args: ["--disable-gpu", "--no-proxy-server"],
   });
   try {
     const page = await browser.newPage();
+    // Public-page regression stays independent from the real OIDC qualification.
+    await page.route("**/account.js", r => r.fulfill({contentType:"text/javascript",body:"export {};"}));
     const errors = [];
     const responses = [];
     let expectedContactErrors = false;
@@ -31,8 +34,8 @@ const baseUrl =
         await page.goto(`${baseUrl}#/${route}`, { waitUntil: "networkidle" });
         await page.locator("h1").waitFor();
         assert.equal(await page.locator("h1").count(), 1);
-        assert.equal(await page.locator('a[href="https://dartlink.fr/manager/"]').count(), 1);
-        assert.equal(await page.locator('a[href="https://dartlink.fr/manager/"]').textContent(), "Ouvrir le Manager");
+        assert.equal(await page.locator('a[href="https://dartlink.fr/manager/"]').count(), 0);
+        assert.equal(await page.locator("#player-navigation a").textContent(), "Connexion");
         assert.equal(await page.locator("main").innerText().then(text => /manager|administrateur/i.test(text)), false);
         assert.equal(await page.locator("footer").innerText().then(text => /manager/i.test(text)), false);
         assert.equal(
@@ -212,13 +215,16 @@ const baseUrl =
         body: "Manager destination intercepted for test",
       });
     });
-    for (const route of ["login", "manager", "manager/devices"]) {
+    for (const route of ["manager", "manager/devices"]) {
       await page.goto(`${baseUrl}#/${route}`);
       await page
         .getByText("Manager destination intercepted for test")
         .waitFor();
     }
-    assert.equal(redirects.length, 3);
+    assert.equal(redirects.length, 2);
+    await page.route("https://cloud.dartlink.fr/compte/", r=>r.fulfill({body:"Player account destination"}));
+    await page.goto(`${baseUrl}#/login`);
+    await page.getByText("Player account destination").waitFor();
     for (const width of [1440, 390]) {
       await page.setViewportSize({ width, height: 1000 });
       await page.goto(baseUrl, { waitUntil: "networkidle" });
@@ -239,7 +245,7 @@ const baseUrl =
     assert.deepEqual(errors, [], "JavaScript errors");
     assert.deepEqual(responses, [], "HTTP failures");
     console.log(
-      `PASS: ${checked} route/viewport checks; Remote links, mobile navigation, Escape, FAQ, contact validation/error/retry/success with intercepted requests, skip link, three Manager redirects, no JS errors or missing assets.`,
+      `PASS: ${checked} route/viewport checks; Remote links, mobile navigation, Escape, FAQ, contact validation/error/retry/success with intercepted requests, skip link, two legacy Manager redirects and player login redirect, no JS errors or missing assets.`,
     );
   } finally {
     await browser.close();
