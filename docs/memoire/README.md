@@ -1,3 +1,7 @@
+## Harmonisation visuelle — 16 novembre 2026
+
+Référence WebSite, palette, logos, métadonnées et limites de livraison : [identité visuelle](../BRANDING.md). Changement préparé sur `fix/website-brand-consistency` ; aucun nouveau déploiement.
+
 # Mémoire de développement WebSite
 
 Établie le 20 octobre 2026 depuis la branche GitHub `fix/manager-link`, a0e7285a41d5f0ea12245a23221cdfe9f0fd9922, dont l’arbre est identique au checkout PiServeur 25abe81. Cette mémoire accompagne son intégration dans main ; elle ne certifie pas l’état du site déployé.
