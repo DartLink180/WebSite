@@ -1,3 +1,7 @@
+## Harmonisation publiée — 16 novembre 2026
+
+Les six dépôts ont leur correction ou documentation dans main. Jeu v2.11.0-rc.2 publié et disponibilité Manager vérifiée en lecture seule ; aucun déploiement web ou sur cible. [Preuves, PR, empreinte et limites](../BRANDING.md#publication-vérifiée--16-novembre-2026).
+
 ## Harmonisation visuelle — 16 novembre 2026
 
 Référence WebSite, palette, logos, métadonnées et limites de livraison : [identité visuelle](../BRANDING.md). Changement préparé sur `fix/website-brand-consistency` ; aucun nouveau déploiement.
